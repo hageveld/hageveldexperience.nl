@@ -80,7 +80,14 @@ const Footer: FunctionComponent = () => (
                 </div>
             </Col>
             <Col span={6}>
-                <h2>Titel</h2>
+                <h2>Links</h2>
+                <p>Algemeen</p>
+                <p>Onderwijs</p>
+                <p>Schoolgids</p>
+                <p>VIA</p>
+                <p>Begeleiding</p>
+                <p>Aanmelden</p>
+                <p>Vacatures</p>
             </Col>
             <Col span={6}>
                 <h2>Leerlingen</h2>
