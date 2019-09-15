@@ -2,10 +2,11 @@
 
 import React, { FunctionComponent } from 'react';
 import ExternalLink from '../ExternalLink';
-import { Row, Col } from 'antd';
+import { Row, Col, Divider } from 'antd';
 import styled from 'styled-components';
 import Favicon from '../../images/favicon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { version } from '../../../package.json';
 
 const FooterWrapper = styled.div`
     //background-color: #5B34AD;
@@ -45,6 +46,7 @@ const socials: any = [
 
 const Footer: FunctionComponent = () => (
     <FooterWrapper>
+        <Divider />
         <Row>
             <Col span={6}>
                 <div>
@@ -75,7 +77,7 @@ const Footer: FunctionComponent = () => (
                             <p>© {new Date().getFullYear()} Hageveld</p>
                         </Col>
                         <Col span={8}>Disclaimer</Col>
-                        <Col span={8}>1.0.0</Col>
+                        <Col span={8}>{version}</Col>
                     </Row>
                 </div>
             </Col>

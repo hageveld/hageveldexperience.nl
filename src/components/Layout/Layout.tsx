@@ -2,6 +2,7 @@ import React, { FunctionComponent, Fragment, ReactNode } from 'react';
 import MetaData from '../MetaData';
 import Navigation from '../Navigation';
 import Footer from '../Footer';
+import { Layout as AntLayout } from 'antd';
 
 const MenuItems = [
     {
@@ -54,9 +55,15 @@ interface Props {
 const Layout: FunctionComponent<Props> = ({ children, title }: Props) => (
     <Fragment>
         <MetaData title={title} />
-        <Navigation items={MenuItems} />
-        {children}
-        <Footer />
+        <AntLayout>
+            <AntLayout.Header style={{ padding: '0' }}>
+                <Navigation items={MenuItems} />
+            </AntLayout.Header>
+            <AntLayout.Content>{children}</AntLayout.Content>
+            <AntLayout.Footer>
+                <Footer />
+            </AntLayout.Footer>
+        </AntLayout>
     </Fragment>
 );
 

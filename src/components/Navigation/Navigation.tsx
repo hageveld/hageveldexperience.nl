@@ -31,7 +31,12 @@ interface Props {
 const Navigation: FunctionComponent<Props> = ({ items }: Props) => (
     <Location>
         {({ location }) => (
-            <Menu onClick={() => false} selectedKeys={[]} mode="horizontal">
+            <Menu
+                onClick={() => false}
+                selectedKeys={[]}
+                mode="horizontal"
+                style={{ lineHeight: '64px' }}
+            >
                 <Menu.Item key="mail">
                     <Icon type="mail" />
                     Navigation One
