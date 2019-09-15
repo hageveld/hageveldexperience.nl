@@ -1155,11 +1155,6 @@
   dependencies:
     prop-types "^15.6.1"
 
-"@magisterjs/authcode@1.16.0":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@magisterjs/authcode/-/authcode-1.16.0.tgz#25c9a9ead706bd0056d80483ef9bcea1c1f5e67a"
-  integrity sha512-QAPqoMHQdbtWsk7JGPcBPGIEmxiDl7T5S3y5P7ZgKKXIW/BTtoi1neAdOzkaahUpJdNE2xJ1iNIU6QcMrFGAYw==
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -2013,14 +2008,6 @@ babel-plugin-syntax-trailing-function-commas@^7.0.0-beta.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-7.0.0-beta.0.tgz#aa213c1435e2bffeb6fca842287ef534ad05d5cf"
   integrity sha512-Xj9XuRuz3nTSbaTXWv3itLOcxyF4oPD8douBBmj7U9BBC6nEBYfyOJYQMf/8PJAFotC62UY5dFfIGEPr7WswzQ==
 
-babel-plugin-transform-util-promisify@0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-util-promisify/-/babel-plugin-transform-util-promisify-0.2.2.tgz#114e19f9c6749610cffced3e303f621f2415b871"
-  integrity sha512-X01+NE42KBHgU1cZ8rUSP9+YdoFEEj4DY7eCJiwNgyNzSP25Yjp3lzZUxcG4MTyU3V/tG8SyLTra1FGetJYRQg==
-  dependencies:
-    babel-runtime "^6.18.0"
-    babylon "^6.18.0"
-
 babel-preset-fbjs@^3.1.2:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/babel-preset-fbjs/-/babel-preset-fbjs-3.2.0.tgz#c0e6347d3e0379ed84b3c2434d3467567aa05297"
@@ -2066,18 +2053,13 @@ babel-preset-gatsby@^0.1.9:
     "@babel/preset-react" "^7.0.0"
     babel-plugin-macros "^2.4.2"
 
-babel-runtime@^6.18.0, babel-runtime@^6.26.0:
+babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
   dependencies:
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
-
-babylon@^6.18.0:
-  version "6.18.0"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
-  integrity sha512-q/UEjfGJ2Cm3oKV71DJz9d25TPnq5rhBVL2Q4fA5wcC3jcrdn7+SssEybFIxwAvvP+YCsCYNKughoF33GxgycQ==
 
 backo2@1.0.2:
   version "1.0.2"

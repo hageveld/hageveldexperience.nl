@@ -12,7 +12,7 @@ const MenuItems = [
     {
         name: 'Hageveld algemeen',
         path: '/algemeen',
-        match: /^\/coin/
+        match: /^\/algemeen/
     },
     {
         name: 'Onderwijs',
