@@ -1,9 +1,9 @@
 {
-  "name": "hageveld",
-  "description": "Website voor het Atheneum College Hageveld",
-  "version": "1.0.0",
+  "name": "hageveld-experience",
+  "description": "Website voor de Hageveld Experience op het Atheneum College Hageveld",
+  "version": "0.0.1",
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
-  "homepage": "https://hageveld.nl",
+  "homepage": "https://experience.hageveld.nl",
   "dependencies": {
     "@babel/core": "7.4.0",
     "@babel/plugin-proposal-class-properties": "7.4.0",
@@ -33,6 +33,7 @@
     "gatsby-source-filesystem": "2.0.29",
     "gatsby-transformer-sharp": "2.1.17",
     "gatsby-transformer-yaml": "2.1.12",
+    "google-map-react": "1.1.4",
     "moment": "2.24.0",
     "node-sass": "4.11.0",
     "react": "16.8.5",

@@ -1,16 +1,16 @@
-// tslint:disable:no-http-string
-
 import React, { FunctionComponent } from 'react';
 import ExternalLink from '../ExternalLink';
 import { Row, Col, Divider } from 'antd';
 import styled from 'styled-components';
 import Favicon from '../../images/favicon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { version } from '../../../package.json';
+import GoogleMapReact from 'google-map-react';
+
+const AnyReactComponent: FunctionComponent<any> = ({ text }) => <div>{text}</div>;
 
 const FooterWrapper = styled.div`
-    //background-color: #5B34AD;
-    //color: white;
+    margin-left: 50px;
+    margin-right: 50px;
 `;
 
 const socials: any = [
@@ -44,16 +44,50 @@ const socials: any = [
     }
 ];
 
+const getMapOptions = (maps: any) => {
+    return {
+        streetViewControl: false,
+        scaleControl: true,
+        fullscreenControl: false,
+        styles: [
+            {
+                featureType: 'poi.business',
+                elementType: 'labels',
+                stylers: [
+                    {
+                        visibility: 'off'
+                    }
+                ]
+            }
+        ],
+        gestureHandling: 'greedy',
+        disableDoubleClickZoom: true,
+        minZoom: 11,
+        maxZoom: 18,
+
+        mapTypeControl: true,
+        //mapTypeId: maps.MapTypeId.SATELLITE,
+        mapTypeControlOptions: {
+            style: maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: maps.ControlPosition.BOTTOM_CENTER,
+            mapTypeIds: [maps.MapTypeId.ROADMAP, maps.MapTypeId.SATELLITE, maps.MapTypeId.HYBRID]
+        },
+
+        zoomControl: true,
+        clickableIcons: false
+    };
+};
+
 const Footer: FunctionComponent = () => (
     <FooterWrapper>
         <Divider />
         <Row>
-            <Col span={6}>
+            <Col span={8}>
                 <div>
                     <img width="32" src={Favicon} style={{ float: 'left' }} />
                     <h2>Hageveld</h2>
                 </div>
-                <div>
+                <div style={{ fontSize: '11px', marginTop: '5px', marginBottom: '10px' }}>
                     Atheneum College Hageveld is gelegen op landgoed Hageveld en is gehuisvest in
                     een gebouw dat voorheen een klein-seminarie herbergde. Het is een sfeervol
                     monumentaal gebouw dat wordt omzoomd door veel groen. Ook de sportvelden liggen
@@ -61,9 +95,9 @@ const Footer: FunctionComponent = () => (
                     Nederland telt.
                 </div>
                 <div>
-                    <Row style={{ width: '50%' }}>
-                        {socials.map(social => (
-                            <Col span={3}>
+                    <Row style={{ width: '100%' }}>
+                        {socials.map((social, index) => (
+                            <Col span={3} key={index}>
                                 <ExternalLink to={social.url}>
                                     <FontAwesomeIcon icon={social.icon} size="2x" />
                                 </ExternalLink>
@@ -71,45 +105,29 @@ const Footer: FunctionComponent = () => (
                         ))}
                     </Row>
                 </div>
-                <div>
+                <div style={{ marginTop: '10px' }}>
                     <Row>
                         <Col span={8}>
                             <p>© {new Date().getFullYear()} Hageveld</p>
                         </Col>
+                        <Col span={8} />
                         <Col span={8}>Disclaimer</Col>
-                        <Col span={8}>{version}</Col>
                     </Row>
                 </div>
             </Col>
-            <Col span={6}>
-                <h2>Links</h2>
-                <p>Algemeen</p>
-                <p>Onderwijs</p>
-                <p>Schoolgids</p>
-                <p>VIA</p>
-                <p>Begeleiding</p>
-                <p>Aanmelden</p>
-                <p>Vacatures</p>
+            <Col span={8}>
+                <div style={{ height: '200px' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{ key: 'KEY' }}
+                        defaultCenter={{ lat: 52.348391, lng: 4.6321063 }}
+                        defaultZoom={15}
+                        options={getMapOptions}
+                    >
+                        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
+                    </GoogleMapReact>
+                </div>
             </Col>
-            <Col span={6}>
-                <h2>Leerlingen</h2>
-                <p>
-                    <ExternalLink to="https://hageveld.magister.net">Magister</ExternalLink>
-                </p>
-                <p>
-                    <ExternalLink to="https://login.microsoftonline.com">Office 365</ExternalLink>
-                </p>
-                <p>
-                    <ExternalLink to="http://informatica.hageveld.nl">Informatica</ExternalLink>
-                </p>
-                <p>
-                    <ExternalLink to="https://via.hageveld.nl">VIA</ExternalLink>
-                </p>
-                <p>
-                    <ExternalLink to="http://shop.hageveld.nl">Shop</ExternalLink>
-                </p>
-            </Col>
-            <Col span={6}>
+            <Col span={8}>
                 <h2>Contact</h2>
                 <div>
                     Atheneum College Hageveld

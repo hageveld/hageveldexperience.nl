@@ -37,6 +37,10 @@ const Navigation: FunctionComponent<Props> = ({ items }: Props) => (
                 mode="horizontal"
                 style={{ lineHeight: '64px' }}
             >
+                <Menu.Item key="home">
+                    <Icon type="home" />
+                    Hageveld
+                </Menu.Item>
                 <Menu.Item key="mail">
                     <Icon type="mail" />
                     Navigation One

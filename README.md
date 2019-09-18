@@ -1,13 +1,13 @@
-# Hageveld
+# Hageveld Experience
 
 [![](https://img.shields.io/travis/com/MrLuit/hageveld.svg?style=flat-square)](https://travis-ci.com/MrLuit/hageveld)
 [![](https://img.shields.io/npm/v/hageveld.svg?style=flat-square)](https://www.npmjs.com/package/hageveld)
 [![](https://img.shields.io/david/MrLuit/hageveld.svg?style=flat-square)](https://david-dm.org/MrLuit/hageveld)
 [![](https://img.shields.io/github/license/MrLuit/hageveld.svg?style=flat-square)](https://github.com/MrLuit/hageveld/blob/master/LICENSE)
 
-Website voor het Atheneum College Hageveld.
+Website voor de Hageveld Experience op het Atheneum College Hageveld.
     
-**Production**: https://hageveld.nl
+**Production**: https://experience.hageveld.nl (momenteel niet actief)
 <br />
 **Development**: https://hageveld.luit.dev
 

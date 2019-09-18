@@ -1,9 +1,8 @@
 module.exports = {
     siteMetadata: {
-        title: 'Atheneum College Hageveld',
-        siteUrl: 'https://hageveld.nl',
-        description:
-            'Atheneum College Hageveld is gelegen op landgoed Hageveld en is gehuisvest in een gebouw dat voorheen een klein-seminarie herbergde. Het is een sfeervol monumentaal gebouw dat wordt omzoomd door veel groen. Ook de sportvelden liggen rondom de school. College Hageveld is het enige zelfstandige atheneum dat Nederland telt.',
+        title: 'Hageveld Experience',
+        siteUrl: 'https://experience.hageveld.nl',
+        description: 'Hageveld Experience',
         author: 'Luit'
     },
     pathPrefix: '/',
@@ -30,8 +29,8 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                name: 'Atheneum College Hageveld',
-                short_name: 'Hageveld',
+                name: 'Hageveld Experience',
+                short_name: 'Hageveld Experience',
                 start_url: '/',
                 background_color: '#FFFFFF',
                 theme_color: '#000000',
