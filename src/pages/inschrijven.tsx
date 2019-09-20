@@ -17,7 +17,7 @@ const Title = styled.div`
 
 const getVakkenByDag = dag => vakken.filter(vak => vak.dagen.includes(dag));
 
-const Index: FunctionComponent = () => (
+const Inschrijven: FunctionComponent = () => (
     <Layout>
         <Title>Hageveld Experience</Title>
         <div style={{ marginLeft: '5%', marginRight: '5%' }}>
@@ -92,4 +92,4 @@ const Index: FunctionComponent = () => (
     </Layout>
 );
 
-export default Index;
+export default Inschrijven;
