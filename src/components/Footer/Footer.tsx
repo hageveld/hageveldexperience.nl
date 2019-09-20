@@ -99,7 +99,7 @@ const Footer: FunctionComponent = () => (
                         {socials.map((social, index) => (
                             <Col span={3} key={index}>
                                 <ExternalLink to={social.url}>
-                                    <FontAwesomeIcon icon={social.icon} size="2x" />
+                                    <FontAwesomeIcon icon={social.icon} size="2x" color="#FA9B3D" />
                                 </ExternalLink>
                             </Col>
                         ))}
