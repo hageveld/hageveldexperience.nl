@@ -2,11 +2,18 @@ import '@babel/polyfill';
 import 'typeface-lato';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+    faBook,
+    faCalculator,
+    faCompass,
     faEnvelope,
-    faFax,
+    faFlask,
+    faGlobe,
+    faLandmark,
     faMapMarkerAlt,
+    faMicroscope,
+    faPencilAlt,
     faPhone,
-    faPhoneSquare
+    faRocket
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faFacebookSquare,
@@ -16,11 +23,18 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 library.add(
+    faBook,
+    faCalculator,
+    faCompass,
     faEnvelope,
-    faFax,
+    faFlask,
+    faGlobe,
+    faLandmark,
     faMapMarkerAlt,
+    faMicroscope,
+    faPencilAlt,
     faPhone,
-    faPhoneSquare,
+    faRocket,
     faFacebookSquare,
     faInstagram,
     faLinkedin,
