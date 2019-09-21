@@ -1,3 +1,5 @@
+// tslint:disable:no-http-string
+
 import React, { FunctionComponent } from 'react';
 import ExternalLink from '../ExternalLink';
 import { Row, Col, Divider } from 'antd';
@@ -107,11 +109,15 @@ const Footer: FunctionComponent = () => (
                 </div>
                 <div style={{ marginTop: '10px' }}>
                     <Row>
-                        <Col span={8}>
+                        <Col span={12}>
                             <p>© {new Date().getFullYear()} Hageveld</p>
                         </Col>
-                        <Col span={8} />
-                        <Col span={8}>Disclaimer</Col>
+
+                        <Col style={{ float: 'right' }} span={12}>
+                            <ExternalLink to="http://www.hageveld.nl/Disclaimer/tabid/276/Default.aspx">
+                                Disclaimer
+                            </ExternalLink>
+                        </Col>
                     </Row>
                 </div>
             </Col>

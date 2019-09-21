@@ -28,14 +28,17 @@ export const vakken: any[] = [
         icon: 'microscope',
         naam: 'Biologie',
         deelnemers: 24,
-        dagen: [1, 2, 3]
+        dagen: [1, 2, 3],
+        inschrijvingen: 24
     },
     {
         id: 'DU',
         icon: 'book',
         naam: 'Duits',
         deelnemers: 28,
-        dagen: [2]
+        dagen: [2],
+        inschrijvingen: 20,
+        ingeschreven: true
     },
     {
         id: 'EN',
