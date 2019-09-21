@@ -1,14 +1,24 @@
 import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
-import styled from 'styled-components';
 import { Link } from 'gatsby';
+import { Result, Button, Icon } from 'antd';
 
 import '../sass/index.scss';
 
 const NotFound: FunctionComponent = () => (
     <Layout>
-        <h1>Niet gevonden</h1>
-        <Link to="/">Keer terug</Link>
+        <Result
+            status="404"
+            title="404"
+            subTitle="Pagina niet gevonden"
+            extra={
+                <Link to="/">
+                    <Button type="primary">
+                        <Icon type="left" /> Keer terug
+                    </Button>
+                </Link>
+            }
+        />
     </Layout>
 );
 
