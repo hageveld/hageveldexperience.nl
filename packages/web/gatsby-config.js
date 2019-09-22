@@ -2,6 +2,7 @@ module.exports = {
     siteMetadata: {
         title: 'Hageveld Experience',
         siteUrl: 'https://experience.hageveld.nl',
+        baseUrl: 'https://experience.hageveld.dev',
         description: 'Hageveld Experience',
         author: 'Luit'
     },

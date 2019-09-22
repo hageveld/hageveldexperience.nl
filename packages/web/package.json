@@ -53,7 +53,7 @@
     "serve": "gatsby serve",
     "clean": "rimraf ./.cache && rimraf ./public",
     "deploy": "yarn run build --prefix-paths && gh-pages -d public",
-    "prettier:diff": "prettier --write --config ./.prettierrc --list-different 'src/**/*.ts' 'src/**/*.tsx' '*.js'"
+    "prettier": "prettier --write --config ../../.prettierrc --list-different './**/*.ts?(x)'"
   },
   "devDependencies": {
     "@types/node": "11.11.6",
@@ -70,23 +70,5 @@
     "tslint-microsoft-contrib": "6.1.0",
     "tslint-react": "3.6.0",
     "typescript": "3.3.4000"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "prettier --write --config ./.prettierrc --config-precedence file-override",
-      "tslint --project .",
-      "git add"
-    ],
-    "*.js": [
-      "prettier --write --config ./.prettierrc --config-precedence file-override",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "post-commit": "git update-index --again",
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run tslint && npm run tscheck"
-    }
   }
 }
