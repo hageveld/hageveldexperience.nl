@@ -8,9 +8,15 @@ export const init = async (): Promise<void> => {
     await this.run(
         `CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT,
-            email TEXT,
-            password TEXT
+            emailadres TEXT,
+            wachtwoord TEXT,
+            roepnaam TEXT,
+            tussenvoegsel TEXT,
+            achternaam TEXT,
+            geslacht TEXT,
+            telefoonnummer TEXT,
+            basisschool TEXT,
+            groep TEXT
         )`
     );
 };
