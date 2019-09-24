@@ -6,9 +6,10 @@ import { Row, Col, Divider } from 'antd';
 import styled from 'styled-components';
 import Favicon from '../../images/favicon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import GoogleMapReact from 'google-map-react';
+import Map from 'pigeon-maps';
+import Marker from 'pigeon-marker';
 
-const AnyReactComponent: FunctionComponent<any> = ({ text }) => <div>{text}</div>;
+import './Footer.scss';
 
 const FooterWrapper = styled.div`
     margin-left: 50px;
@@ -46,39 +47,7 @@ const socials: any = [
     }
 ];
 
-const getMapOptions = (maps: any) => {
-    return {
-        streetViewControl: false,
-        scaleControl: true,
-        fullscreenControl: false,
-        styles: [
-            {
-                featureType: 'poi.business',
-                elementType: 'labels',
-                stylers: [
-                    {
-                        visibility: 'off'
-                    }
-                ]
-            }
-        ],
-        gestureHandling: 'greedy',
-        disableDoubleClickZoom: true,
-        minZoom: 11,
-        maxZoom: 18,
-
-        mapTypeControl: true,
-        //mapTypeId: maps.MapTypeId.SATELLITE,
-        mapTypeControlOptions: {
-            style: maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: maps.ControlPosition.BOTTOM_CENTER,
-            mapTypeIds: [maps.MapTypeId.ROADMAP, maps.MapTypeId.SATELLITE, maps.MapTypeId.HYBRID]
-        },
-
-        zoomControl: true,
-        clickableIcons: false
-    };
-};
+const position = [52.348391, 4.6321063];
 
 const Footer: FunctionComponent = () => (
     <FooterWrapper>
@@ -122,16 +91,9 @@ const Footer: FunctionComponent = () => (
                 </div>
             </Col>
             <Col span={8}>
-                <div style={{ height: '200px' }}>
-                    <GoogleMapReact
-                        bootstrapURLKeys={{ key: 'KEY' }}
-                        defaultCenter={{ lat: 52.348391, lng: 4.6321063 }}
-                        defaultZoom={15}
-                        options={getMapOptions}
-                    >
-                        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-                    </GoogleMapReact>
-                </div>
+                <Map center={position} zoom={15} height="200px">
+                    <Marker anchor={position} payload={1} onClick={({ event, anchor, payload }) => {}} />
+                </Map>
             </Col>
             <Col span={8}>
                 <h2>Contact</h2>
