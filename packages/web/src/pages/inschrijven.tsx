@@ -5,6 +5,7 @@ import { Row, Col, Button, Card, List, Avatar, Icon, Statistic, DatePicker } fro
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { dagen, vakken } from '../constants';
 import moment from 'moment';
+import Vak from '../components/Vak';
 
 import '../sass/index.scss';
 
@@ -43,57 +44,7 @@ const Inschrijven: FunctionComponent = () => (
                                     itemLayout="horizontal"
                                     dataSource={getVakkenByDag(dag.dag)}
                                     renderItem={item => (
-                                        <List.Item>
-                                            <List.Item.Meta
-                                                avatar={
-                                                    <Avatar>
-                                                        <FontAwesomeIcon
-                                                            icon={['fas', item.icon]}
-                                                        />
-                                                    </Avatar>
-                                                }
-                                                title={
-                                                    <a href="https://hageveld.nl">{item.naam}</a>
-                                                }
-                                                description={
-                                                    <Row gutter={12}>
-                                                        <Col span={6}>
-                                                            <p>Test</p>
-                                                        </Col>
-                                                        <Col span={6} style={{ float: 'right' }}>
-                                                            {item.ingeschreven ? (
-                                                                <Button
-                                                                    type="primary"
-                                                                    shape="circle"
-                                                                    icon="check"
-                                                                    style={{
-                                                                        backgroundColor: '#52c41a',
-                                                                        borderColor: '#52c41a'
-                                                                    }}
-                                                                />
-                                                            ) : (
-                                                                <Button
-                                                                    type="primary"
-                                                                    shape="circle"
-                                                                    icon="plus"
-                                                                />
-                                                            )}
-                                                        </Col>
-                                                        <Col span={6} style={{ float: 'right' }}>
-                                                            <Statistic
-                                                                title="Inschrijvingen"
-                                                                value={
-                                                                    item.inschrijvingen
-                                                                        ? item.inschrijvingen
-                                                                        : 0
-                                                                }
-                                                                suffix={`/ ${item.deelnemers}`}
-                                                            />
-                                                        </Col>
-                                                    </Row>
-                                                }
-                                            />
-                                        </List.Item>
+                                        <Vak icon={item.icon} naam={item.naam} inschrijvingen={item.inschrijvingen ? item.inschrijvingen : 0} deelnemers={item.deelnemers} />
                                     )}
                                 />
                             </Card>
