@@ -6,7 +6,7 @@ const db = new sqlite3.Database('database.db');
 
 export const init = async (): Promise<void> => {
     await this.run(
-        `CREATE TABLE IF NOT EXISTS users (
+        `CREATE TABLE IF NOT EXISTS gebruikers (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             emailadres TEXT,
             wachtwoord TEXT,
@@ -17,6 +17,16 @@ export const init = async (): Promise<void> => {
             telefoonnummer TEXT,
             basisschool TEXT,
             groep TEXT
+        )`
+    );
+
+    await this.run(
+        `CREATE TABLE IF NOT EXISTS activaties (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            emailadres TEXT,
+            token TEXT,
+            gebruikt TEXT,
+            aangemaakt TEXT
         )`
     );
 };

@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import ping from '../routes/ping';
 import register from '../routes/register';
+import activate from '../routes/activate';
 
 const router = Router();
 
@@ -11,6 +12,7 @@ router.use((req: Request, res: Response, next) => {
 });
 
 router.get('/ping', ping);
-router.get('/register', register);
+router.get('/register/:email', register);
+router.get('/activate/:token/:wachtwoord', activate);
 
 export default router;
