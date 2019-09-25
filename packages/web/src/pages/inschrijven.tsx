@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
-import styled from 'styled-components';
+import Title from '../components/Title';
 import { Row, Col, Button, Card, List, Avatar, Icon, Statistic, DatePicker } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { dagen, vakken } from '../constants';
@@ -9,19 +9,11 @@ import Vak from '../components/Vak';
 
 import '../sass/index.scss';
 
-const Title = styled.div`
-    font-size: 40px;
-    font-family: Georgia;
-    color: #362e95;
-    text-transform: uppercase;
-    text-align: center;
-`;
-
 const getVakkenByDag = dag => vakken.filter(vak => vak.dagen.includes(dag));
 
 const Inschrijven: FunctionComponent = () => (
     <Layout>
-        <Title>Hageveld Experience</Title>
+        <Title />
         <div style={{ marginLeft: '5%', marginRight: '5%' }}>
             <div style={{ background: '#ECECEC', padding: '30px' }}>
                 <Row gutter={16}>

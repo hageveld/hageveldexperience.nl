@@ -3,8 +3,6 @@ import Layout from '../components/Layout';
 import { Link } from 'gatsby';
 import { Result, Button, Icon } from 'antd';
 
-import '../sass/index.scss';
-
 const NotFound: FunctionComponent = () => (
     <Layout>
         <Result

@@ -1,23 +1,18 @@
 module.exports = {
     siteMetadata: {
         title: 'Hageveld Experience',
-        siteUrl: 'https://experience.hageveld.nl',
-        baseUrl: 'https://experience.hageveld.dev',
+        siteUrl: 'https://experience.hageveld.dev',
         description: 'Hageveld Experience',
-        author: 'Luit'
+        author: 'Atheneum College Hageveld',
+        keywords: 'Atheneum, College, Hageveld, Experience, VWO, Heemstede'
     },
     pathPrefix: '/',
     plugins: [
         'gatsby-plugin-typescript',
         'gatsby-plugin-react-helmet',
+        'gatsby-plugin-sitemap',
         'gatsby-plugin-styled-components',
         'gatsby-transformer-yaml',
-        {
-            resolve: 'gatsby-plugin-compile-es6-packages',
-            options: {
-                modules: ['styled-components']
-            }
-        },
         {
             resolve: 'gatsby-source-filesystem',
             options: {
@@ -33,8 +28,8 @@ module.exports = {
                 name: 'Hageveld Experience',
                 short_name: 'Hageveld Experience',
                 start_url: '/',
-                background_color: '#FFFFFF',
-                theme_color: '#000000',
+                background_color: '#5B34AD',
+                theme_color: '#E67200',
                 display: 'minimal-ui',
                 icon: 'src/images/favicon.png'
             }

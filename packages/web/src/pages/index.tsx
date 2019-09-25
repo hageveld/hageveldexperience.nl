@@ -1,22 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
-import styled from 'styled-components';
 import { Row, Col, Button } from 'antd';
+import { Link } from 'gatsby';
 import Hageveld from '../images/hageveld_front.jpg';
+import Title from '../components/Title';
 
 import '../sass/index.scss';
 
-const Title = styled.div`
-    font-size: 40px;
-    font-family: Georgia;
-    color: #362e95;
-    text-transform: uppercase;
-    text-align: center;
-`;
-
 const Index: FunctionComponent = () => (
     <Layout>
-        <Title>Hageveld Experience</Title>
+        <Title centered={true}>Hageveld Experience</Title>
         <Row style={{ marginLeft: '5%', marginRight: '5%' }}>
             <Col span={12} style={{ paddingRight: '5%' }}>
                 <img width="700px" src={Hageveld} />
@@ -34,7 +27,7 @@ const Index: FunctionComponent = () => (
             <Col span={12}>
                 <h2>Welkom</h2>
                 <br />
-                <Button type="primary">Aanmelden</Button>
+                <Link to="/registreren"><Button type="primary">Aanmelden</Button></Link>
             </Col>
         </Row>
     </Layout>
