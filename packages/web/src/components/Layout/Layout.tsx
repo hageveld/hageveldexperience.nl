@@ -13,10 +13,12 @@ const Layout: FunctionComponent<Props> = ({ children, title }: Props) => (
     <Fragment>
         <MetaData title={title} />
         <AntLayout>
-            <AntLayout.Header style={{ padding: '0' }}>
+            <AntLayout.Header style={{ padding: '0', marginBottom: '25px' }}>
                 <Header />
             </AntLayout.Header>
-            <AntLayout.Content>{children}</AntLayout.Content>
+            <AntLayout.Content>
+                {children}
+            </AntLayout.Content>
             <AntLayout.Footer>
                 <Footer />
             </AntLayout.Footer>

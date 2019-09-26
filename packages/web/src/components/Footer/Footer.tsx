@@ -1,6 +1,6 @@
 // tslint:disable:no-http-string
 
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import ExternalLink from '../ExternalLink';
 import { Row, Col, Divider } from 'antd';
 import styled from 'styled-components';
@@ -50,10 +50,10 @@ const socials: any = [
 const position = [52.348391, 4.6321063];
 
 const Footer: FunctionComponent = () => (
-    <FooterWrapper>
+    <Fragment>
         <Divider />
         <Row>
-            <Col span={8}>
+            <Col span={6} offset={1}>
                 <div>
                     <img width="32" src={Favicon} style={{ float: 'left' }} />
                     <h2>Hageveld</h2>
@@ -90,12 +90,12 @@ const Footer: FunctionComponent = () => (
                     </Row>
                 </div>
             </Col>
-            <Col span={8}>
-                <Map center={position} zoom={15} height="200px">
+            <Col span={6} offset={2}>
+                <Map center={position} zoom={15} height={200}>
                     <Marker anchor={position} payload={1} onClick={({ event, anchor, payload }) => {}} />
                 </Map>
             </Col>
-            <Col span={8}>
+            <Col span={6} offset={3}>
                 <h2>Contact</h2>
                 <div>
                     Atheneum College Hageveld
@@ -115,7 +115,7 @@ const Footer: FunctionComponent = () => (
                 </div>
             </Col>
         </Row>
-    </FooterWrapper>
+    </Fragment>
 );
 
 export default Footer;
