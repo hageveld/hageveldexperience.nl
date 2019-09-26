@@ -1,9 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Carousel } from 'antd';
 import { Link } from 'gatsby';
-import Hageveld from '../images/hageveld_front.jpg';
 import Title from '../components/Title';
+
+import Hageveld from '../images/hageveld_front.jpg';
+import Kluisjes from '../images/1_kluisjes.jpg';
+import LO_Instr from '../images/2_lo_instr.jpg';
+import Mediath from '../images/3_mediath.jpg';
+import Lokaal from '../images/4_lokaal.jpg';
 
 import '../sass/index.scss';
 
@@ -12,22 +17,50 @@ const Index: FunctionComponent = () => (
         <Title centered={true}>Hageveld Experience</Title>
         <Row style={{ marginLeft: '5%', marginRight: '5%' }}>
             <Col span={12} style={{ paddingRight: '5%' }}>
-                <img width="700px" src={Hageveld} />
+                <Carousel autoplay>
+                    <div>
+                        <img width="100%" height="100%" src={Hageveld} />
+                    </div>
+                    <div>
+                        <img width="100%" height="100%" src={Kluisjes} />
+                    </div>
+                    <div>
+                        <img width="100%" height="100%" src={LO_Instr} />
+                    </div>
+                    <div>
+                        <img width="100%" height="100%" src={Mediath} />
+                    </div>
+                    <div>
+                        <img width="100%" height="100%" src={Lokaal} />
+                    </div>
+                </Carousel>
                 <div>
-                    Atheneum College Hageveld is gelegen op landgoed Hageveld en is gehuisvest in
-                    een gebouw dat voorheen een klein-seminarie herbergde. Het is een sfeervol
-                    monumentaal gebouw dat wordt omzoomd door veel groen. Ook de sportvelden liggen
-                    rondom de school. College Hageveld is het enige zelfstandige atheneum dat
-                    Nederland telt. Wij bieden onze leerlingen een inspirerende werkomgeving. De
-                    sfeer die wij als school nastreven laat zich het best vangen in een zevental
-                    trefwoorden: Betrokkenheid, Vertrouwen, Veiligheid, Respect, Enthousiasme,
-                    Uitdaging en Ontplooiing. Het zijn de bouwstenen van ons atheneum.
+                De data van de Hageveld Experience voor het schooljaar 2019-2020 zijn:<br />
+<br />
+woensdag 20 november 2019, 27 november 2019 en woensdag 8 januari 2020 van 14.00 -15.30 uur.
                 </div>
             </Col>
             <Col span={12}>
-                <h2>Welkom</h2>
+                <h1>Welkom</h1>
+                <div>
+                Beste groep 8-er,<br />
                 <br />
-                <Link to="/registreren"><Button type="primary">Aanmelden</Button></Link>
+De grootste vraag waar je dit jaar voor staat, is “Naar welke school ga ik na de zomervakantie?”<br />
+<br />
+Het antwoord kan heel simpel zijn, want de leerlingen van onze school zullen zeggen:<br />
+<br />
+“naar Hageveld natuurlijk!”<br />
+<br />
+Zij voelen zich thuis bij ons en misschien jij ook wel? Ben jij al een echte nieuwsgierige vwo-leerling en wil je graag nu al een kijkje nemen in en op Hageveld?  Geef je dan op voor de Hageveld Experience! <br />
+<br />
+Tijdens de Hageveld Experience krijg je alvast een rondleiding of kun je speeddaten met Hageveldse leerlingen of een puzzeltocht door ons prachtige gebouw maken.<br />
+<br />
+Na de activiteit brengt de leerling je naar het juiste lokaal voor een proefles in het door jou gekozen vak.<br />
+<br />
+Op deze manier kun je ervaren hoe een les op Hageveld eruit ziet.<br />
+                </div>
+                <br />
+                <Link to="/registreren"><Button type="primary">Meld je nu aan!</Button></Link>
             </Col>
         </Row>
     </Layout>

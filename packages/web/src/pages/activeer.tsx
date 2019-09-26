@@ -4,7 +4,7 @@ import { Steps, Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplet
 import Title from '../components/Title';
 import basisscholen from '../../../duo-bo-data/result/result.json';
 
-console.log((basisscholen as any).map(school => school.VESTIGINGSNAAM));
+const boList = (basisscholen as any).map(basisschool => basisschool.naam + ' - ' + basisschool.plaats);
 
 const { Step } = Steps;
 const { Option } = Select;
@@ -51,7 +51,13 @@ const steps = [{
     title: "School",
     description: "Beschrijving",
     content: (
-        <AutoComplete dataSource={(basisscholen as any).filter(school => school.VESTIGINGSNAAM).map(school => school.VESTIGINGSNAAM)} />
+        <AutoComplete
+            style={{ width: '400px' }}
+            dataSource={boList}
+            filterOption={(inputValue, option: any) =>
+                option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+            }
+        />
     )
 }, {
     title: "Einde",
@@ -100,7 +106,7 @@ export default class Activeer extends Component<{}, State> {
 
         return (
             <Layout>
-                <Title centered={true}>Aanmelden</Title>
+                <Title centered={true}>Activeer je account</Title>
                 <Row>
                     <Col span={12} offset={6}>
                         <Steps current={step}>

@@ -17,4 +17,15 @@ for(let i = 1; i < lines.length; i++){
     items.push(item);
 }
 
-writeFileSync("./result/result.json", JSON.stringify(items, null , 4));
+writeFileSync("./result/result_full.json", JSON.stringify(items, null , 4));
+
+const itemsLite = items
+    .filter(item => item.VESTIGINGSNAAM)
+    .filter(item => item.PROVINCIE === 'Noord-Holland')
+    .map(item => ({
+        naam: item.VESTIGINGSNAAM,
+        plaats: item.PLAATSNAAM
+    }));
+
+writeFileSync("./result/result.json", JSON.stringify([...new Set(itemsLite)], null , 4));
+
