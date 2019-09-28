@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
-import { Link } from 'gatsby';
+import axios from 'axios';
 import { Row, Col, Button, Input, Result } from 'antd';
 import Title from '../components/Title';
 
@@ -37,10 +37,14 @@ export default class Registreren extends Component<{}, State> {
                     <Col span={12} offset={6}>
                         {!done ? (
                             <>
-                            <Input placeholder="e-mailadres" />
-                            <Button type="primary" icon="caret-right" size="large" onClick={this.handleClick}>
-                                Verzenden
-                            </Button>
+                            Vul hier je e-mailadres in om een account aan te maken:
+                            <br /><br />
+                            <Row>
+                                <Col span={18}><Input placeholder="mail@voorbeeld.nl" /></Col>
+                                <Col span={6}><Button type="primary" icon="login" onClick={this.handleClick}>
+                                    Verzenden
+                                </Button></Col>
+                            </Row>
                             </>
                         ) : (
                             <Result

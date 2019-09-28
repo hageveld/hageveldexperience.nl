@@ -23,6 +23,15 @@ module.exports = {
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
         {
+            resolve: 'gatsby-plugin-less',
+            options: {
+                javascriptEnabled: true,
+                modifyVars: {
+                    "primary-color": `#5B34AD`,
+                }
+            },
+        },
+        {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Hageveld Experience',
@@ -51,6 +60,12 @@ module.exports = {
                         disallow: '/'
                     }
                 ]
+            }
+        },
+        {
+            resolve: 'gatsby-plugin-antd',
+            options: {
+              style: true
             }
         },
         'gatsby-plugin-remove-trailing-slashes'
