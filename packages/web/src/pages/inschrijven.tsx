@@ -13,7 +13,7 @@ const getVakkenByDag = dag => vakken.filter(vak => vak.dagen.includes(dag));
 
 const Inschrijven: FunctionComponent = () => (
     <Layout>
-        <Title />
+        <Title centered={true}>Inschrijven</Title>
         <div style={{ marginLeft: '5%', marginRight: '5%' }}>
             <div style={{ background: '#ECECEC', padding: '30px' }}>
                 <Row gutter={16}>
