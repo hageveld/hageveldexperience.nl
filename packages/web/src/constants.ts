@@ -3,15 +3,18 @@
 export const dagen = [
     {
         dag: 1,
-        datum: '20-11-2019'
+        datum: '20-11-2019',
+        beschrijving: '(+ rondleiding)'
     },
     {
         dag: 2,
-        datum: '27-11-2019'
+        datum: '27-11-2019',
+        beschrijving: '(+ puzzeltocht)'
     },
     {
         dag: 3,
-        datum: '08-01-2020'
+        datum: '08-01-2020',
+        beschrijving: '(+ speeddate)'
     }
 ];
 
