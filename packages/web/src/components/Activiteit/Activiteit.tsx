@@ -12,14 +12,15 @@ interface Props {
 const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnemers } }) => {
     const inschrijvingen = 0;
     const ingeschreven = useSelector(state => state.inschrijf[id]);
+    const dagLocked = useSelector(state => state.inschrijf[`DAG-${dag.id}`]);
     const dispatch = useDispatch();
 
     const toggleSchrijfIn = () => {
         if(ingeschreven) {
-            dispatch(uitschrijf(id));
+            dispatch(uitschrijf(id, dag.id));
             message.error('Succesvol uitgeschreven');
         } else {
-            dispatch(inschrijf(id));
+            dispatch(inschrijf(id, dag.id));
             message.success('Succesvol ingeschreven!');
         }
     };
@@ -28,7 +29,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
         <Fragment>
                 <Row gutter={12}>
                     <Col span={3}>
-                        <Avatar>
+                        <Avatar style={{ backgroundColor: '#FA9B3D' }}>
                             <FontAwesomeIcon icon={['fas', vak.icon]} />
                         </Avatar>
                     </Col>
@@ -58,7 +59,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                                 type="primary"
                                 shape="circle"
                                 icon={ingeschreven ? "check" : "plus"}
-                                disabled={inschrijvingen >= maxDeelnemers}
+                                disabled={!ingeschreven && (dagLocked || inschrijvingen >= maxDeelnemers)}
                                 style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>

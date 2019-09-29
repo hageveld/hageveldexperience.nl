@@ -10,22 +10,26 @@ import {
   IngeschrevenAction
 } from './types';
 
-export const inschrijf: ActionCreator<InschrijfAction> = (id: string) => ({
+export const inschrijf: ActionCreator<InschrijfAction> = (id: string, dag: number) => ({
   type: INSCHRIJF,
-  id
+  id,
+  dag
 });
 
-export const uitschrijf: ActionCreator<UitschrijfAction> = (id: string) => ({
+export const uitschrijf: ActionCreator<UitschrijfAction> = (id: string, dag: number) => ({
   type: UITSCHRIJF,
-  id
+  id,
+  dag
 });
 
-export const ingeschreven: ActionCreator<IngeschrevenAction> = (id: string) => ({
+export const ingeschreven: ActionCreator<IngeschrevenAction> = (id: string, dag: number) => ({
   type: INGESCHREVEN,
-  id
+  id,
+  dag
 });
 
-export const uitgeschreven: ActionCreator<UitgeschrevenAction> = (id: string) => ({
+export const uitgeschreven: ActionCreator<UitgeschrevenAction> = (id: string, dag: number) => ({
   type: UITGESCHREVEN,
-  id
+  id,
+  dag
 });
