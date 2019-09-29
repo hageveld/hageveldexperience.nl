@@ -5,7 +5,12 @@
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "serve": "cross-env NODE_ENV=production lerna run --scope @hageveld/experience-web --stream serve",
+    "build": "cross-env NODE_ENV=production lerna run --stream build"
+  },
   "devDependencies": {
+    "cross-env": "6.0.0",
     "lerna": "3.16.4"
   }
 }
