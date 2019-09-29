@@ -1,22 +1,31 @@
 import { ActionCreator } from 'redux';
 import {
   INSCHRIJF,
-  InschrijfAction, UITGESCHREVEN,
+  UITSCHRIJF,
+  UITGESCHREVEN,
   INGESCHREVEN,
+  InschrijfAction,
+  UitschrijfAction,
   UitgeschrevenAction,
   IngeschrevenAction
 } from './types';
 
-export const inschrijf: ActionCreator<InschrijfAction> = () => ({
-  type: INSCHRIJF
+export const inschrijf: ActionCreator<InschrijfAction> = (id: string) => ({
+  type: INSCHRIJF,
+  id
 });
 
-export const ingeschreven: ActionCreator<IngeschrevenAction> = (payload: any) => ({
+export const uitschrijf: ActionCreator<UitschrijfAction> = (id: string) => ({
+  type: UITSCHRIJF,
+  id
+});
+
+export const ingeschreven: ActionCreator<IngeschrevenAction> = (id: string) => ({
   type: INGESCHREVEN,
-  payload
+  id
 });
 
-export const uitgeschreven: ActionCreator<UitgeschrevenAction> = (payload?: Error) => ({
+export const uitgeschreven: ActionCreator<UitgeschrevenAction> = (id: string) => ({
   type: UITGESCHREVEN,
-  payload
+  id
 });

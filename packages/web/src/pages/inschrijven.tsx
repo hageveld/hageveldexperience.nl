@@ -2,13 +2,12 @@ import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Row, Col, Card, List, DatePicker } from 'antd';
-import { dagen, vakken, activiteiten } from '../constants';
+import { dagen, activiteiten } from '../data';
 import moment from 'moment';
+import ActiviteitType from '../classes/activiteit';
 import Activiteit from '../components/Activiteit';
 
 import '../sass/index.scss';
-
-const getActiviteitenByDag = dag => activiteiten.filter(activiteit => activiteit.dag === dag).map(activiteit => ({ ...activiteit, dag: dagen.find(dag => dag.dag === activiteit.dag), vak: vakken.find(vak => vak.id === activiteit.vak)}));
 
 const Inschrijven: FunctionComponent = () => (
     <Layout>
@@ -21,7 +20,7 @@ const Inschrijven: FunctionComponent = () => (
                             <Card
                                 title={
                                     <div>
-                                        Dag {dag.dag} -{' '}
+                                        Dag {dag.id} -{' '}
                                         <DatePicker
                                             defaultValue={moment(dag.datum, 'DD-MM-YYYY')}
                                             format={'DD-MM-YYYY'}
@@ -33,10 +32,8 @@ const Inschrijven: FunctionComponent = () => (
                             >
                                 <List
                                     itemLayout="horizontal"
-                                    dataSource={getActiviteitenByDag(dag.dag)}
-                                    renderItem={(item: any) => (
-                                        <Activiteit vak={item.vak} dag={item.dag} inschrijvingen={item.inschrijvingen ? item.inschrijvingen : 0} deelnemers={item.maxDeelnemers} />
-                                    )}
+                                    dataSource={activiteiten.filter(activiteit => activiteit.dag.id === dag.id)}
+                                    renderItem={(activiteit: ActiviteitType) => <Activiteit data={activiteit} />}
                                 />
                             </Card>
                         </Col>

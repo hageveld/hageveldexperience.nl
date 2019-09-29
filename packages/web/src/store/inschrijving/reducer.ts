@@ -1,9 +1,7 @@
 import { Reducer } from 'redux';
-import { INSCHRIJF, INGESCHREVEN, UITGESCHREVEN, InschrijfActions, InschrijfState } from './types';
+import { INSCHRIJF, UITSCHRIJF, INGESCHREVEN, UITGESCHREVEN, InschrijfActions, InschrijfState } from './types';
 
-const INITIAL_STATE: InschrijfState = {
-  ingeschreven: false
-};
+const INITIAL_STATE: InschrijfState = {};
 
 export const reducer: Reducer<InschrijfState, InschrijfActions> = (
   state = INITIAL_STATE,
@@ -13,17 +11,22 @@ export const reducer: Reducer<InschrijfState, InschrijfActions> = (
     case INSCHRIJF:
       return {
         ...state,
-        ingeschreven: true
+        [action.id]: true
       };
+    case UITSCHRIJF:
+        return {
+          ...state,
+          [action.id]: false
+        };
     case INGESCHREVEN:
       return {
         ...state,
-        ingeschreven: false
+        [action.id]: true
       };
     case UITGESCHREVEN:
       return {
         ...state,
-        ingeschreven: false
+        [action.id]: false
       };
     default:
       return state;

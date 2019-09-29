@@ -1,28 +1,25 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { Row, Col, Button, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { useDispatch, useSelector } from '../../hooks';
-import { inschrijf, uitgeschreven } from '../../store/inschrijving';
+import { inschrijf, uitschrijf } from '../../store/inschrijving';
+import ActiviteitType from '../../classes/activiteit';
 
 interface Props {
-    //icon: IconName;
-    vak: any;
-    dag: any;
-    inschrijvingen: number; // maximale inschrijvingen (!)
-    deelnemers: number; // huidige inschrijvingen
+    data: ActiviteitType;
 }
 
-const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datum }, inschrijvingen, deelnemers }) => {
-    const ingeschreven = useSelector(state => state.inschrijf.ingeschreven);
+const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnemers } }) => {
+    const inschrijvingen = 0;
+    const ingeschreven = useSelector(state => state.inschrijf[id]);
     const dispatch = useDispatch();
 
     const toggleSchrijfIn = () => {
         if(ingeschreven) {
-            dispatch(uitgeschreven());
+            dispatch(uitschrijf(id));
             message.error('Succesvol uitgeschreven');
         } else {
-            dispatch(inschrijf());
+            dispatch(inschrijf(id));
             message.success('Succesvol ingeschreven!');
         }
     };
@@ -32,11 +29,11 @@ const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datu
                 <Row gutter={12}>
                     <Col span={3}>
                         <Avatar>
-                            <FontAwesomeIcon icon={['fas', icon]} />
+                            <FontAwesomeIcon icon={['fas', vak.icon]} />
                         </Avatar>
                     </Col>
                     <Col span={3}>
-                        {naam}
+                        {vak.naam}
                     </Col>
                     <Col span={2} style={{ float: 'right' }}>
                         <Popconfirm
@@ -44,11 +41,11 @@ const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datu
                                 <Fragment>
                                     <p>Weet je zeker dat je je in wilt schrijven?</p>
                                     <p>
-                                        <b>Vak</b>: {naam}
+                                        <b>Vak</b>: {vak.naam}
                                         <br />
-                                        <b>Datum</b>: {datum}
+                                        <b>Datum</b>: {dag.datum}
                                         <br />
-                                        <b>Tijd</b>: 14:00 - 15:30
+                                        <b>Tijd</b>: {dag.startTijd} - {dag.eindTijd}
                                     </p>
                                     <p>Je krijgt een bevestigingsmail.</p>
                                 </Fragment>
@@ -61,7 +58,7 @@ const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datu
                                 type="primary"
                                 shape="circle"
                                 icon={ingeschreven ? "check" : "plus"}
-                                disabled={inschrijvingen >= deelnemers}
+                                disabled={inschrijvingen >= maxDeelnemers}
                                 style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>
@@ -70,7 +67,7 @@ const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datu
                         <Statistic
                             title="Inschrijvingen"
                             value={ingeschreven ? inschrijvingen+1 : inschrijvingen}
-                            suffix={`/ ${deelnemers}`}
+                            suffix={`/ ${maxDeelnemers}`}
                         />
                     </Col>
                 </Row>

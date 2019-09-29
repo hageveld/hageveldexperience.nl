@@ -17,7 +17,7 @@ const Index: FunctionComponent = () => (
         <Title centered={true}>Hageveld Experience</Title>
         <Row style={{ marginLeft: '5%', marginRight: '5%' }}>
             <Col span={12} style={{ paddingRight: '5%' }}>
-                <Carousel autoplay>
+                <Carousel autoplay={true}>
                     <div>
                         <img width="100%" height="100%" src={Hageveld} />
                     </div>

@@ -1,93 +1,4 @@
-// 14:00 - 15:30
-
-interface Vak {
-    id: string;
-    icon: string;
-    naam: string;
-}
-
-export const vakken: Vak[] = [
-    {
-        id: "AK",
-        icon: "globe",
-        naam: "Aardrijkskunde"
-    },
-    {
-        id: "BI",
-        icon: "microscope",
-        naam: "Biologie"
-    },
-    {
-        id: "DU",
-        icon: "book",
-        naam: "Duits"
-    },
-    {
-        id: "EN",
-        icon: "book",
-        naam: "Engels"
-    },
-    {
-        id: "GS",
-        icon: "landmark",
-        naam: "Geschiedenis"
-    },
-    {
-        id: "LA",
-        icon: "book",
-        naam: "Latijn"
-    },
-    {
-        id: "NT",
-        icon: "rocket",
-        naam: "Natuur en Techniek"
-    },
-    {
-        id: "SK",
-        icon: "flask",
-        naam: "Scheikunde"
-    },
-    {
-        id: "SP",
-        icon: "book",
-        naam: "Spaans"
-    },
-    {
-        id: "TE",
-        icon: "pencil-alt",
-        naam: "Tekenen"
-    },
-    {
-        id: "WW",
-        icon: "compass",
-        naam: "Wereldwijs"
-    },
-    {
-        id: "WI",
-        icon: "calculator",
-        naam: "Wiskunde"
-    }
-]
-
-export const dagen = [
-    {
-        dag: 1,
-        datum: '20-11-2019',
-        beschrijving: '(+ rondleiding)'
-    },
-    {
-        dag: 2,
-        datum: '27-11-2019',
-        beschrijving: '(+ puzzeltocht)'
-    },
-    {
-        dag: 3,
-        datum: '08-01-2020',
-        beschrijving: '(+ speeddate)'
-    }
-];
-
-export const activiteiten = [
+const activiteiten = [
     {
         vak: "AK",
         dag: 1,
@@ -239,3 +150,5 @@ export const activiteiten = [
         maxDeelnemers: 28
     }
 ];
+
+export default activiteiten;
