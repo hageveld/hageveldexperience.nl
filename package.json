@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "serve": "cross-env NODE_ENV=production lerna run --scope @hageveld/experience-web --stream serve",
     "build": "cross-env NODE_ENV=production lerna run --scope @hageveld/experience-web --stream build"
   },
