@@ -1,19 +1,8 @@
 import * as db from '../utils/db';
 import * as mail from '../utils/mail';
-import { randomBytes } from 'crypto';
+import { generateToken } from '../utils/token';
 import { Request, Response } from 'express';
 
-const generateToken = () => {
-    return new Promise((resolve, reject) => {
-        randomBytes(32, (err, buf) => {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(buf.toString('hex'));
-            }
-        });
-    });
-}
 
 export default async (req: Request, res: Response) => {
     const { email } = req.params;

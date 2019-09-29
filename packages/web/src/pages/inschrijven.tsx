@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
-import { Row, Col, Button, Card, List, Avatar, Icon, Statistic, DatePicker } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { dagen, vakken } from '../constants';
+import { Row, Col, Card, List, DatePicker } from 'antd';
+import { dagen, vakken, activiteiten } from '../constants';
 import moment from 'moment';
-import Vak from '../components/Vak';
+import Activiteit from '../components/Activiteit';
 
 import '../sass/index.scss';
 
-const getVakkenByDag = dag => vakken.filter(vak => vak.dagen.includes(dag));
+const getActiviteitenByDag = dag => activiteiten.filter(activiteit => activiteit.dag === dag).map(activiteit => ({ ...activiteit, dag: dagen.find(dag => dag.dag === activiteit.dag), vak: vakken.find(vak => vak.id === activiteit.vak)}));
 
 const Inschrijven: FunctionComponent = () => (
     <Layout>
@@ -34,9 +33,9 @@ const Inschrijven: FunctionComponent = () => (
                             >
                                 <List
                                     itemLayout="horizontal"
-                                    dataSource={getVakkenByDag(dag.dag)}
-                                    renderItem={item => (
-                                        <Vak icon={item.icon} naam={item.naam} inschrijvingen={item.inschrijvingen ? item.inschrijvingen : 0} deelnemers={item.deelnemers} />
+                                    dataSource={getActiviteitenByDag(dag.dag)}
+                                    renderItem={(item: any) => (
+                                        <Activiteit vak={item.vak} dag={item.dag} inschrijvingen={item.inschrijvingen ? item.inschrijvingen : 0} deelnemers={item.maxDeelnemers} />
                                     )}
                                 />
                             </Card>

@@ -1,47 +1,34 @@
-import React, { Component, Fragment } from 'react';
-import { Row, Col, Button, List, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
+import React, { Fragment, FunctionComponent } from 'react';
+import { Row, Col, Button, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
+import { useDispatch, useSelector } from '../../hooks';
+import { inschrijf, uitgeschreven } from '../../store/inschrijving';
 
 interface Props {
-    icon: IconName;
-    naam: string;
+    //icon: IconName;
+    vak: any;
+    dag: any;
     inschrijvingen: number; // maximale inschrijvingen (!)
     deelnemers: number; // huidige inschrijvingen
 }
 
-interface State {
-    ingeschreven: boolean;
-}
+const Activiteit: FunctionComponent<Props> = ({ vak: { icon, naam }, dag: { datum }, inschrijvingen, deelnemers }) => {
+    const ingeschreven = useSelector(state => state.inschrijf.ingeschreven);
+    const dispatch = useDispatch();
 
-export default class Vak extends Component<Props, State> {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            ingeschreven: false
-        };
-        this.toggleSchrijfIn = this.toggleSchrijfIn.bind(this);
-    }
-
-    toggleSchrijfIn() {
-        const { ingeschreven } = this.state;
-        this.setState({
-            ingeschreven: !ingeschreven
-        });
+    const toggleSchrijfIn = () => {
         if(ingeschreven) {
+            dispatch(uitgeschreven());
             message.error('Succesvol uitgeschreven');
         } else {
+            dispatch(inschrijf());
             message.success('Succesvol ingeschreven!');
         }
-    }
+    };
 
-    render() {
-        const { icon, naam, inschrijvingen, deelnemers } = this.props;
-        const { ingeschreven } = this.state;
-
-        return (
-            <Fragment>
+    return (
+        <Fragment>
                 <Row gutter={12}>
                     <Col span={3}>
                         <Avatar>
@@ -59,14 +46,14 @@ export default class Vak extends Component<Props, State> {
                                     <p>
                                         <b>Vak</b>: {naam}
                                         <br />
-                                        <b>Datum</b>: 01-01-9999
+                                        <b>Datum</b>: {datum}
                                         <br />
                                         <b>Tijd</b>: 14:00 - 15:30
                                     </p>
                                     <p>Je krijgt een bevestigingsmail.</p>
                                 </Fragment>
                             )}
-                            onConfirm={this.toggleSchrijfIn}
+                            onConfirm={toggleSchrijfIn}
                             okText="Ja"
                             cancelText="Nee"
                         >
@@ -89,6 +76,7 @@ export default class Vak extends Component<Props, State> {
                 </Row>
                 <Divider style={{ margin: '15px' }} />
             </Fragment>
-        );
-    }
+    );
 }
+
+export default Activiteit;

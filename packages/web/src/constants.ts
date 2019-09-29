@@ -1,5 +1,74 @@
 // 14:00 - 15:30
 
+interface Vak {
+    id: string;
+    icon: string;
+    naam: string;
+}
+
+export const vakken: Vak[] = [
+    {
+        id: "AK",
+        icon: "globe",
+        naam: "Aardrijkskunde"
+    },
+    {
+        id: "BI",
+        icon: "microscope",
+        naam: "Biologie"
+    },
+    {
+        id: "DU",
+        icon: "book",
+        naam: "Duits"
+    },
+    {
+        id: "EN",
+        icon: "book",
+        naam: "Engels"
+    },
+    {
+        id: "GS",
+        icon: "landmark",
+        naam: "Geschiedenis"
+    },
+    {
+        id: "LA",
+        icon: "book",
+        naam: "Latijn"
+    },
+    {
+        id: "NT",
+        icon: "rocket",
+        naam: "Natuur en Techniek"
+    },
+    {
+        id: "SK",
+        icon: "flask",
+        naam: "Scheikunde"
+    },
+    {
+        id: "SP",
+        icon: "book",
+        naam: "Spaans"
+    },
+    {
+        id: "TE",
+        icon: "pencil-alt",
+        naam: "Tekenen"
+    },
+    {
+        id: "WW",
+        icon: "compass",
+        naam: "Wereldwijs"
+    },
+    {
+        id: "WI",
+        icon: "calculator",
+        naam: "Wiskunde"
+    }
+]
+
 export const dagen = [
     {
         dag: 1,
@@ -18,92 +87,155 @@ export const dagen = [
     }
 ];
 
-export const vakken: any[] = [
+export const activiteiten = [
     {
-        id: 'AK',
-        icon: 'globe',
-        naam: 'Aardrijkskunde',
-        deelnemers: 28,
-        dagen: [1, 2]
+        vak: "AK",
+        dag: 1,
+        maxDeelnemers: 28
     },
     {
-        id: 'BI',
-        icon: 'microscope',
-        naam: 'Biologie',
-        deelnemers: 24,
-        dagen: [1, 2, 3],
-        inschrijvingen: 24
+        vak: "AK",
+        dag: 2,
+        maxDeelnemers: 28
     },
     {
-        id: 'DU',
-        icon: 'book',
-        naam: 'Duits',
-        deelnemers: 28,
-        dagen: [2],
-        inschrijvingen: 20,
-        ingeschreven: true
+        vak: "BI",
+        dag: 1,
+        maxDeelnemers: 24
     },
     {
-        id: 'EN',
-        icon: 'book',
-        naam: 'Engels',
-        deelnemers: 28,
-        dagen: [1, 2, 3]
+        vak: "BI",
+        dag: 2,
+        maxDeelnemers: 24
     },
     {
-        id: 'GS',
-        icon: 'landmark',
-        naam: 'Geschiedenis',
-        deelnemers: 28,
-        dagen: [1, 2, 3]
+        vak: "BI",
+        dag: 3,
+        maxDeelnemers: 24
     },
     {
-        id: 'LA',
-        icon: 'book',
-        naam: 'Latijn',
-        deelnemers: 28,
-        dagen: [1, 2, 3]
+        vak: "DU",
+        dag: 2,
+        maxDeelnemers: 28
     },
     {
-        id: 'NT',
-        icon: 'rocket',
-        naam: 'Natuur en Techniek',
-        deelnemers: 24,
-        dagen: [1, 2, 3]
+        vak: "EN",
+        dag: 1,
+        maxDeelnemers: 28
     },
     {
-        id: 'SK',
-        icon: 'flask',
-        naam: 'Scheikunde',
-        deelnemers: 24,
-        dagen: [1, 2, 3]
+        vak: "EN",
+        dag: 2,
+        maxDeelnemers: 28
     },
     {
-        id: 'SP',
-        icon: 'book',
-        naam: 'Spaans',
-        deelnemers: 28,
-        dagen: [2, 3]
+        vak: "EN",
+        dag: 3,
+        maxDeelnemers: 28
     },
     {
-        id: 'TE',
-        icon: 'pencil-alt',
-        naam: 'Tekenen',
-        deelnemers: 24,
-        dagen: [1, 3]
+        vak: "GS",
+        dag: 1,
+        maxDeelnemers: 28
     },
     {
-        id: 'WW',
-        icon: 'compass',
-        naam: 'Wereldwijs',
-        deelnemers: 28,
-        dagen: [1, 3]
+        vak: "GS",
+        dag: 2,
+        maxDeelnemers: 28
     },
     {
-        id: 'WI',
-        icon: 'calculator',
-        naam: 'Wiskunde',
-        deelnemers: 28,
-        dagen: [1, 2, 3]
+        vak: "GS",
+        dag: 3,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "LA",
+        dag: 1,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "LA",
+        dag: 2,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "LA",
+        dag: 3,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "NT",
+        dag: 1,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "NT",
+        dag: 2,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "NT",
+        dag: 3,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "SK",
+        dag: 1,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "SK",
+        dag: 2,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "SK",
+        dag: 3,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "SP",
+        dag: 2,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "SP",
+        dag: 3,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "TE",
+        dag: 1,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "TE",
+        dag: 3,
+        maxDeelnemers: 24
+    },
+    {
+        vak: "WW",
+        dag: 1,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "WW",
+        dag: 3,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "WI",
+        dag: 1,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "WI",
+        dag: 2,
+        maxDeelnemers: 28
+    },
+    {
+        vak: "WI",
+        dag: 3,
+        maxDeelnemers: 28
     }
 ];

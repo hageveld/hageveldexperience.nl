@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { navigate } from 'gatsby';
 import Layout from '../components/Layout';
 import { Steps, Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete } from 'antd';
 import Title from '../components/Title';
@@ -73,14 +74,21 @@ const steps = [{
 
 interface State {
     step: number;
+    hash: string;
 }
 
 export default class Activeer extends Component<{}, State> {
     constructor(props) {
         super(props);
 
+        const hash = location.hash.replace("#/", "");
+        if(!(/^[0-9a-f]{64}$/.test(hash))) {
+            navigate("/");
+        }
+
         this.state = {
-            step: 0
+            step: 0,
+            hash
         };
 
         this.back = this.back.bind(this);

@@ -7,6 +7,7 @@ import Title from '../components/Title';
 interface State {
     loading: boolean;
     done: boolean;
+    email: string;
 }
 
 export default class Registreren extends Component<{}, State> {
@@ -15,20 +16,37 @@ export default class Registreren extends Component<{}, State> {
 
         this.state = {
             loading: false,
-            done: false
+            done: false,
+            email: ''
         };
 
         this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({
+            email: event.target.value
+        });
     }
 
     handleClick() {
+        const { email } = this.state;
         this.setState({
-            done: true
+            loading: true
+        });
+        axios.get(`http://localhost:3000/register/${email}`).then(response => {
+            this.setState({
+                loading: false,
+                done: true
+            });
+        }).catch(error => {
+
         });
     }
 
     render() {
-        const { loading, done } = this.state;
+        const { email, loading, done } = this.state;
 
         return (
             <Layout>
@@ -40,8 +58,8 @@ export default class Registreren extends Component<{}, State> {
                             Vul hier je e-mailadres in om een account aan te maken:
                             <br /><br />
                             <Row>
-                                <Col span={18}><Input placeholder="mail@voorbeeld.nl" /></Col>
-                                <Col span={6}><Button type="primary" icon="login" onClick={this.handleClick}>
+                                <Col span={18}><Input disabled={loading} placeholder="mail@voorbeeld.nl" onChange={this.handleChange} value={email} /></Col>
+                                <Col span={6}><Button disabled={loading} type="primary" icon="login" onClick={this.handleClick}>
                                     Verzenden
                                 </Button></Col>
                             </Row>

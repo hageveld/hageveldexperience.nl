@@ -16,10 +16,22 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@types/node@*":
+  version "12.7.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.8.tgz#cb1bf6800238898bc2ff6ffa5702c3cadd350708"
+  integrity sha512-FMdVn84tJJdV+xe+53sYiZS4R5yn1mAIxfj+DVoNiQjTYz1+OYmjwEZr1ev9nU0axXwda0QDbYl06QHanRVH3A==
+
 "@types/node@11.11.6":
   version "11.11.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.6.tgz#df929d1bb2eee5afdda598a41930fe50b43eaa6a"
   integrity sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ==
+
+"@types/sqlite3@3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@types/sqlite3/-/sqlite3-3.1.5.tgz#c9bbc94b8e8ed0654e1f8bc98716aba6030e9533"
+  integrity sha512-upsrd1zEYMa4Y+prurQ+vpo5SN63BUF6tOjeTv3ziF+9W9PHVh4/S5cy0qAqkHvmOEm/AZhEKd7V/0bR2udmFw==
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1:
   version "1.1.1"

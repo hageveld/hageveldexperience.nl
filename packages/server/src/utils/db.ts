@@ -1,11 +1,11 @@
 import * as sqlite3 from 'sqlite3';
-import * as Debug from 'debug';
+import Debug from 'debug';
 
 const debug = Debug('db');
 const db = new sqlite3.Database('database.db');
 
 export const init = async (): Promise<void> => {
-    await this.run(
+    await run(
         `CREATE TABLE IF NOT EXISTS gebruikers (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             emailadres TEXT,
@@ -20,7 +20,7 @@ export const init = async (): Promise<void> => {
         )`
     );
 
-    await this.run(
+    await run(
         `CREATE TABLE IF NOT EXISTS activaties (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             emailadres TEXT,
@@ -67,7 +67,7 @@ export const run = (query, data?) => {
                 debug('ERROR %s %o', query, data);
                 reject(error);
             } else {
-                resolve(this.changes);
+                resolve();
             }
         });
     });

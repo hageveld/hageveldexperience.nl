@@ -1,6 +1,6 @@
-import * as express from 'express';
-import * as helmet from 'helmet';
-import * as compression from 'compression';
+import express from 'express';
+import helmet from 'helmet';
+import compression from 'compression';
 import * as db from './utils/db';
 import router from './utils/router';
 
