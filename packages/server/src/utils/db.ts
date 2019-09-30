@@ -62,7 +62,7 @@ export const all = (query, data?) => {
 export const run = (query, data?) => {
     return new Promise((resolve, reject) => {
         debug('RUN %s %o', query, data);
-        db.run(query, data, function(error) {
+        db.run(query, data, (error) => {
             if (error) {
                 debug('ERROR %s %o', query, data);
                 reject(error);

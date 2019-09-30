@@ -10,6 +10,8 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "tscheck": "cross-env NODE_ENV=production lerna run --stream tscheck",
+    "tslint": "cross-env NODE_ENV=production lerna run --stream tslint",
     "serve": "cross-env NODE_ENV=production lerna run --scope @hageveld/experience-web --stream serve",
     "build": "cross-env NODE_ENV=production lerna run --scope @hageveld/experience-web --stream build"
   },
