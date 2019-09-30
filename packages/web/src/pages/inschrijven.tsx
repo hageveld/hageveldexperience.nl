@@ -16,7 +16,7 @@ const Inschrijven: FunctionComponent = () => (
             <div style={{ background: '#ECECEC', padding: '30px' }}>
                 <Row gutter={16}>
                     {dagen.map((dag, index) => (
-                        <Col span={8} key={index}>
+                        <Col span={8} key={index} xs={24} sm={24} md={24} lg={8}>
                             <Card
                                 title={
                                     <div>
