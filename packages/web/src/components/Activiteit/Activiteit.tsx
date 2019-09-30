@@ -13,6 +13,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
     const inschrijvingen = 0;
     const ingeschreven = useSelector(state => state.inschrijf[id]);
     const dagLocked = useSelector(state => state.inschrijf[`DAG-${dag.id}`]);
+    const dagenIngeschreven = useSelector(state => state.inschrijf.DAGEN);
     const dispatch = useDispatch();
 
     const toggleSchrijfIn = () => {
@@ -59,7 +60,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                                 type="primary"
                                 shape="circle"
                                 icon={ingeschreven ? "check" : "plus"}
-                                disabled={!ingeschreven && (dagLocked || inschrijvingen >= maxDeelnemers)}
+                                disabled={!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)}
                                 style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>

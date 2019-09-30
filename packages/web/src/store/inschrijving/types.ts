@@ -1,7 +1,8 @@
 import { Action } from 'redux';
 
 export interface InschrijfState {
-  [key: string]: boolean;
+  DAGEN: number;
+  [key: string]: boolean | number;
 }
 
 export const INSCHRIJF = 'INSCHRIJF';
