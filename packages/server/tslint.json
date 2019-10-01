@@ -29,5 +29,5 @@
     "member-access": [true, "no-public"],
     "no-empty": false
   },
-  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"]
+  "rulesDirectory": ["./node_modules/tslint-microsoft-contrib"]
 }
