@@ -3,18 +3,12 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import ExternalLink from '../ExternalLink';
 import { Row, Col, Divider } from 'antd';
-import styled from 'styled-components';
 import Favicon from '../../images/favicon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
 import './Footer.scss';
-
-const FooterWrapper = styled.div`
-    margin-left: 50px;
-    margin-right: 50px;
-`;
 
 const socials: any = [
     {

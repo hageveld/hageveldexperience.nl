@@ -10,7 +10,8 @@
   "scripts": {
     "tscheck": "tsc --noEmit --project tsconfig.json",
     "tslint": "tslint --project .",
-    "start": "ts-node src/index.ts",
+    "build": "ts-node src/index.ts",
+    "build:4pp": "ts-node src/4pp.ts",
     "prettier": "prettier --write --config ../../.prettierrc --list-different './**/*.ts?(x)'"
   },
   "devDependencies": {

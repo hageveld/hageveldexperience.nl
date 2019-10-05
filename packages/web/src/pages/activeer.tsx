@@ -1,134 +1,107 @@
-import React, { Component } from 'react';
-import { navigate } from 'gatsby';
+import React, { FunctionComponent } from 'react';
+import { Link, navigate } from 'gatsby';
 import Layout from '../components/Layout';
-import { Steps, Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete } from 'antd';
+import Stepper from '../components/Stepper';
+import { Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete } from 'antd';
 import Title from '../components/Title';
 import basisscholen from '../../../duo-bo-data/result/result.json';
+import Map from 'pigeon-maps';
+import Marker from 'pigeon-marker';
 
-const boList = (basisscholen as any).map(basisschool => basisschool.naam + ' - ' + basisschool.plaats);
-
-const { Step } = Steps;
 const { Option } = Select;
+const { Item } = Form;
+const { Step } = Stepper;
 
-const steps = [{
-    title: "Gegevens",
-    description: "Beschrijving",
-    content: (
-        <Form>
-            <Form.Item label="Roepnaam">
-                <Input />
-            </Form.Item>
-            <Form.Item label="Tussenvoegsel">
-                <Input />
-            </Form.Item>
-            <Form.Item label="Achternaam">
-                <Input />
-            </Form.Item>
-            <Form.Item label="Geslacht">
-                <Select>
-                    <Option value="M">Jongen</Option>
-                    <Option value="V">Meisje</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item label="Telefoonnummer">
-                <Input />
-            </Form.Item>
-        </Form>
-    )
-}, {
-    title: "Wachtwoord",
-    description: "Beschrijving",
-    content: (
-        <>
-                            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
-            />
-                            
-                            </>
-    )
-}, {
-    title: "School",
-    description: "Beschrijving",
-    content: (
-        <AutoComplete
-            style={{ width: '400px' }}
-            dataSource={boList}
-            filterOption={(inputValue, option: any) =>
-                option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-        />
-    )
-}, {
-    title: "Einde",
-    description: "Beschrijving",
-    content: (
-        <Result
-                                status="success"
-                                title="Succesvol aangemeld!"
-                                subTitle="Kijk in de inbox van je e-mail en klik op de activatielink"
-                            />
-    )
-}]
+const Activeer: FunctionComponent = () => {
+    const hash = location.hash.replace("#/", "");
 
-interface State {
-    step: number;
-    hash: string;
-}
-
-export default class Activeer extends Component<{}, State> {
-    constructor(props) {
-        super(props);
-
-        const hash = location.hash.replace("#/", "");
-        if(!(/^[0-9a-f]{64}$/.test(hash))) {
-            navigate("/");
-        }
-
-        this.state = {
-            step: 0,
-            hash
-        };
-
-        this.back = this.back.bind(this);
-        this.forward = this.forward.bind(this);
+    if(!(/^[0-9a-f]{64}$/.test(hash))) {
+        navigate("/");
     }
 
-    back() {
-        const { step } = this.state;
-        this.setState({
-            step: step-1
-        });
-    }
-
-    forward() {
-        const { step } = this.state;
-        this.setState({
-            step: step+1
-        });
-    }
-
-    render() {
-        const { step } = this.state;
-
-        return (
+    return (
             <Layout>
                 <Title centered={true}>Activeer je account</Title>
                 <Row>
                     <Col span={12} offset={6}>
-                        <Steps current={step}>
-                            {steps.map((stepData, index) => (
-                                <Step title={stepData.title} description={stepData.description} key={index} />
-                            ))}
-                        </Steps>
-                        {steps[step].content}
-                        <Button type="primary" icon="caret-right" size="large" onClick={this.forward}>
-                                Verzenden
-                            </Button>
+                        <Stepper>
+                            <Step title="Gegevens" icon="user" description="Persoonsgegevens">
+                                <Form>
+                                    <Item label="Roepnaam">
+                                        <Input />
+                                    </Item>
+                                    <Item label="Tussenvoegsel">
+                                        <Input />
+                                    </Item>
+                                    <Item label="Achternaam">
+                                        <Input />
+                                    </Item>
+                                    <Item label="Geslacht">
+                                        <Select>
+                                            <Option value="M">Jongen</Option>
+                                            <Option value="V">Meisje</Option>
+                                        </Select>
+                                    </Item>
+                                    <Item label="Telefoonnummer">
+                                        <Input />
+                                    </Item>
+                                </Form>
+                            </Step>
+                            <Step title="Wachtwoord" icon="lock" description="Authenticatie">
+                                <>
+                                    <Input
+                                        prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                        type="password"
+                                        placeholder="Password"
+                                    />         
+                                </>
+                            </Step>
+                            <Step title="School" icon="bank" description="Basisschool">
+                                <>
+                                    <AutoComplete
+                                        style={{ width: '400px' }}
+                                        dataSource={(basisscholen as any).filter(basisschool => basisschool.distance < 15).map(basisschool => basisschool.naam + ' - ' + basisschool.plaats)}
+                                        filterOption={(inputValue, option: any) =>
+                                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                                        }
+                                    />
+                                    <Map center={[52.348391, 4.6321063]} zoom={11} height={400}>
+                                        {(basisscholen as any).filter(basisschool => basisschool.distance < 15).map((basisschool, index) => 
+                                            <Marker key={index} anchor={[parseFloat(basisschool.latitude), parseFloat(basisschool.longitude)]} payload={1} onClick={({ event, anchor, payload }) => {}} />
+                                        )}
+                                    </Map>
+                                </>
+                            </Step>
+                            <Step title="Verwijzing" icon="search" description="Extra informatie">
+                                <>
+                                    <p>Hoe heb je ons gevonden?</p>
+                                    <Select style={{ width: '300px' }}>
+                                        <Option value="school">School</Option>
+                                        <Option value="kennis">Vrienden/familie/kennis</Option>
+                                        <Option value="online">Digitaal</Option>
+                                        <Option value="overig">Geen van bovenstaande opties</Option>
+                                    </Select>         
+                                </>
+                            </Step>
+                            <Step title="Einde" icon="check" description="Klaar!">
+                                <Result
+                                    status="success"
+                                    title="Succesvol geregistreerd!"
+                                    subTitle="Je kunt je nu inschrijven voor de proeflessen."
+                                    extra={
+                                        <Link to="/inschrijven">
+                                            <Button type="primary" icon="form" size="large">
+                                                Inschrijven
+                                            </Button>
+                                        </Link>
+                                    }
+                                />
+                            </Step>
+                        </Stepper>
                     </Col>
                 </Row>
             </Layout>
-        );
-    }
+    );
 }
+
+export default Activeer;
