@@ -64,6 +64,7 @@ export default class Stepper extends Component<Props, State> {
                         />
                     ))}
                 </Steps>
+                <br />
                 {steps[step].children}
                 {step < children.length-1 && 
                     <Button type="primary" icon="caret-right" size="large" onClick={this.forward}>
