@@ -10,7 +10,6 @@ import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
 const { Option } = Select;
-const { Item } = Form;
 const { Step } = Stepper;
   
 class Persoonsgegevens extends Component<FormComponentProps> {
@@ -184,9 +183,48 @@ class Authenticatie extends Component<FormComponentProps> {
         );
     }
 }
+
+class Verwijzing extends Component<FormComponentProps> {
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    };
+  
+    render() {
+        const { getFieldDecorator } = this.props.form;
+  
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                <h2><span style={{ color: 'red'}}>*</span> Hoe heb je ons gevonden?</h2>
+                <Form.Item>
+                    {getFieldDecorator('verwijzing', {
+                        rules: [{ required: true, message: 'Laat alsjeblieft weten hoe je ons hebt gevonden.' }],
+                    })(
+                        <Select>
+                            <Option value="school">School</Option>
+                            <Option value="kennis">Vrienden/familie/kennis</Option>
+                            <Option value="online">Digitaal</Option>
+                            <Option value="overig">Geen van bovenstaande opties</Option>
+                        </Select>
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        Register
+                    </Button>
+                </Form.Item>
+            </Form>
+        );
+    }
+}
   
 const WrappedPersoonsgegevens = Form.create({ name: 'persoonsgegevens' })(Persoonsgegevens);
 const WrappedAuthenticatie = Form.create({ name: 'authenticatie' })(Authenticatie);
+const WrappedVerwijzing = Form.create({ name: 'verwijzing' })(Verwijzing);
 
 const Activeer: FunctionComponent = () => {
     const hash = location.hash.replace("#/", "");
@@ -226,15 +264,7 @@ const Activeer: FunctionComponent = () => {
                                 </>
                             </Step>
                             <Step title="Verwijzing" icon="search" description="Extra informatie">
-                                <>
-                                    <p>Hoe heb je ons gevonden?</p>
-                                    <Select style={{ width: '300px' }}>
-                                        <Option value="school">School</Option>
-                                        <Option value="kennis">Vrienden/familie/kennis</Option>
-                                        <Option value="online">Digitaal</Option>
-                                        <Option value="overig">Geen van bovenstaande opties</Option>
-                                    </Select>         
-                                </>
+                                <WrappedVerwijzing />
                             </Step>
                             <Step title="Einde" icon="check" description="Klaar!">
                                 <Result
