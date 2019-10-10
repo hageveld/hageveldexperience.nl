@@ -11,6 +11,7 @@ import {
     faLandmark,
     faMapMarkerAlt,
     faMicroscope,
+    faMusic,
     faPencilAlt,
     faPhone,
     faRocket
@@ -32,6 +33,7 @@ library.add(
     faLandmark,
     faMapMarkerAlt,
     faMicroscope,
+    faMusic,
     faPencilAlt,
     faPhone,
     faRocket,
