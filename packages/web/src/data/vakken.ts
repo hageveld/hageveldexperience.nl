@@ -32,6 +32,11 @@ const vakken: Vak[] = [
         naam: "Latijn"
     },
     {
+        id: "MU",
+        icon: "music",
+        naam: "Muziek"
+    },
+    {
         id: "NT",
         icon: "rocket",
         naam: "Natuur en Techniek"
