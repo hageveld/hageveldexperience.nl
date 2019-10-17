@@ -20,6 +20,8 @@ const Inschrijven: FunctionComponent = () => (
                 <Alert message={
                         <Fragment>
                             Op deze pagina kun je je inschrijven voor de proeflessen. Hieronder kun je kiezen uit vakken die op Hageveld gegeven worden. Of nou je een taal kiest of een praktisch vak, op een leuke en creatieve manier maak je kennis bij dat vak.
+                            <br />
+                            Indien je een keuze wilt wijzigen, klik dan nogmaals op het groene vinkje om je uit te schrijven.
                             <br /><br />
                             <b>Let op</b>: Je kunt je voor maximaal 2 dagen inschrijven, en maximaal 1 vak per dag.
                         </Fragment>
