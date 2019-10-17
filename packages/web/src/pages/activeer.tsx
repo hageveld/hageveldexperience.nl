@@ -205,9 +205,10 @@ class Verwijzing extends Component<FormComponentProps> {
                         rules: [{ required: true, message: 'Laat alsjeblieft weten hoe je ons hebt gevonden.' }],
                     })(
                         <Select>
-                            <Option value="school">School</Option>
+                            <Option value="school">Ik heb een folder gekregen van mijn basisschool</Option>
+                            <Option value="school-leraar">Mijn leraar heeft verteld over de experience</Option>
                             <Option value="kennis">Vrienden/familie/kennis</Option>
-                            <Option value="online">Digitaal</Option>
+                            <Option value="online">Digitaal (via social media of google)</Option>
                             <Option value="overig">Geen van bovenstaande opties</Option>
                         </Select>
                     )}
