@@ -1,4 +1,4 @@
-import React, { Component, Fragment, ReactNode } from 'react';
+import React, { Component, Fragment, ReactNode, cloneElement } from 'react';
 import { Steps, Button, Avatar } from 'antd';
 import Step from './Step';
 
@@ -65,8 +65,8 @@ export default class Stepper extends Component<Props, State> {
                     ))}
                 </Steps>
                 <br />
-                {steps[step].children}
-                {step < children.length-1 && 
+                {steps[step].children.length > 1 ? steps[step].children.map(child => cloneElement(child, { forward: this.forward })) : cloneElement(steps[step].children, { forward: this.forward })}
+                {steps[step].showForward !== false && step < children.length-1 && 
                     <Button type="primary" icon="caret-right" size="large" onClick={this.forward}>
                         Verzenden
                     </Button>

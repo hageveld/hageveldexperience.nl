@@ -1,5 +1,6 @@
-import React, { FunctionComponent, Component } from 'react';
+import React, { FunctionComponent, Component, useState } from 'react';
 import { Link, navigate } from 'gatsby';
+import axios from 'axios';
 import Layout from '../components/Layout';
 import Stepper from '../components/Stepper';
 import { Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete, Tooltip, Alert } from 'antd';
@@ -12,12 +13,13 @@ import Marker from 'pigeon-marker';
 const { Option } = Select;
 const { Step } = Stepper;
   
-class Persoonsgegevens extends Component<FormComponentProps> {
+class Persoonsgegevens extends Component<FormComponentProps & any> {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.setFormData({ ...this.props.formData, ...values });
+                this.props.forward();
             }
         });
     };
@@ -96,7 +98,7 @@ class Persoonsgegevens extends Component<FormComponentProps> {
     }
 }
 
-class Authenticatie extends Component<FormComponentProps> {
+class Authenticatie extends Component<FormComponentProps & any> {
     state = {
         confirmDirty: false
     };
@@ -105,7 +107,8 @@ class Authenticatie extends Component<FormComponentProps> {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.setFormData({ ...this.props.formData, ...values });
+                this.props.forward();
             }
         });
     };
@@ -184,12 +187,14 @@ class Authenticatie extends Component<FormComponentProps> {
     }
 }
 
-class Verwijzing extends Component<FormComponentProps> {
+class Verwijzing extends Component<FormComponentProps & any> {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.setFormData({ ...this.props.formData, ...values });
+                this.props.sendData();
+                this.props.forward();
             }
         });
     };
@@ -205,7 +210,7 @@ class Verwijzing extends Component<FormComponentProps> {
                         rules: [{ required: true, message: 'Laat alsjeblieft weten hoe je ons hebt gevonden.' }],
                     })(
                         <Select>
-                            <Option value="school">Ik heb een folder gekregen van mijn basisschool</Option>
+                            <Option value="school-folder">Ik heb een folder gekregen van mijn basisschool</Option>
                             <Option value="school-leraar">Mijn leraar heeft verteld over de experience</Option>
                             <Option value="kennis">Vrienden/familie/kennis</Option>
                             <Option value="online">Digitaal (via social media of google)</Option>
@@ -223,9 +228,9 @@ class Verwijzing extends Component<FormComponentProps> {
     }
 }
   
-const WrappedPersoonsgegevens = Form.create({ name: 'persoonsgegevens' })(Persoonsgegevens);
-const WrappedAuthenticatie = Form.create({ name: 'authenticatie' })(Authenticatie);
-const WrappedVerwijzing = Form.create({ name: 'verwijzing' })(Verwijzing);
+const WrappedPersoonsgegevens: any = Form.create({ name: 'persoonsgegevens' })(Persoonsgegevens);
+const WrappedAuthenticatie: any = Form.create({ name: 'authenticatie' })(Authenticatie);
+const WrappedVerwijzing: any = Form.create({ name: 'verwijzing' })(Verwijzing);
 
 const Activeer: FunctionComponent = () => {
     const hash = location.hash.replace("#/", "");
@@ -234,19 +239,35 @@ const Activeer: FunctionComponent = () => {
         navigate("/");
     }
 
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({});
+    console.log(formData);
+
+    const sendData = () => {
+        setLoading(true);
+        axios.post(`http://localhost:3000/activate`, {
+            token: hash,
+            ...formData
+        }).then(response => {
+            setLoading(false);
+        }).catch(error => {
+            
+        });
+    }
+
     return (
             <Layout>
                 <Title centered={true}>Activeer je account</Title>
                 <Row>
                     <Col span={12} offset={6}>
                         <Stepper>
-                            <Step title="Gegevens" icon="user" description="Persoonsgegevens">
+                            <Step title="Gegevens" icon="user" description="Persoonsgegevens" showForward={false}>
                                 <Alert message="Door het invullen van je persoonsgegevens ga je ermee akkoord dat deze gegevens beveiligd opgeslagen en verwerkt worden." type="info" showIcon />
                                 <br />
-                                <WrappedPersoonsgegevens />
+                                <WrappedPersoonsgegevens formData={formData} setFormData={setFormData} />
                             </Step>
-                            <Step title="Wachtwoord" icon="lock" description="Authenticatie">
-                                <WrappedAuthenticatie />
+                            <Step title="Wachtwoord" icon="lock" description="Authenticatie" showForward={false}>
+                                <WrappedAuthenticatie formData={formData} setFormData={setFormData} />
                             </Step>
                             <Step title="School" icon="bank" description="Basisschool">
                                 <>
@@ -264,22 +285,30 @@ const Activeer: FunctionComponent = () => {
                                     </Map>
                                 </>
                             </Step>
-                            <Step title="Verwijzing" icon="search" description="Extra informatie">
-                                <WrappedVerwijzing />
+                            <Step title="Verwijzing" icon="search" description="Extra informatie" showForward={false}>
+                                <WrappedVerwijzing formData={formData} setFormData={setFormData} sendData={sendData} />
                             </Step>
-                            <Step title="Einde" icon="check" description="Klaar!">
-                                <Result
-                                    status="success"
-                                    title="Succesvol geregistreerd!"
-                                    subTitle="Je kunt je nu inschrijven voor de proeflessen."
-                                    extra={
-                                        <Link to="/inschrijven">
-                                            <Button type="primary" icon="form" size="large">
-                                                Inschrijven
-                                            </Button>
-                                        </Link>
-                                    }
-                                />
+                            <Step title="Einde" icon={loading ? "loading" : "check"} description="Klaar!">
+                                {loading ? (
+                                    <Result
+                                        title="Registratie voltooien..."
+                                        subTitle="Een moment geduld alstublieft"
+                                        icon={<Icon type="loading" />}
+                                    />
+                                ) : (
+                                    <Result
+                                        status="success"
+                                        title="Succesvol geregistreerd!"
+                                        subTitle="Je kunt je nu inschrijven voor de proeflessen."
+                                        extra={
+                                            <Link to="/inschrijven">
+                                                <Button type="primary" icon="form" size="large">
+                                                    Inschrijven
+                                                </Button>
+                                            </Link>
+                                        }
+                                    />
+                                )}
                             </Step>
                         </Stepper>
                     </Col>

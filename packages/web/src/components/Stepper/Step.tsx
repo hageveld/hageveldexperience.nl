@@ -5,6 +5,7 @@ interface Props {
     icon: string;
     description: string;
     children: ReactNode;
+    showForward?: boolean;
 }
 
 const Step: FunctionComponent<Props> = () => (
