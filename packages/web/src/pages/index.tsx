@@ -60,7 +60,9 @@ Na de activiteit brengt de leerling je naar het juiste lokaal voor een proefles 
 Op deze manier kun je ervaren hoe een les op Hageveld eruit ziet.<br />
                 </div>
                 <br />
-                <Link to="/registreren"><Button type="primary">Meld je nu aan!</Button></Link>
+                {/*<Link to="/registreren">*/}<Button type="primary" disabled={true}>Meld je nu aan!</Button>{/*</Link>*/}
+                <br /><br />
+                <b>(aanmelden binnenkort beschikbaar!)</b>
             </Col>
         </Row>
     </Layout>
