@@ -15,7 +15,6 @@ install:
   - yarn --silent
 
 script:
-  - yarn run tscheck
   - yarn run build
 
 before_deploy:
