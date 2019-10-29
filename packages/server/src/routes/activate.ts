@@ -3,7 +3,7 @@ import * as mail from '../utils/mail';
 import { Request, Response } from 'express';
 
 export default async (req: Request, res: Response) => {
-    const { token, wachtwoord } = req.params;
+    const { token, wachtwoord } = req.body;
     const time = Date.now().toString();
     const item: any = await db.get("SELECT * FROM activaties WHERE token=?", [token]);
     if(item) {

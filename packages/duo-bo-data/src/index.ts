@@ -27,6 +27,7 @@ const itemsLite = items
         const postcode = postcodes[item.POSTCODE.substring(0, 4)] || { latitude: '0', longitude: '0' };
 
         return {
+            id: item.VESTIGINGSNUMMER,
             naam: item.VESTIGINGSNAAM,
             plaats: item.PLAATSNAAM,
             latitude: postcode.latitude,

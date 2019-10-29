@@ -13,6 +13,6 @@ router.use((req: Request, res: Response, next) => {
 
 router.get('/ping', ping);
 router.get('/register/:email', register);
-router.get('/activate/:token/:wachtwoord', activate);
+router.post('/activate', activate);
 
 export default router;

@@ -16,7 +16,7 @@ export const init = async (): Promise<void> => {
             geslacht TEXT,
             telefoonnummer TEXT,
             basisschool TEXT,
-            groep TEXT
+            verwijzing TEXT
         )`
     );
 

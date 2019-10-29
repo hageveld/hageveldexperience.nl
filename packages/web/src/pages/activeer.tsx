@@ -90,7 +90,7 @@ class Persoonsgegevens extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Register
+                        Volgende
                     </Button>
                 </Form.Item>
             </Form>
@@ -179,7 +179,7 @@ class Authenticatie extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Register
+                        Volgende
                     </Button>
                 </Form.Item>
             </Form>
@@ -220,7 +220,7 @@ class Verwijzing extends Component<FormComponentProps & any> {
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Register
+                        Volgende
                     </Button>
                 </Form.Item>
             </Form>
@@ -231,6 +231,15 @@ class Verwijzing extends Component<FormComponentProps & any> {
 const WrappedPersoonsgegevens: any = Form.create({ name: 'persoonsgegevens' })(Persoonsgegevens);
 const WrappedAuthenticatie: any = Form.create({ name: 'authenticatie' })(Authenticatie);
 const WrappedVerwijzing: any = Form.create({ name: 'verwijzing' })(Verwijzing);
+
+const scholenOpties = {};
+
+(basisscholen as any).filter(basisschool => basisschool.distance < 15).forEach(basisschool => {
+    if(!(basisschool.plaats in scholenOpties)) {
+        scholenOpties[basisschool.plaats] = [];
+    }
+    scholenOpties[basisschool.plaats].push(basisschool);
+});
 
 const Activeer: FunctionComponent = () => {
     const hash = location.hash.replace("#/", "");
@@ -271,18 +280,29 @@ const Activeer: FunctionComponent = () => {
                             </Step>
                             <Step title="School" icon="bank" description="Basisschool">
                                 <>
+                                    <h2><span style={{ color: 'red'}}>*</span> Selecteer je bassischool</h2>
                                     <AutoComplete
                                         style={{ width: '400px' }}
-                                        dataSource={(basisscholen as any).filter(basisschool => basisschool.distance < 15).map(basisschool => basisschool.naam + ' - ' + basisschool.plaats)}
-                                        filterOption={(inputValue, option: any) =>
-                                            option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                        }
+                                        dataSource={Object.keys(scholenOpties).map(plaats => (
+                                            <AutoComplete.OptGroup label={plaats}>
+                                                {scholenOpties[plaats].map(basisschool => (
+                                                    <AutoComplete.Option value={basisschool.id} naam={basisschool.naam}>
+                                                        {basisschool.naam}
+                                                    </AutoComplete.Option>
+                                                ))}
+                                            </AutoComplete.OptGroup>
+                                        ))}
+                                        filterOption={true}
+                                        optionFilterProp="naam"
+                                        defaultOpen={true}
                                     />
-                                    <Map center={[52.348391, 4.6321063]} zoom={11} height={400}>
+                                    {/*<Map center={[52.348391, 4.6321063]} zoom={11} height={400}>
                                         {(basisscholen as any).filter(basisschool => basisschool.distance < 15).map((basisschool, index) => 
-                                            <Marker key={index} anchor={[parseFloat(basisschool.latitude), parseFloat(basisschool.longitude)]} payload={1} onClick={({ event, anchor, payload }) => {}} />
+                                            <Marker key={index} anchor={[parseFloat(basisschool.latitude), parseFloat(basisschool.longitude)]} payload={1} onClick={({ event, anchor, payload }) => {
+                                                console.log(basisschool.naam);
+                                            }} />
                                         )}
-                                    </Map>
+                                    </Map>*/}
                                 </>
                             </Step>
                             <Step title="Verwijzing" icon="search" description="Extra informatie" showForward={false}>

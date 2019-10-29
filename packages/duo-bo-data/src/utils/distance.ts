@@ -1,6 +1,6 @@
 /* Haversine formula: https://en.wikipedia.org/wiki/Haversine_formula */
 
-const deg2rad = (deg) => deg * (Math.PI/180);
+const deg2rad = (deg: number): number => deg * (Math.PI/180);
 
 export const getDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
     const radius = 6371; // Radius of the earth in km
