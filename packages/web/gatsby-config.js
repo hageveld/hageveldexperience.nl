@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: 'Hageveld Experience',
-        siteUrl: 'https://experience.hageveld.dev',
+        siteUrl: 'https://hageveldexperience.nl',
         description: 'Hageveld Experience',
         author: 'Atheneum College Hageveld',
         keywords: 'Atheneum, College, Hageveld, Experience, VWO, Heemstede'
@@ -57,7 +57,7 @@ module.exports = {
                 policy: [
                     {
                         userAgent: '*',
-                        disallow: '/'
+                        allow: '/'
                     }
                 ]
             }
