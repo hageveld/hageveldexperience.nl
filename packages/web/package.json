@@ -3,7 +3,7 @@
   "description": "Website voor de Hageveld Experience op het Atheneum College Hageveld",
   "version": "0.0.1",
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
-  "homepage": "https://experience.hageveld.nl",
+  "homepage": "https://hageveldexperience.nl",
   "dependencies": {
     "@babel/core": "7.4.0",
     "@babel/plugin-proposal-class-properties": "7.4.0",

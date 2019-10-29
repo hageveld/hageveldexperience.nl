@@ -7,9 +7,7 @@
 
 Website voor de Hageveld Experience op het Atheneum College Hageveld.
     
-**Production**: https://experience.hageveld.nl (momenteel niet actief)
-<br />
-**Development**: https://experience.hageveld.dev
+**Link**: https://hageveldexperience.nl
 
 ## Usage
 
