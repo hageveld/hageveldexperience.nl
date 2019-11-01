@@ -1,7 +1,5 @@
 language: node_js
 
-before_script: cd packages/web
-
 cache:
   yarn: true
   directories:
