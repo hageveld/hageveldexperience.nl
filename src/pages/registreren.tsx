@@ -35,7 +35,9 @@ export default class Registreren extends Component<{}, State> {
         this.setState({
             loading: true
         });
-        axios.get(`http://localhost:3000/register/${email}`).then(response => {
+        axios.post(`https://api.hageveldexperience.nl/register`, {
+            email
+        }).then(response => {
             this.setState({
                 loading: false,
                 done: true

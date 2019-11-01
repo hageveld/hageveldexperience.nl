@@ -244,7 +244,7 @@ const scholenOpties = {};
 const Activeer: FunctionComponent = () => {
     const hash = location.hash.replace("#/", "");
 
-    if(!(/^[0-9a-f]{64}$/.test(hash))) {
+    if(!(/^[0-9a-f]{16}$/.test(hash))) {
         navigate("/");
     }
 
