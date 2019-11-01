@@ -101,8 +101,6 @@ const Footer: FunctionComponent = () => (
                     <br />
                     Tel. 023 5 100 100
                     <br />
-                    Fax 023 5 100 150
-                    <br />
                     <br />
                     Mail college@hageveld.nl
                     <br />

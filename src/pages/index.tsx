@@ -37,7 +37,7 @@ const Index: FunctionComponent = () => (
                 <div>
                 De data van de Hageveld Experience voor het schooljaar 2019-2020 zijn:<br />
 <br />
-woensdag 20 november 2019, 27 november 2019 en woensdag 8 januari 2020 van 14.00 -15.30 uur.
+woensdag 20 november 2019, 27 november 2019 en 8 januari 2020 van 14.00 -15.30 uur.
                 </div>
             </Col>
             <Col span={12}>
