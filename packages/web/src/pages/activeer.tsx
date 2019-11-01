@@ -6,7 +6,7 @@ import Stepper from '../components/Stepper';
 import { Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete, Tooltip, Alert } from 'antd';
 import { FormComponentProps  } from 'antd/lib/form';
 import Title from '../components/Title';
-import basisscholen from '../../../duo-bo-data/result/result.json';
+import basisscholen from '../data/duo-bo-data.json';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
 
