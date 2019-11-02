@@ -3,12 +3,15 @@ import { Link, navigate } from 'gatsby';
 import axios from 'axios';
 import Layout from '../components/Layout';
 import Stepper from '../components/Stepper';
-import { Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete, Tooltip, Alert } from 'antd';
+import { Row, Col, Button, Input, Result, Icon, Form, Select, AutoComplete, Tooltip, Alert, Checkbox } from 'antd';
 import { FormComponentProps  } from 'antd/lib/form';
 import Title from '../components/Title';
 import basisscholen from '../data/duo-bo-data.json';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';
+import { createHash } from 'crypto';
+import { useDispatch, useSelector } from '../hooks';
+import { login } from '../store/auth';
 
 const { Option } = Select;
 const { Step } = Stepper;
@@ -107,7 +110,7 @@ class Authenticatie extends Component<FormComponentProps & any> {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                this.props.setFormData({ ...this.props.formData, ...values });
+                this.props.setFormData({ ...this.props.formData, wachtwoord: createHash('sha256').update(values.wachtwoord).digest('hex') });
                 this.props.forward();
             }
         });
@@ -187,14 +190,33 @@ class Authenticatie extends Component<FormComponentProps & any> {
     }
 }
 
+class Volgende extends Component<any> {
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.forward();
+    };
+
+    render() {
+        const { formData} = this.props;
+
+        return (
+            <Button type="primary" htmlType="submit" disabled={!('school' in formData && (formData as any).school)} onClick={this.handleSubmit}>
+                Volgende
+            </Button>
+        )
+    }
+}
+
 class Verwijzing extends Component<FormComponentProps & any> {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 this.props.setFormData({ ...this.props.formData, ...values });
-                this.props.sendData();
-                this.props.forward();
+                setTimeout(() => {
+                    this.props.sendData();
+                    this.props.forward();
+                }, 100);
             }
         });
     };
@@ -250,15 +272,17 @@ const Activeer: FunctionComponent = () => {
 
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
+    const dispatch = useDispatch();
     console.log(formData);
 
     const sendData = () => {
         setLoading(true);
-        axios.post(`http://localhost:3000/activate`, {
+        axios.post(`https://api.hageveldexperience.nl/activate`, {
             token: hash,
             ...formData
         }).then(response => {
             setLoading(false);
+            dispatch(login({ ...formData }));
         }).catch(error => {
             
         });
@@ -278,8 +302,7 @@ const Activeer: FunctionComponent = () => {
                             <Step title="Wachtwoord" icon="lock" description="Authenticatie" showForward={false}>
                                 <WrappedAuthenticatie formData={formData} setFormData={setFormData} />
                             </Step>
-                            <Step title="School" icon="bank" description="Basisschool">
-                                <>
+                            <Step title="School" icon="bank" description="Basisschool" showForward={false}>
                                     <h2><span style={{ color: 'red'}}>*</span> Selecteer je bassischool</h2>
                                     <AutoComplete
                                         style={{ width: '400px' }}
@@ -294,8 +317,13 @@ const Activeer: FunctionComponent = () => {
                                         ))}
                                         filterOption={true}
                                         optionFilterProp="naam"
-                                        defaultOpen={true}
+                                        placeholder="Selecteer je basisschool"
+                                        onSelect={(value) => setFormData({ ...formData, school: value })}
                                     />
+                                    <br /><br />
+                                    <Checkbox onChange={(e) => e.target.checked ? setFormData({ ...formData, school: "000000" }) : setFormData({ ...formData, school: undefined })}>Mijn school staat hier niet bij</Checkbox>
+                                    <br /><br />
+                                    <Volgende formData={formData} />
                                     {/*<Map center={[52.348391, 4.6321063]} zoom={11} height={400}>
                                         {(basisscholen as any).filter(basisschool => basisschool.distance < 15).map((basisschool, index) => 
                                             <Marker key={index} anchor={[parseFloat(basisschool.latitude), parseFloat(basisschool.longitude)]} payload={1} onClick={({ event, anchor, payload }) => {
@@ -303,7 +331,6 @@ const Activeer: FunctionComponent = () => {
                                             }} />
                                         )}
                                     </Map>*/}
-                                </>
                             </Step>
                             <Step title="Verwijzing" icon="search" description="Extra informatie" showForward={false}>
                                 <WrappedVerwijzing formData={formData} setFormData={setFormData} sendData={sendData} />

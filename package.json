@@ -44,7 +44,7 @@
     "pigeon-marker": "0.3.4",
     "react": "16.8.5",
     "react-dom": "16.8.5",
-    "react-helmet": "5.2.0",
+    "react-helmet": "5.2.1",
     "react-redux": "7.1.1",
     "redux": "4.0.4",
     "redux-logger": "3.0.6",
