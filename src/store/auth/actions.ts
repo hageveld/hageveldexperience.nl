@@ -11,7 +11,7 @@ export const connect: ActionCreator<LoginAction> = () => ({
   type: LOGIN
 });
 
-export const connectionSuccessful: ActionCreator<LoginSuccessfulAction> = (payload: any) => ({
+export const login: ActionCreator<LoginSuccessfulAction> = (payload: any) => ({
   type: LOGIN_SUCCESSFUL,
   payload
 });

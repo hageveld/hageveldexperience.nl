@@ -18,7 +18,7 @@ export const reducer: Reducer<AuthState, AuthActions> = (
     case LOGIN_SUCCESSFUL:
       return {
         ...state,
-        isLoggedIn: false,
+        isLoggedIn: true,
         auth: action.payload
       };
     case LOGIN_FAILED:

@@ -4,27 +4,47 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from '../../hooks';
 import { inschrijf, uitschrijf } from '../../store/inschrijving';
 import ActiviteitType from '../../classes/activiteit';
+import axios from 'axios';
 
 interface Props {
     data: ActiviteitType;
+    api: any;
 }
 
-const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnemers } }) => {
+const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnemers }, api }) => {
     const inschrijvingen = 0;
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const auth = useSelector(state => state.auth.auth);
     const ingeschreven = useSelector(state => state.inschrijf[id]);
     const dagLocked = useSelector(state => state.inschrijf[`DAG-${dag.id}`]);
     const dagenIngeschreven = useSelector(state => state.inschrijf.DAGEN);
     const dispatch = useDispatch();
 
     const toggleSchrijfIn = () => {
-        if(ingeschreven) {
-            dispatch(uitschrijf(id, dag.id));
-            message.error('Succesvol uitgeschreven');
-        } else {
-            dispatch(inschrijf(id, dag.id));
-            message.success('Succesvol ingeschreven!');
+        if(isLoggedIn) {
+            if(ingeschreven) {
+                dispatch(uitschrijf(id, dag.id));
+                message.error('Succesvol uitgeschreven');
+                axios.post("https://api.hageveldexperience.nl/activity", {
+                    email: auth.email,
+                    wachtwoord: auth.wachtwoord,
+                    type: "uitschrijving",
+                    id: id.toString()
+                });
+            } else {
+                dispatch(inschrijf(id, dag.id));
+                message.success('Succesvol ingeschreven!');
+                axios.post("https://api.hageveldexperience.nl/activity", {
+                    email: auth.email,
+                    wachtwoord: auth.wachtwoord,
+                    type: "inschrijving",
+                    id: id.toString()
+                });
+            }
         }
     };
+
+    console.log(api);
 
     return (
         <Fragment>
@@ -68,7 +88,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                     <Col span={6} style={{ float: 'right' }}>
                         <Statistic
                             title="Inschrijvingen"
-                            value={ingeschreven ? inschrijvingen+1 : inschrijvingen}
+                            value={api ? api.deelnemers : '0'}
                             suffix={`/ ${maxDeelnemers}`}
                         />
                     </Col>

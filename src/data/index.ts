@@ -13,7 +13,7 @@ export const activiteiten = rawActiviteiten.map(activiteit => {
     if(!dag) {
         throw new Error(`Dag "${activiteit.dag}" niet gevonden`);
     }
-    return new Activiteit(vak, dag, activiteit.maxDeelnemers);
+    return new Activiteit(activiteit.id, vak, dag, activiteit.maxDeelnemers);
 });
 
 export const vakken = rawVakken;
