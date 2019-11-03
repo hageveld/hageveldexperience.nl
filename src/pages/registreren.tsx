@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import axios from 'axios';
+import { Link } from 'gatsby';
 import { Row, Col, Button, Input, Result } from 'antd';
 import Title from '../components/Title';
 
@@ -65,6 +66,8 @@ export default class Registreren extends Component<{}, State> {
                                     Verzenden
                                 </Button></Col>
                             </Row>
+                            <br />
+                            <p>Klik <Link to="/inloggen">hier</Link> indien je al een account hebt, en wilt inloggen.</p>
                             </>
                         ) : (
                             <Result
