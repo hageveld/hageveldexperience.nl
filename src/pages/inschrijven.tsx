@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Alert, Row, Col, Card, List } from 'antd';
 import { dagen, activiteiten } from '../data';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import moment from 'moment';
 import 'moment/locale/nl';
 import ActiviteitType from '../classes/activiteit';
@@ -50,6 +50,8 @@ const Inschrijven: FunctionComponent = () => {
                 });
                 setActivities(activities);
                 setDone(true);
+            }).catch(error => {
+                navigate("/error");
             });
         } else {
             axios.get("https://api.hageveldexperience.nl/activities").then(response => {
@@ -63,6 +65,8 @@ const Inschrijven: FunctionComponent = () => {
                 });
                 setActivities(activities);
                 setDone(true);
+            }).catch(error => {
+                navigate("/error");
             });
         }
     }

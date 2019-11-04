@@ -1,5 +1,6 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { Row, Col, Button, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
+import { navigate } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from '../../hooks';
 import { inschrijf, uitschrijf } from '../../store/inschrijving';
@@ -30,6 +31,8 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                     wachtwoord: auth.wachtwoord,
                     type: "uitschrijving",
                     id: id.toString()
+                }).catch(error => {
+                    navigate("/error");
                 });
             } else {
                 dispatch(inschrijf(id, dag.id));
@@ -39,6 +42,8 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                     wachtwoord: auth.wachtwoord,
                     type: "inschrijving",
                     id: id.toString()
+                }).catch(error => {
+                    navigate("/error");
                 });
             }
         }

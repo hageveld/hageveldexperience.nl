@@ -35,8 +35,8 @@ const Header: FunctionComponent = () => {
                                     float: 'right'
                                 }}
                             >
-                    <Menu.Item key="setting:1"><Link to="/inschrijven">Inschrijven</Link></Menu.Item>
-                    <Menu.Item key="setting:2"><Link to="/uitloggen">Uitloggen</Link></Menu.Item>
+                    <Menu.Item key="setting:1"><Link to="/inschrijven"><Icon type="edit" />Inschrijven</Link></Menu.Item>
+                    <Menu.Item key="setting:2"><Link to="/uitloggen"><Icon type="user-delete" /> Uitloggen</Link></Menu.Item>
                 </SubMenu>
                 ) : (
                     <SubMenu
@@ -50,8 +50,8 @@ const Header: FunctionComponent = () => {
                         float: 'right'
                     }}
                 >
-        <Menu.Item key="setting:1"><Link to="/inloggen">Inloggen</Link></Menu.Item>
-        <Menu.Item key="setting:2"><Link to="/registreren">Registreren</Link></Menu.Item>
+        <Menu.Item key="setting:1"><Link to="/inloggen"><Icon type="form" /> Inloggen</Link></Menu.Item>
+        <Menu.Item key="setting:2"><Link to="/registreren"><Icon type="user-add" /> Registreren</Link></Menu.Item>
     </SubMenu>
                 )}
         </Menu>

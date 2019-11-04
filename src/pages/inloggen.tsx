@@ -52,7 +52,7 @@ class LoginForm extends Component<any, any> {
               });
             }
         }).catch(error => {
-            
+          navigate("/error");
         });
       }
     });

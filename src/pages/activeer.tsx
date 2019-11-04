@@ -284,7 +284,7 @@ const Activeer: FunctionComponent = () => {
             setLoading(false);
             dispatch(login({ ...formData, email: response.data.result.email }));
         }).catch(error => {
-            
+            navigate("/error");
         });
     }
 

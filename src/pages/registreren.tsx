@@ -49,7 +49,7 @@ class Registreren extends Component<Props, State> {
                 done: true
             });
         }).catch(error => {
-
+            navigate("/error");
         });
     }
 
