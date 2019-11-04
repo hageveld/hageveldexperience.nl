@@ -58,6 +58,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                         {vak.naam}
                     </Col>
                     <Col span={2} style={{ float: 'right' }}>
+                        {!(!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)) ? (
                         <Popconfirm
                             title={ingeschreven ? "Weet je zeker dat je je uit wilt schrijven?" : (
                                 <Fragment>
@@ -84,6 +85,15 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                                 style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>
+                        ) : (
+<Button
+                                type="primary"
+                                shape="circle"
+                                icon={ingeschreven ? "check" : "plus"}
+                                disabled={!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)}
+                                style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
+                            />
+                        )}
                     </Col>
                     <Col span={6} style={{ float: 'right' }}>
                         <Statistic
