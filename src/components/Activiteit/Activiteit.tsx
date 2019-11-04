@@ -98,7 +98,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                     <Col span={6} style={{ float: 'right' }}>
                         <Statistic
                             title="Inschrijvingen"
-                            value={api ? api.deelnemers : '0'}
+                            value={api ? (ingeschreven ? parseInt(api.deelnemers)+1 : api.deelnemers) : '0'}
                             suffix={`/ ${maxDeelnemers}`}
                         />
                     </Col>

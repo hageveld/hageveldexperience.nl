@@ -8,30 +8,62 @@ import 'moment/locale/nl';
 import ActiviteitType from '../classes/activiteit';
 import Activiteit from '../components/Activiteit';
 import axios from 'axios';
+import { useSelector, useDispatch } from '../hooks';
+import { inschrijf, uitschrijf } from '../store/inschrijving';
 
 import '../sass/index.scss';
 
 moment.locale('nl');
 
 const Inschrijven: FunctionComponent = () => {
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const auth = useSelector(state => state.auth.auth);
+    const ingeschrevenList = useSelector(state => state.inschrijf);
+
     const [done, setDone] = useState(false);
     const [loading, setLoading] = useState(false);
     const [activities, setActivities] = useState({} as any);
+    const dispatch = useDispatch();
     useEffect(() => {
     if(!loading) {
         setLoading(true);
-        axios.get("https://api.hageveldexperience.nl/activities").then(response => {
-            const { result } = response.data;
-            console.log(result);
-            result.forEach(activiteit => {
-                activities[activiteit.id.N] = {
-                    id: activiteit.id.N,
-                    deelnemers: activiteit.deelnemers.N
-                };
+        if(isLoggedIn) {
+            axios.post("https://api.hageveldexperience.nl/activities", {
+                email: auth.email,
+                wachtwoord: auth.wachtwoord,
+            }).then(response => {
+                const { result } = response.data;
+                console.log(result);
+                result.forEach(activiteit => {
+                    activities[activiteit.id.N] = {
+                        id: activiteit.id.N,
+                        deelnemers: activiteit.ingeschreven ? parseInt(activiteit.deelnemers.N)-1 : activiteit.deelnemers.N,
+                        ingeschreven: activiteit.ingeschreven ? true : false
+                    };
+                    const ingeschreven = ingeschrevenList[activiteit.id.N];
+                    if(activiteit.ingeschreven && !ingeschreven) {
+                        dispatch(inschrijf(parseInt(activiteit.id.N), parseInt(activiteit.dag.S)));
+                    } else if(!activiteit.ingeschreven && ingeschreven) {
+                        dispatch(uitschrijf(parseInt(activiteit.id.N), parseInt(activiteit.dag.S)));
+                    }
+                });
+                setActivities(activities);
+                setDone(true);
             });
-            setActivities(activities);
-            setDone(true);
-        });
+        } else {
+            axios.get("https://api.hageveldexperience.nl/activities").then(response => {
+                const { result } = response.data;
+                console.log(result);
+                result.forEach(activiteit => {
+                    activities[activiteit.id.N] = {
+                        id: activiteit.id.N,
+                        deelnemers: activiteit.deelnemers.N
+                    };
+                });
+                setActivities(activities);
+                setDone(true);
+            });
+        }
     }
     });
     console.log(activities);
