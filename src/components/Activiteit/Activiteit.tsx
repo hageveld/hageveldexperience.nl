@@ -58,7 +58,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                         {vak.naam}
                     </Col>
                     <Col span={2} style={{ float: 'right' }}>
-                        {!(!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)) ? (
+                        {!(!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))) ? (
                         <Popconfirm
                             title={ingeschreven ? "Weet je zeker dat je je uit wilt schrijven?" : (
                                 <Fragment>
@@ -80,25 +80,25 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                             <Button
                                 type="primary"
                                 shape="circle"
-                                icon={ingeschreven ? "check" : "plus"}
-                                disabled={!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)}
-                                style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
+                                icon={(isLoggedIn && ingeschreven) ? "check" : "plus"}
+                                disabled={!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))}
+                                style={(isLoggedIn && ingeschreven) ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>
                         ) : (
 <Button
                                 type="primary"
                                 shape="circle"
-                                icon={ingeschreven ? "check" : "plus"}
-                                disabled={!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2)}
-                                style={ingeschreven ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
+                                icon={(isLoggedIn && ingeschreven) ? "check" : "plus"}
+                                disabled={!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))}
+                                style={(isLoggedIn && ingeschreven) ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         )}
                     </Col>
                     <Col span={6} style={{ float: 'right' }}>
                         <Statistic
                             title="Inschrijvingen"
-                            value={api ? (ingeschreven ? parseInt(api.deelnemers)+1 : api.deelnemers) : '0'}
+                            value={api ? ((isLoggedIn && ingeschreven) ? parseInt(api.deelnemers)+1 : api.deelnemers) : '0'}
                             suffix={`/ ${maxDeelnemers}`}
                         />
                     </Col>

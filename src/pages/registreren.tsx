@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import axios from 'axios';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Row, Col, Button, Input, Result } from 'antd';
+import { connect } from 'react-redux';
 import Title from '../components/Title';
+
+interface Props {
+    isLoggedIn: boolean;
+}
 
 interface State {
     loading: boolean;
@@ -11,7 +16,7 @@ interface State {
     email: string;
 }
 
-export default class Registreren extends Component<{}, State> {
+class Registreren extends Component<Props, State> {
     constructor(props) {
         super(props);
 
@@ -49,6 +54,11 @@ export default class Registreren extends Component<{}, State> {
     }
 
     render() {
+        const { isLoggedIn } = this.props;
+        if(isLoggedIn) {
+            navigate("/inschrijven");
+        }
+
         const { email, loading, done } = this.state;
 
         return (
@@ -67,7 +77,7 @@ export default class Registreren extends Component<{}, State> {
                                 </Button></Col>
                             </Row>
                             <br />
-                            <p>Klik <Link to="/inloggen">hier</Link> indien je al een account hebt, en wilt inloggen.</p>
+                            <p>Klik <Link to="/inloggen"><b>hier</b></Link> indien je al een account hebt, en wilt inloggen.</p>
                             </>
                         ) : (
                             <Result
@@ -82,3 +92,11 @@ export default class Registreren extends Component<{}, State> {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+      isLoggedIn: state.auth.isLoggedIn
+    };
+  };
+  
+  export default connect(mapStateToProps)(Registreren);

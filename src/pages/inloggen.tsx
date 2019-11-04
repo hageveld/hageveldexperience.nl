@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
-import { navigate } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Form, Icon, Input, Button, Checkbox, Col, Row, Result, Alert } from 'antd';
 import { createHash } from 'crypto';
 import { connect } from 'react-redux';
@@ -59,6 +59,10 @@ class LoginForm extends Component<any, any> {
   };
 
   render() {
+    const { isLoggedIn } = this.props;
+    if(isLoggedIn) {
+      navigate("/inschrijven");
+    }
     const { getFieldDecorator } = this.props.form;
     const { loading, wrongPassword } = this.state;
     if(loading) {
@@ -104,17 +108,12 @@ class LoginForm extends Component<any, any> {
             )}
           </Form.Item>
           <Form.Item>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
-            Or <a href="">register now!</a>
+          </Form.Item>
+          <Form.Item>
+          <p>Klik <Link to="/registreren"><b>hier</b></Link> indien je nog geen account hebt.</p>
           </Form.Item>
         </Form>
         </Col>
@@ -127,4 +126,10 @@ class LoginForm extends Component<any, any> {
 
 const WrappedLoginForm = Form.create({ name: 'login' })(LoginForm);
 
-export default connect()(WrappedLoginForm);
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn
+  };
+};
+
+export default connect(mapStateToProps)(WrappedLoginForm);

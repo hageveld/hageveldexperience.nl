@@ -1,9 +1,9 @@
 import { ActionCreator } from 'redux';
 import {
   LOGIN,
-  LoginAction, LOGIN_FAILED,
+  LoginAction, LOGOUT,
   LOGIN_SUCCESSFUL,
-  LoginFailedAction,
+  LogoutAction,
   LoginSuccessfulAction
 } from './types';
 
@@ -16,7 +16,6 @@ export const login: ActionCreator<LoginSuccessfulAction> = (payload: any) => ({
   payload
 });
 
-export const connectionFailed: ActionCreator<LoginFailedAction> = (payload?: Error) => ({
-  type: LOGIN_FAILED,
-  payload
+export const logout: ActionCreator<LogoutAction> = () => ({
+  type: LOGOUT
 });

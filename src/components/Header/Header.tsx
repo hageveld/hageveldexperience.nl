@@ -36,6 +36,7 @@ const Header: FunctionComponent = () => {
                                 }}
                             >
                     <Menu.Item key="setting:1"><Link to="/inschrijven">Inschrijven</Link></Menu.Item>
+                    <Menu.Item key="setting:2"><Link to="/uitloggen">Uitloggen</Link></Menu.Item>
                 </SubMenu>
                 ) : (
                     <SubMenu

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, Fragment } from 'react';
 import Layout from '../components/Layout';
 import { Row, Col, Button, Carousel } from 'antd';
 import { Link } from 'gatsby';
@@ -66,7 +66,11 @@ const Index: FunctionComponent = () => {
                     {isLoggedIn ? (
                         <Link to="/inschrijven"><Button type="primary">Inschrijven</Button></Link>
                     ) : (
+                        <Fragment>
                         <Link to="/registreren"><Button type="primary">Meld je nu aan!</Button></Link>
+                        <br /><br /><br />
+                        <p>Klik <Link to="/inschrijven"><b>hier</b></Link> om eerst het aanbod te bekijken.</p>
+                        </Fragment>
                     )}
                 </Col>
             </Row>

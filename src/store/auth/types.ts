@@ -16,13 +16,13 @@ export interface LoginSuccessfulAction extends Action {
   payload: any;
 }
 
-export const LOGIN_FAILED = 'LOGIN_FAILED';
-export interface LoginFailedAction extends Action {
-  type: typeof LOGIN_FAILED;
+export const LOGOUT = 'LOGOUT';
+export interface LogoutAction extends Action {
+  type: typeof LOGOUT;
   payload?: Error;
 }
 
 export type AuthActions =
   | LoginAction
   | LoginSuccessfulAction
-  | LoginFailedAction;
+  | LogoutAction;

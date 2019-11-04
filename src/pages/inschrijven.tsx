@@ -3,6 +3,7 @@ import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Alert, Row, Col, Card, List } from 'antd';
 import { dagen, activiteiten } from '../data';
+import { Link } from 'gatsby';
 import moment from 'moment';
 import 'moment/locale/nl';
 import ActiviteitType from '../classes/activiteit';
@@ -72,6 +73,18 @@ const Inschrijven: FunctionComponent = () => {
             <Title centered={true}>Inschrijven</Title>
             <div style={{ marginLeft: '5%', marginRight: '5%' }}>
                 <div style={{ background: '#ECECEC', padding: '30px' }}>
+                    {!isLoggedIn && (
+                        <Alert message={
+                            <Fragment>
+                                Je bent niet ingelogd.
+                            </Fragment>
+                        } 
+                        description={
+                            <p>Dit betekent dat je momenteel niet jezelf kan inschrijven voor de proeflessen. Klik <Link to="/inloggen"><b>hier</b></Link> om in te loggen.</p>
+                        }
+                        type="warning" showIcon={true} style={{ marginBottom: '10px' }} 
+                        />
+                    )}
                     <Alert message={
                             <Fragment>
                                 Op deze pagina kun je je inschrijven voor de proeflessen. Hieronder kun je kiezen uit vakken die op Hageveld gegeven worden. Of nou je een taal kiest of een praktisch vak, op een leuke en creatieve manier maak je kennis bij dat vak.
