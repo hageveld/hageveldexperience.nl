@@ -282,7 +282,7 @@ const Activeer: FunctionComponent = () => {
             ...formData
         }).then(response => {
             setLoading(false);
-            dispatch(login({ ...formData, email: response.data.result.email }));
+            dispatch(login({ ...formData, email: response.data.result.email, admin: false }));
         }).catch(error => {
             navigate("/error");
         });

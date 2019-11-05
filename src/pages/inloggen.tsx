@@ -42,7 +42,8 @@ class LoginForm extends Component<any, any> {
                 telefoonnummer: ("NULL" in result.telefoonnummer ? undefined : result.telefoonnummer.S),
                 wachtwoord: result.wachtwoord.S,
                 school: result.school.S,
-                verwijzing: result.verwijzing.S
+                verwijzing: result.verwijzing.S,
+                admin: 'admin' in result ? result.admin.BOOL : false
               }));
               navigate("/inschrijven");
             } else {
