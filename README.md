@@ -1,9 +1,9 @@
 # Hageveld Experience
 
-[![](https://img.shields.io/travis/com/hageveld/hageveldexperience.nl?style=flat-square)](https://travis-ci.com/hageveld/hageveldexperience)
+[![](https://img.shields.io/travis/com/hageveld/hageveldexperience.nl?style=flat-square)](https://travis-ci.com/hageveld/hageveldexperience.nl)
 [![](https://img.shields.io/npm/v/@hageveld/experience-web.svg?style=flat-square)](https://www.npmjs.com/package/@hageveld/experience-web)
-[![](https://img.shields.io/david/hageveld/hageveldexperience?style=flat-square)](https://david-dm.org/hageveld/hageveldexperience)
-[![](https://img.shields.io/github/license/hageveld/hageveldexperience?style=flat-square)](https://github.com/hageveld/hageveldexperience/blob/master/LICENSE)
+[![](https://img.shields.io/david/hageveld/hageveldexperience.nl?style=flat-square)](https://david-dm.org/hageveld/hageveldexperience.nl)
+[![](https://img.shields.io/github/license/hageveld/hageveldexperience.nl?style=flat-square)](https://github.com/hageveld/hageveldexperience.nl/blob/master/LICENSE)
 
 Website voor de Hageveld Experience op het Atheneum College Hageveld.
     
@@ -30,4 +30,4 @@ Website voor de Hageveld Experience op het Atheneum College Hageveld.
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/hageveld/hageveldexperience/blob/master/LICENSE). 
+This project is licensed under the [MIT License](https://github.com/hageveld/hageveldexperience.nl/blob/master/LICENSE). 
