@@ -12,30 +12,37 @@ import './Footer.scss';
 
 const socials: any = [
     {
+        label: 'E-mailadres',
         icon: ['fas', 'envelope'],
         url: 'mailto:college@hageveld.nl'
     },
     {
+        label: 'Instagram',
         icon: ['fab', 'instagram'],
         url: 'https://www.instagram.com/college.hageveld/'
     },
     {
+        label: 'Facebook',
         icon: ['fab', 'facebook-square'],
         url: 'https://nl-nl.facebook.com/Hageveld/'
     },
     {
+        label: 'LinkedIn',
         icon: ['fab', 'linkedin'],
         url: 'https://www.linkedin.com/school/college-hageveld/'
     },
     {
+        label: 'YouTube',
         icon: ['fab', 'youtube'],
         url: 'https://www.youtube.com/channel/UCU0sMRDZcW6MGujyGeqHXFA'
     },
     {
+        label: 'Telefoonnummer',
         icon: ['fas', 'phone'],
         url: 'tel:+310235100100'
     },
     {
+        label: 'Locatie',
         icon: ['fas', 'map-marker-alt'],
         url: 'https://goo.gl/maps/GrvUce5ri1kZPBhN8'
     }
@@ -49,7 +56,7 @@ const Footer: FunctionComponent = () => (
         <Row>
             <Col span={6} offset={1}>
                 <div>
-                    <img width="32" src={Favicon} style={{ float: 'left' }} />
+                    <img width="32" src={Favicon} style={{ float: 'left' }} alt="Hageveld Koepel Icon" />
                     <h2>Hageveld</h2>
                 </div>
                 <div style={{ fontSize: '11px', marginTop: '5px', marginBottom: '10px' }}>
@@ -63,7 +70,7 @@ const Footer: FunctionComponent = () => (
                     <Row style={{ width: '100%' }}>
                         {socials.map((social, index) => (
                             <Col span={3} key={index}>
-                                <ExternalLink to={social.url}>
+                                <ExternalLink to={social.url} aria-label={social.label}>
                                     <FontAwesomeIcon icon={social.icon} size="2x" color="#FA9B3D" />
                                 </ExternalLink>
                             </Col>

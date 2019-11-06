@@ -56,7 +56,6 @@ const Inschrijven: FunctionComponent = () => {
         } else {
             axios.get("https://api.hageveldexperience.nl/activities").then(response => {
                 const { result } = response.data;
-                console.log(result);
                 result.forEach(activiteit => {
                     activities[activiteit.id.N] = {
                         id: activiteit.id.N,
@@ -71,7 +70,7 @@ const Inschrijven: FunctionComponent = () => {
         }
     }
     });
-    console.log(activities);
+
     return (
         <Layout>
             <Title centered={true}>Inschrijven</Title>

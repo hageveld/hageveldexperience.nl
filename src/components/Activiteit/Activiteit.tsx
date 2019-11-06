@@ -59,11 +59,11 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                             <FontAwesomeIcon icon={['fas', vak.icon]} />
                         </Avatar>
                     </Col>
-                    <Col span={3}>
+                    <Col span={7}>
                         {vak.naam}
                     </Col>
                     <Col span={2} style={{ float: 'right' }}>
-                        {!(!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))) ? (
+                        {!api || !(!isLoggedIn || (!ingeschreven && (!!dagLocked || parseInt(api.deelnemers) >= maxDeelnemers || dagenIngeschreven >= 2))) ? (
                         <Popconfirm
                             title={ingeschreven ? "Weet je zeker dat je je uit wilt schrijven?" : (
                                 <Fragment>
@@ -86,7 +86,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                                 type="primary"
                                 shape="circle"
                                 icon={(isLoggedIn && ingeschreven) ? "check" : "plus"}
-                                disabled={!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))}
+                                disabled={!api || !isLoggedIn || (!ingeschreven && (!!dagLocked || parseInt(api.deelnemers) >= maxDeelnemers || dagenIngeschreven >= 2))}
                                 style={(isLoggedIn && ingeschreven) ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         </Popconfirm>
@@ -95,7 +95,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                                 type="primary"
                                 shape="circle"
                                 icon={(isLoggedIn && ingeschreven) ? "check" : "plus"}
-                                disabled={!isLoggedIn || (!ingeschreven && (!!dagLocked || inschrijvingen >= maxDeelnemers || dagenIngeschreven >= 2))}
+                                disabled={!api || !isLoggedIn || (!ingeschreven && (!!dagLocked || parseInt(api.deelnemers) >= maxDeelnemers || dagenIngeschreven >= 2))}
                                 style={(isLoggedIn && ingeschreven) ? { backgroundColor: "#52c41a", borderColor: "#52c41a" } : {}}
                             />
                         )}

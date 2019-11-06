@@ -1,14 +1,21 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, Fragment, useState } from 'react';
 import Layout from '../components/Layout';
-import { Row, Col, Button, Result, Icon, Statistic } from 'antd';
+import { Row, Col, Button, Result, Icon, Statistic, Layout as AntLayout, Menu, Breadcrumb, Table, Collapse } from 'antd';
+import MetaData from '../components/MetaData';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import PieChart from 'react-minimal-pie-chart';
 import { Link, navigate } from 'gatsby';
 import Title from '../components/Title';
 import { useSelector } from '../hooks';
 import axios from 'axios';
 import colors from 'nice-color-palettes';
+import { activiteiten } from '../data';
 
 import '../sass/index.scss';
+
+const { Sider } = AntLayout;
+const { Panel } = Collapse;
 
 /* 
 TODO:
@@ -21,17 +28,22 @@ TODO:
 const Admin: FunctionComponent = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const auth = useSelector(state => state.auth.auth);
-    if(isLoggedIn && auth.admin) {
+    if(isLoggedIn && auth && auth.admin) {
         const [result, setResult] = useState({
             gebruikers: 0,
             inschrijvingen: 0,
             verwijzingen: {},
             inschrijvingenGemiddelde: {},
             dagen: {},
-            vakken: {}
+            vakken: {},
+            inschrijvingenItems: [],
+            gebruikersItems: [],
+            emailUser: '',
+            emailPassword: ''
         });
         const [done, setDone] = useState(false);
         const [loading, setLoading] = useState(false);
+        const [selectedItem, setSelectedItem] = useState(1);
         if(!done && !loading) {
             setLoading(true);
             axios.post('https://api.hageveldexperience.nl/admin', {
@@ -47,10 +59,42 @@ const Admin: FunctionComponent = () => {
             });
         }
         return (
-            <Layout>
-                <Title centered={true}><Icon type="crown" /> Hageveld Experience</Title>
+            <Fragment>
+                <MetaData />
+                <AntLayout>
+                    <AntLayout.Header style={{ padding: '0' }}>
+                        <Header />
+                    </AntLayout.Header>
+                    <AntLayout.Content>
+                        <hr style={{ margin: '0', border: '2px solid #001529', height: '0px' }} />
+      <AntLayout style={{ padding: '0px 0', background: '#fff' }}>
+        <Sider width={200} style={{ background: '#fff' }}>
+
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            style={{ height: '100%' }}
+            theme="dark"
+            onSelect={(item) => setSelectedItem(parseInt(item.key))}
+          >
+            <p style={{ visibility: 'hidden', fontSize: '20px' }}>.</p>
+            <span style={{ fontSize: '18px', fontWeight: 'bold', marginLeft: '10px' }}>
+                  <Icon type="crown" style={{ marginRight: '5px' }} /> Admin
+                </span>
+            
+              <Menu.Item key="1" style={{ marginTop: '20px' }}><Icon type="pie-chart" /> Statistieken</Menu.Item>
+              <Menu.Item key="2"><Icon type="profile" /> Inschrijvingen</Menu.Item>
+              <Menu.Item key="3"><Icon type="team" /> Gebruikers</Menu.Item>
+              <Menu.Item key="4"><Icon type="mail" /> Inbox</Menu.Item>
+              <Menu.Item key="5"><Icon type="tool" /> Instellingen</Menu.Item>
+            
+          </Menu>
+        </Sider>
+        <AntLayout.Content style={{ padding: '0 24px', minHeight: 280 }}>
                 <br />
-                <Row gutter={16} style={{ textAlign: 'center' }}>
+                {selectedItem === 1 && (
+                    <Fragment>
+                        <Row gutter={16} style={{ textAlign: 'center' }}>
                     <Col span={12}>
                         <Statistic title="Gebruikers" value={result.gebruikers} groupSeparator="." decimalSeparator="," />
                     </Col>
@@ -160,9 +204,77 @@ const Admin: FunctionComponent = () => {
                         />
                     </Col>
                 </Row>
-            </Layout>
+                    </Fragment>
+                )}
+                {selectedItem === 2 && (
+                    <Collapse bordered={false}>
+                        {activiteiten.map((activiteit, index) => (
+                            <Panel header={activiteit.vak.naam + " (" + activiteit.dag.datum + ")"} key={index}>
+                                                    <Table 
+                        columns={[{
+                            title: 'Naam',
+                            dataIndex: 'naam',
+                            key: 'naam'
+                        }, {
+                            title: 'Geslacht',
+                            dataIndex: 'geslacht',
+                            key: 'geslacht'
+                        }]}
+                        dataSource={result.inschrijvingenItems.filter((inschrijving: any) => inschrijving.activiteit === activiteit.id).map((inschrijving: any, index) => {
+                            const gebruiker: any = result.gebruikersItems.find((gebruikerItem: any) => gebruikerItem.email === inschrijving.email);
+                            return {
+                                key: index,
+                                email: inschrijving.email.toLowerCase(),
+                                naam: gebruiker.roepnaam + ' ' + (gebruiker.tussenvoegsel ? gebruiker.tussenvoegsel + ' ' : '') + gebruiker.achternaam,
+                                geslacht: gebruiker.geslacht
+                            };
+                        }).sort((a, b) => a.naam.localeCompare(b.naam))}
+                    />
+                    <Button type="primary" icon="printer" style={{ position: 'relative', bottom: '48px' }}>Print</Button>
+                            </Panel>
+                        ))}
+                    </Collapse>
+                )}
+                {selectedItem === 3 && (
+                    <Table 
+                        columns={[{
+                            title: 'E-mailadres',
+                            dataIndex: 'email',
+                            key: 'email'
+                        }, {
+                            title: 'Naam',
+                            dataIndex: 'naam',
+                            key: 'naam'
+                        }, {
+                            title: 'Geslacht',
+                            dataIndex: 'geslacht',
+                            key: 'geslacht'
+                        }]}
+                        dataSource={result.gebruikersItems.map((gebruiker: any, index) => ({
+                            key: index,
+                            email: gebruiker.email.toLowerCase(),
+                            naam: gebruiker.roepnaam + ' ' + (gebruiker.tussenvoegsel ? gebruiker.tussenvoegsel + ' ' : '') + gebruiker.achternaam,
+                            geslacht: gebruiker.geslacht
+                        })).sort((a, b) => a.email.localeCompare(b.email))}
+                    />
+                )}
+                {selectedItem === 4 && (
+                    <p>Test</p>
+                )}
+                {selectedItem === 5 && (
+                    <p>Test</p>
+                )}
+        </AntLayout.Content>
+      </AntLayout>
+                    
+                    </AntLayout.Content>
+                    <AntLayout.Footer style={{ padding: '0' }}>
+                        <Footer />
+                    </AntLayout.Footer>
+                </AntLayout>
+            </Fragment>
         );
-    } else if(!auth.admin) {
+    } else if(isLoggedIn && (!auth || !auth.admin)) {
         return (
             <Layout>
                 <Title centered={true}>Hageveld Experience</Title>

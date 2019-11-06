@@ -19,7 +19,7 @@ const Layout: FunctionComponent<Props> = ({ children, title }: Props) => (
             <AntLayout.Content>
                 {children}
             </AntLayout.Content>
-            <AntLayout.Footer>
+            <AntLayout.Footer style={{ padding: '0' }}>
                 <Footer />
             </AntLayout.Footer>
         </AntLayout>

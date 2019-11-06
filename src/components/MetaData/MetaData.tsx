@@ -23,7 +23,7 @@ const MetaData: FunctionComponent<Props> = ({ title }: Props) => (
             }
         `}
         render={({ site: { siteMetadata } }) => (
-            <Helmet>
+            <Helmet htmlAttributes={{ lang: 'nl' }}>
                 <title>{title ? `${siteMetadata.title} - ${title}` : siteMetadata.title}</title>
                 <meta name="apple-mobile-web-app-title" content={siteMetadata.title} />
                 <meta name="description" content={siteMetadata.description} />

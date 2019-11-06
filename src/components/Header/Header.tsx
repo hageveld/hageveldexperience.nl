@@ -36,9 +36,9 @@ const Header: FunctionComponent = () => {
                                 }}
                             >
                     {auth.admin && (
-                        <Menu.Item key="setting:0"><Link to="/admin"><Icon type="crown" />Admin</Link></Menu.Item>
+                        <Menu.Item key="setting:0"><Link to="/admin"><Icon type="crown" /> Admin</Link></Menu.Item>
                     )}
-                    <Menu.Item key="setting:1"><Link to="/inschrijven"><Icon type="edit" />Inschrijven</Link></Menu.Item>
+                    <Menu.Item key="setting:1"><Link to="/inschrijven"><Icon type="edit" /> Inschrijven</Link></Menu.Item>
                     <Menu.Item key="setting:2"><Link to="/uitloggen"><Icon type="user-delete" /> Uitloggen</Link></Menu.Item>
                 </SubMenu>
                 ) : (
