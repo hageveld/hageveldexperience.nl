@@ -27,9 +27,9 @@ module.exports = {
             options: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    "primary-color": `#5B34AD`,
+                    'primary-color': `#5B34AD`
                 }
-            },
+            }
         },
         {
             resolve: 'gatsby-plugin-manifest',
@@ -65,7 +65,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-antd',
             options: {
-              style: true
+                style: true
             }
         },
         'gatsby-plugin-remove-trailing-slashes'

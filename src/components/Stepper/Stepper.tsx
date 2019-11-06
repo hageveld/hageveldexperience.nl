@@ -27,14 +27,14 @@ export default class Stepper extends Component<Props, State> {
     back() {
         const { step } = this.state;
         this.setState({
-            step: step-1
+            step: step - 1
         });
     }
 
     forward() {
         const { step } = this.state;
         this.setState({
-            step: step+1
+            step: step + 1
         });
     }
 
@@ -51,7 +51,7 @@ export default class Stepper extends Component<Props, State> {
                         <Steps.Step
                             icon={
                                 <Avatar
-                                    icon={step > index ? "check" : stepData.icon}
+                                    icon={step > index ? 'check' : stepData.icon}
                                     style={{
                                         backgroundColor: step >= index ? '#5B34AD' : 'white',
                                         color: step < index ? '#d9d5e4' : 'default'
@@ -65,12 +65,16 @@ export default class Stepper extends Component<Props, State> {
                     ))}
                 </Steps>
                 <br />
-                {steps[step].children.length > 1 ? steps[step].children.map(child => cloneElement(child, { forward: this.forward })) : cloneElement(steps[step].children, { forward: this.forward })}
-                {steps[step].showForward !== false && step < children.length-1 && 
+                {steps[step].children.length > 1
+                    ? steps[step].children.map(child =>
+                          cloneElement(child, { forward: this.forward })
+                      )
+                    : cloneElement(steps[step].children, { forward: this.forward })}
+                {steps[step].showForward !== false && step < children.length - 1 && (
                     <Button type="primary" icon="caret-right" size="large" onClick={this.forward}>
                         Verzenden
                     </Button>
-                }
+                )}
             </Fragment>
         );
     }

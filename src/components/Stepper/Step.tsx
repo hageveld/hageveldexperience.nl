@@ -8,8 +8,6 @@ interface Props {
     showForward?: boolean;
 }
 
-const Step: FunctionComponent<Props> = () => (
-    <Fragment />
-);
+const Step: FunctionComponent<Props> = () => <Fragment />;
 
 export default Step;

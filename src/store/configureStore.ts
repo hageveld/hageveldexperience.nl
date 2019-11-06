@@ -5,14 +5,14 @@ import storage from 'redux-persist/lib/storage';
 import rootReducer from './reducer';
 
 const persistConfig = {
-  key: 'root',
-  storage,
+    key: 'root',
+    storage
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const configureStore = () => {
-  const store = createStore(persistedReducer, compose(applyMiddleware(logger)));
-  const persistor = persistStore(store);
-  return { store, persistor };
-}
+    const store = createStore(persistedReducer, compose(applyMiddleware(logger)));
+    const persistor = persistStore(store);
+    return { store, persistor };
+};

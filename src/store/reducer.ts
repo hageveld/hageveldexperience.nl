@@ -6,8 +6,8 @@ import { inschrijfReducer, InschrijfActions } from './inschrijving';
 export type ApplicationActions = AuthActions | InschrijfActions;
 
 const rootReducer = combineReducers<ApplicationState>({
-  auth: authReducer,
-  inschrijf: inschrijfReducer
+    auth: authReducer,
+    inschrijf: inschrijfReducer
 });
 
 export default rootReducer;

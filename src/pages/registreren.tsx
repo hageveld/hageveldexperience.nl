@@ -41,22 +41,25 @@ class Registreren extends Component<Props, State> {
         this.setState({
             loading: true
         });
-        axios.post(`https://api.hageveldexperience.nl/register`, {
-            email
-        }).then(response => {
-            this.setState({
-                loading: false,
-                done: true
+        axios
+            .post(`https://api.hageveldexperience.nl/register`, {
+                email
+            })
+            .then(response => {
+                this.setState({
+                    loading: false,
+                    done: true
+                });
+            })
+            .catch(error => {
+                navigate('/error');
             });
-        }).catch(error => {
-            navigate("/error");
-        });
     }
 
     render() {
         const { isLoggedIn } = this.props;
-        if(isLoggedIn) {
-            navigate("/inschrijven");
+        if (isLoggedIn) {
+            navigate('/inschrijven');
         }
 
         const { email, loading, done } = this.state;
@@ -68,16 +71,37 @@ class Registreren extends Component<Props, State> {
                     <Col span={12} offset={6}>
                         {!done ? (
                             <>
-                            Vul hier je e-mailadres in om een account aan te maken:
-                            <br /><br />
-                            <Row>
-                                <Col span={18}><Input disabled={loading} placeholder="mail@voorbeeld.nl" onChange={this.handleChange} value={email} /></Col>
-                                <Col span={6}><Button disabled={loading} type="primary" icon="login" onClick={this.handleClick}>
-                                    Verzenden
-                                </Button></Col>
-                            </Row>
-                            <br />
-                            <p>Klik <Link to="/inloggen"><b>hier</b></Link> indien je al een account hebt, en wilt inloggen.</p>
+                                Vul hier je e-mailadres in om een account aan te maken:
+                                <br />
+                                <br />
+                                <Row>
+                                    <Col span={18}>
+                                        <Input
+                                            disabled={loading}
+                                            placeholder="mail@voorbeeld.nl"
+                                            onChange={this.handleChange}
+                                            value={email}
+                                        />
+                                    </Col>
+                                    <Col span={6}>
+                                        <Button
+                                            disabled={loading}
+                                            type="primary"
+                                            icon="login"
+                                            onClick={this.handleClick}
+                                        >
+                                            Verzenden
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                <br />
+                                <p>
+                                    Klik{' '}
+                                    <Link to="/inloggen">
+                                        <b>hier</b>
+                                    </Link>{' '}
+                                    indien je al een account hebt, en wilt inloggen.
+                                </p>
                             </>
                         ) : (
                             <Result
@@ -95,8 +119,8 @@ class Registreren extends Component<Props, State> {
 
 const mapStateToProps = state => {
     return {
-      isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn
     };
-  };
-  
-  export default connect(mapStateToProps)(Registreren);
+};
+
+export default connect(mapStateToProps)(Registreren);

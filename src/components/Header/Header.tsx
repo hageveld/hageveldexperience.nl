@@ -23,42 +23,62 @@ const Header: FunctionComponent = () => {
                     Hageveld Experience
                 </Link>
             </Menu.Item>
-                {isLoggedIn ? (
-                                <SubMenu
-                                title={
-                                    <span className="submenu-title-wrapper">
-                                        <Icon type="user" />
-                                        {isLoggedIn ? auth.roepnaam : "Gebruiker"}
-                                    </span>
-                                }
-                                style={{
-                                    float: 'right'
-                                }}
-                            >
-                    {auth.admin && (
-                        <Menu.Item key="setting:0"><Link to="/admin"><Icon type="crown" /> Admin</Link></Menu.Item>
-                    )}
-                    <Menu.Item key="setting:1"><Link to="/inschrijven"><Icon type="edit" /> Inschrijven</Link></Menu.Item>
-                    <Menu.Item key="setting:2"><Link to="/uitloggen"><Icon type="user-delete" /> Uitloggen</Link></Menu.Item>
-                </SubMenu>
-                ) : (
-                    <SubMenu
+            {isLoggedIn ? (
+                <SubMenu
                     title={
                         <span className="submenu-title-wrapper">
                             <Icon type="user" />
-                            {isLoggedIn ? auth.roepnaam : "Gebruiker"}
+                            {isLoggedIn ? auth.roepnaam : 'Gebruiker'}
                         </span>
                     }
                     style={{
                         float: 'right'
                     }}
                 >
-        <Menu.Item key="setting:1"><Link to="/inloggen"><Icon type="form" /> Inloggen</Link></Menu.Item>
-        <Menu.Item key="setting:2"><Link to="/registreren"><Icon type="user-add" /> Registreren</Link></Menu.Item>
-    </SubMenu>
-                )}
+                    {auth.admin && (
+                        <Menu.Item key="setting:0">
+                            <Link to="/admin">
+                                <Icon type="crown" /> Admin
+                            </Link>
+                        </Menu.Item>
+                    )}
+                    <Menu.Item key="setting:1">
+                        <Link to="/inschrijven">
+                            <Icon type="edit" /> Inschrijven
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="setting:2">
+                        <Link to="/uitloggen">
+                            <Icon type="user-delete" /> Uitloggen
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+            ) : (
+                <SubMenu
+                    title={
+                        <span className="submenu-title-wrapper">
+                            <Icon type="user" />
+                            {isLoggedIn ? auth.roepnaam : 'Gebruiker'}
+                        </span>
+                    }
+                    style={{
+                        float: 'right'
+                    }}
+                >
+                    <Menu.Item key="setting:1">
+                        <Link to="/inloggen">
+                            <Icon type="form" /> Inloggen
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="setting:2">
+                        <Link to="/registreren">
+                            <Icon type="user-add" /> Registreren
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+            )}
         </Menu>
     );
-}
+};
 
 export default Header;

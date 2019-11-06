@@ -56,7 +56,12 @@ const Footer: FunctionComponent = () => (
         <Row>
             <Col span={6} offset={1}>
                 <div>
-                    <img width="32" src={Favicon} style={{ float: 'left' }} alt="Hageveld Koepel Icon" />
+                    <img
+                        width="32"
+                        src={Favicon}
+                        style={{ float: 'left' }}
+                        alt="Hageveld Koepel Icon"
+                    />
                     <h2>Hageveld</h2>
                 </div>
                 <div style={{ fontSize: '11px', marginTop: '5px', marginBottom: '10px' }}>
@@ -93,7 +98,11 @@ const Footer: FunctionComponent = () => (
             </Col>
             <Col span={6} offset={2}>
                 <Map center={position} zoom={15} height={200}>
-                    <Marker anchor={position} payload={1} onClick={({ event, anchor, payload }) => {}} />
+                    <Marker
+                        anchor={position}
+                        payload={1}
+                        onClick={({ event, anchor, payload }) => {}}
+                    />
                 </Map>
             </Col>
             <Col span={6} offset={3}>

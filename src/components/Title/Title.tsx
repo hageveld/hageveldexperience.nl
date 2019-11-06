@@ -26,11 +26,13 @@ interface Props {
 const TitleWrapper = styled(Typography.Title)`
     font-size: 40px;
     color: #362e95 !important;
-    text-align: ${(props: StyledComponentProps) => props.centered ? "center" : "inherit"};
+    text-align: ${(props: StyledComponentProps) => (props.centered ? 'center' : 'inherit')};
 `;
 
 const Title: FunctionComponent<Props> = ({ children, ...props }: Props) => (
-    <TitleWrapper {...props} centered={props.centered ? 1 : 0}>{children ? children : "Hageveld Experience"}</TitleWrapper>
-)
+    <TitleWrapper {...props} centered={props.centered ? 1 : 0}>
+        {children ? children : 'Hageveld Experience'}
+    </TitleWrapper>
+);
 
 export default Title;
