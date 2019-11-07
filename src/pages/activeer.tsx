@@ -356,7 +356,21 @@ const Activeer: FunctionComponent = () => {
                             showForward={false}
                         >
                             <Alert
-                                message="Door het invullen van je persoonsgegevens ga je ermee akkoord dat deze gegevens beveiligd opgeslagen en verwerkt worden."
+                                message={
+                                    <>
+                                        <span>
+                                            Door het invullen van je persoonsgegevens ga je ermee
+                                            akkoord dat deze gegevens beveiligd opgeslagen en
+                                            verwerkt worden.
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span>
+                                            <b>Let op</b>: Indien u een account maakt voor uw zoon
+                                            of dochter, vul dan zijn/haar gegevens in.
+                                        </span>
+                                    </>
+                                }
                                 type="info"
                                 showIcon={true}
                             />
