@@ -1,5 +1,5 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import { Row, Col, Button, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
+import { Row, Col, Button, Avatar, Statistic, Popconfirm, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from '../../hooks';
 import {
@@ -27,8 +27,6 @@ const Activiteit: FunctionComponent<Props> = ({
     const deelnemers = activiteit ? activiteit.deelnemers : 0;
     const loading = fetching || (activiteit ? activiteit.loading : true);
     const dispatch = useDispatch();
-
-    console.log('ACTIVITEIT RENDER');
 
     const geactiveerd =
         !loading &&
@@ -131,7 +129,6 @@ const Activiteit: FunctionComponent<Props> = ({
                     />
                 </Col>
             </Row>
-            <Divider style={{ margin: '15px' }} />
         </Fragment>
     );
 };

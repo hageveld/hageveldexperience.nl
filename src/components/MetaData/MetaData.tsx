@@ -9,9 +9,11 @@ interface Props {
 const MetaData: FunctionComponent<Props> = ({  }: Props) => {
     const title = 'Hageveld Experience';
     const siteUrl = 'https://hageveldexperience.nl';
-    const description = 'Hageveld Experience';
+    const description =
+        'Tijdens de Hageveld Experience krijg je een unieke rondleiding in onze school, en kun je ervaren hoe een les op Hageveld eruit ziet.';
     const author = 'Atheneum College Hageveld';
-    const keywords = 'Atheneum, College, Hageveld, Experience, VWO, Heemstede';
+    const keywords =
+        'Atheneum, College, Hageveld, Experience, VWO, Heemstede, Groep 8, Brugklas, Basisschool';
 
     return (
         <Helmet htmlAttributes={{ lang: 'nl' }}>

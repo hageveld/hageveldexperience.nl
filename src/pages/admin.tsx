@@ -11,7 +11,8 @@ import {
     Menu,
     Switch,
     Table,
-    Collapse
+    Collapse,
+    Progress
 } from 'antd';
 import MetaData from '../components/MetaData';
 import Header from '../components/Header';
@@ -22,7 +23,7 @@ import Title from '../components/Title';
 import { useSelector } from '../hooks';
 import axios from 'axios';
 import colors from 'nice-color-palettes';
-import { activiteiten } from '../data';
+import { activiteiten, dagen } from '../data';
 
 import '../sass/index.scss';
 
@@ -39,6 +40,7 @@ const Admin: FunctionComponent = () => {
             verwijzingen: {},
             inschrijvingenGemiddelde: {},
             dagen: {},
+            dagenExtended: {},
             vakken: {},
             inschrijvingenItems: [],
             gebruikersItems: [],
@@ -56,7 +58,32 @@ const Admin: FunctionComponent = () => {
                     wachtwoord: auth.wachtwoord
                 })
                 .then(response => {
-                    setResult(response.data.result);
+                    const dagenData: any = { ...dagen };
+                    Object.values(dagenData).map((dagData: any) => {
+                        const dagActiviteiten = activiteiten.filter(
+                            activiteit => activiteit.dag.id === dagData.id
+                        );
+                        const maxDeelnemers = dagActiviteiten
+                            .map(activiteit => activiteit.maxDeelnemers)
+                            .reduce((a, b) => a + b);
+                        dagData.maxDeelnemers = maxDeelnemers;
+                        dagData.inschrijvingen = 0;
+
+                        return dagData;
+                    });
+
+                    response.data.result.inschrijvingenItems.forEach(item => {
+                        const dagActiviteit: any = activiteiten.find(
+                            activiteit => activiteit.id === item.activiteit
+                        );
+                        const dag = dagActiviteit.dag.id;
+                        const dagItem: any = Object.values(dagenData).find(
+                            (dagData: any) => dagData.id === dag
+                        );
+                        dagItem.inschrijvingen++;
+                    });
+
+                    setResult({ ...response.data.result, dagenExtended: dagenData });
                     setDone(true);
                     setLoading(false);
                 })
@@ -92,22 +119,36 @@ const Admin: FunctionComponent = () => {
                                     >
                                         <Icon type="crown" style={{ marginRight: '5px' }} /> Admin
                                     </span>
-
-                                    <Menu.Item key="1" style={{ marginTop: '20px' }}>
-                                        <Icon type="pie-chart" /> Statistieken
-                                    </Menu.Item>
-                                    <Menu.Item key="2">
-                                        <Icon type="profile" /> Inschrijvingen
-                                    </Menu.Item>
-                                    <Menu.Item key="3">
-                                        <Icon type="team" /> Gebruikers
-                                    </Menu.Item>
-                                    <Menu.Item key="4">
-                                        <Icon type="mail" /> Inbox
-                                    </Menu.Item>
-                                    <Menu.Item key="5">
-                                        <Icon type="tool" /> Instellingen
-                                    </Menu.Item>
+                                    <Menu.ItemGroup title="Algemeen" style={{ marginTop: '20px' }}>
+                                        <Menu.Item key="1">
+                                            <Icon type="pie-chart" /> Statistieken
+                                        </Menu.Item>
+                                        <Menu.Item key="2">
+                                            <Icon type="profile" /> Inschrijvingen
+                                        </Menu.Item>
+                                        <Menu.Item key="3">
+                                            <Icon type="team" /> Gebruikers
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
+                                    <Menu.ItemGroup title="Data">
+                                        <Menu.Item key="4">
+                                            <Icon type="project" /> Vakken
+                                        </Menu.Item>
+                                        <Menu.Item key="5">
+                                            <Icon type="calendar" /> Dagen
+                                        </Menu.Item>
+                                        <Menu.Item key="6">
+                                            <Icon type="schedule" /> Activiteiten
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
+                                    <Menu.ItemGroup title="Overig">
+                                        <Menu.Item key="7">
+                                            <Icon type="mail" /> Inbox
+                                        </Menu.Item>
+                                        <Menu.Item key="8">
+                                            <Icon type="tool" /> Instellingen
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
                                 </Menu>
                             </Sider>
                             <AntLayout.Content style={{ padding: '0 24px', minHeight: 280 }}>
@@ -394,6 +435,49 @@ const Admin: FunctionComponent = () => {
                                 )}
                                 {selectedItem === 4 && <p>Test</p>}
                                 {selectedItem === 5 && (
+                                    <Fragment>
+                                        <h2>Dagen</h2>
+                                        <Table
+                                            columns={[
+                                                {
+                                                    title: '#',
+                                                    dataIndex: 'id',
+                                                    key: 'id'
+                                                },
+                                                {
+                                                    title: 'Datum',
+                                                    dataIndex: 'datum',
+                                                    key: 'datum'
+                                                },
+                                                {
+                                                    title: 'Inschrijvingen',
+                                                    dataIndex: 'inschrijvingen',
+                                                    key: 'inschrijvingen'
+                                                }
+                                            ]}
+                                            dataSource={Object.values(result.dagenExtended).map(
+                                                (dag: any) => {
+                                                    return {
+                                                        id: dag.id,
+                                                        datum: dag.datum,
+                                                        inschrijvingen: (
+                                                            <Progress
+                                                                percent={Math.floor(
+                                                                    (dag.inschrijvingen /
+                                                                        dag.maxDeelnemers) *
+                                                                        100
+                                                                )}
+                                                            />
+                                                        )
+                                                    };
+                                                }
+                                            )}
+                                        />
+                                    </Fragment>
+                                )}
+                                {selectedItem === 6 && <p>Test</p>}
+                                {selectedItem === 7 && <p>Test</p>}
+                                {selectedItem === 8 && (
                                     <>
                                         <h2>Instellingen</h2>
                                         <b>Inschrijvingen</b>: <Switch />

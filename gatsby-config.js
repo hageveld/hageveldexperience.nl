@@ -2,9 +2,11 @@ module.exports = {
     siteMetadata: {
         title: 'Hageveld Experience',
         siteUrl: 'https://hageveldexperience.nl',
-        description: 'Hageveld Experience',
+        description:
+            'Tijdens de Hageveld Experience krijg je een unieke rondleiding in onze school, en kun je ervaren hoe een les op Hageveld eruit ziet.',
         author: 'Atheneum College Hageveld',
-        keywords: 'Atheneum, College, Hageveld, Experience, VWO, Heemstede'
+        keywords:
+            'Atheneum, College, Hageveld, Experience, VWO, Heemstede, Groep 8, Brugklas, Basisschool'
     },
     pathPrefix: '/',
     plugins: [
