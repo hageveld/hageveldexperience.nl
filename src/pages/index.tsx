@@ -13,8 +13,9 @@ import Lokaal from '../images/4_lokaal.jpg';
 
 import '../sass/index.scss';
 
-const Index: FunctionComponent = () => {
+const Index: FunctionComponent<any> = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
     return (
         <Layout>
             <Title centered={true}>Hageveld Experience</Title>

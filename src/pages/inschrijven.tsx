@@ -3,14 +3,14 @@ import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Alert, Row, Col, Card, List } from 'antd';
 import { dagen, activiteiten } from '../data';
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import moment from 'moment';
 import 'moment/locale/nl';
-import ActiviteitType from '../classes/activiteit';
+import ActiviteitModel from '../models/activiteit';
 import Activiteit from '../components/Activiteit';
-import axios from 'axios';
 import { useSelector, useDispatch } from '../hooks';
-import { inschrijf, uitschrijf } from '../store/inschrijving';
+import { updateActiviteiten } from '../store/activiteiten';
+import { getActivities } from '../utils/api';
 
 import '../sass/index.scss';
 
@@ -18,76 +18,29 @@ moment.locale('nl');
 
 const Inschrijven: FunctionComponent = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-    const auth = useSelector(state => state.auth.auth);
-    const ingeschrevenList = useSelector(state => state.inschrijf);
 
     const [done, setDone] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [activities, setActivities] = useState({} as any);
     const dispatch = useDispatch();
     useEffect(() => {
         if (!loading) {
             setLoading(true);
-            if (isLoggedIn) {
-                axios
-                    .post('https://api.hageveldexperience.nl/activities', {
-                        email: auth.email,
-                        wachtwoord: auth.wachtwoord
-                    })
-                    .then(response => {
-                        const { result } = response.data;
-                        console.log(result);
-                        result.forEach(activiteit => {
-                            activities[activiteit.id.N] = {
-                                id: activiteit.id.N,
-                                deelnemers: activiteit.ingeschreven
-                                    ? parseInt(activiteit.deelnemers.N, 10) - 1
-                                    : activiteit.deelnemers.N,
-                                ingeschreven: activiteit.ingeschreven ? true : false
-                            };
-                            const ingeschreven = ingeschrevenList[activiteit.id.N];
-                            if (activiteit.ingeschreven && !ingeschreven) {
-                                dispatch(
-                                    inschrijf(
-                                        parseInt(activiteit.id.N, 10),
-                                        parseInt(activiteit.dag.S, 10)
-                                    )
-                                );
-                            } else if (!activiteit.ingeschreven && ingeschreven) {
-                                dispatch(
-                                    uitschrijf(
-                                        parseInt(activiteit.id.N, 10),
-                                        parseInt(activiteit.dag.S, 10)
-                                    )
-                                );
-                            }
-                        });
-                        setActivities(activities);
-                        setDone(true);
-                    })
-                    .catch(error => {
-                        navigate('/error');
-                    });
-            } else {
-                axios
-                    .get('https://api.hageveldexperience.nl/activities')
-                    .then(response => {
-                        const { result } = response.data;
-                        result.forEach(activiteit => {
-                            activities[activiteit.id.N] = {
-                                id: activiteit.id.N,
-                                deelnemers: activiteit.deelnemers.N
-                            };
-                        });
-                        setActivities(activities);
-                        setDone(true);
-                    })
-                    .catch(error => {
-                        navigate('/error');
-                    });
-            }
+            getActivities().then(activities => {
+                const activitiesData = activities.map(activity => {
+                    return {
+                        id: parseInt(activity.id.N, 10),
+                        dag: parseInt(activity.dag.S, 10),
+                        ingeschreven: activity.ingeschreven ? true : false,
+                        deelnemers: parseInt(activity.deelnemers.N, 10)
+                    };
+                });
+                dispatch(updateActiviteiten(activitiesData));
+                setDone(true);
+            });
         }
     });
+
+    console.log('INSCHRIJVEN RENDER');
 
     return (
         <Layout>
@@ -155,14 +108,14 @@ const Inschrijven: FunctionComponent = () => {
                                 <Card
                                     title={
                                         <Row>
-                                            <Col span={12}>
+                                            <Col span={8}>
                                                 Dag {dag.id}
                                                 <br />
                                                 <span style={{ fontSize: '10px' }}>
                                                     {dag.beschrijving}
                                                 </span>
                                             </Col>
-                                            <Col span={12} style={{ textAlign: 'right' }}>
+                                            <Col span={16} style={{ textAlign: 'right' }}>
                                                 {moment(dag.datum, 'DD-MM-YYYY').format(
                                                     'D MMMM YYYY'
                                                 )}
@@ -180,11 +133,8 @@ const Inschrijven: FunctionComponent = () => {
                                         dataSource={activiteiten.filter(
                                             activiteit => activiteit.dag.id === dag.id
                                         )}
-                                        renderItem={(activiteit: ActiviteitType) => (
-                                            <Activiteit
-                                                data={activiteit}
-                                                api={activities[activiteit.id]}
-                                            />
+                                        renderItem={(activiteit: ActiviteitModel) => (
+                                            <Activiteit data={activiteit} fetching={!done} />
                                         )}
                                     />
                                 </Card>

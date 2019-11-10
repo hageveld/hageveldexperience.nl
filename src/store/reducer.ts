@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import { ApplicationState } from './index';
 import { authReducer, AuthActions } from './auth';
-import { inschrijfReducer, InschrijfActions } from './inschrijving';
+import { activiteitenReducer, ActiviteitenActions } from './activiteiten';
 
-export type ApplicationActions = AuthActions | InschrijfActions;
+export type ApplicationActions = AuthActions | ActiviteitenActions;
 
 const rootReducer = combineReducers<ApplicationState>({
     auth: authReducer,
-    inschrijf: inschrijfReducer
+    activiteiten: activiteitenReducer
 });
 
 export default rootReducer;

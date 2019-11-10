@@ -9,7 +9,7 @@ import {
     Statistic,
     Layout as AntLayout,
     Menu,
-    Breadcrumb,
+    Switch,
     Table,
     Collapse
 } from 'antd';
@@ -298,6 +298,7 @@ const Admin: FunctionComponent = () => {
                                                 key={activiteitIndex}
                                             >
                                                 <Table
+                                                    locale={{ emptyText: 'Geen inschrijvingen' }}
                                                     columns={[
                                                         {
                                                             title: 'Naam',
@@ -392,7 +393,12 @@ const Admin: FunctionComponent = () => {
                                     />
                                 )}
                                 {selectedItem === 4 && <p>Test</p>}
-                                {selectedItem === 5 && <p>Test</p>}
+                                {selectedItem === 5 && (
+                                    <>
+                                        <h2>Instellingen</h2>
+                                        <b>Inschrijvingen</b>: <Switch />
+                                    </>
+                                )}
                             </AntLayout.Content>
                         </AntLayout>
                     </AntLayout.Content>

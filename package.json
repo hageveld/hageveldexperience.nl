@@ -1,7 +1,7 @@
 {
   "name": "@hageveld/experience-web",
   "description": "Website voor de Hageveld Experience op het Atheneum College Hageveld",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
   "homepage": "https://hageveldexperience.nl",
   "repository": "https://github.com/hageveld/hageveldexperience.git",
@@ -22,6 +22,7 @@
     "@babel/polyfill": "7.4.0",
     "@babel/preset-env": "7.4.2",
     "@babel/preset-react": "7.0.0",
+    "@babel/runtime": "7.7.2",
     "@fortawesome/fontawesome-svg-core": "1.2.17",
     "@fortawesome/free-brands-svg-icons": "5.8.1",
     "@fortawesome/free-regular-svg-icons": "5.8.1",
@@ -68,6 +69,7 @@
     "typeface-lato": "0.0.54"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "7.6.2",
     "@types/node": "11.11.6",
     "@types/react": "16.8.8",
     "@types/react-helmet": "5.0.8",

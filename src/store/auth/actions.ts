@@ -1,19 +1,8 @@
 import { ActionCreator } from 'redux';
-import {
-    LOGIN,
-    LoginAction,
-    LOGOUT,
-    LOGIN_SUCCESSFUL,
-    LogoutAction,
-    LoginSuccessfulAction
-} from './types';
+import { LOGIN, LOGOUT, LoginAction, LogoutAction } from './types';
 
-export const connect: ActionCreator<LoginAction> = () => ({
-    type: LOGIN
-});
-
-export const login: ActionCreator<LoginSuccessfulAction> = (payload: any) => ({
-    type: LOGIN_SUCCESSFUL,
+export const login: ActionCreator<LoginAction> = (payload: any) => ({
+    type: LOGIN,
     payload
 });
 

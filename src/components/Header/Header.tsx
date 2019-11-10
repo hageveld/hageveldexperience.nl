@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'gatsby';
 import { Menu, Icon } from 'antd';
-import { useDispatch, useSelector } from '../../hooks';
-import { login } from '../../store/auth';
+import { useSelector } from '../../hooks';
 
 const { SubMenu } = Menu;
 

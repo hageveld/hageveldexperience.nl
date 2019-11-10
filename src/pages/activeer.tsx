@@ -21,10 +21,8 @@ import {
 import { FormComponentProps } from 'antd/lib/form';
 import Title from '../components/Title';
 import basisscholen from '../data/duo-bo-data.json';
-import Map from 'pigeon-maps';
-import Marker from 'pigeon-marker';
 import { createHash } from 'crypto';
-import { useDispatch, useSelector } from '../hooks';
+import { useDispatch } from '../hooks';
 import { login } from '../store/auth';
 
 const { Option } = Select;
@@ -325,7 +323,6 @@ const Activeer: FunctionComponent = () => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch();
-    console.log(formData);
 
     const sendData = () => {
         setLoading(true);
@@ -430,13 +427,6 @@ const Activeer: FunctionComponent = () => {
                             <br />
                             <br />
                             <Volgende formData={formData} />
-                            {/*<Map center={[52.348391, 4.6321063]} zoom={11} height={400}>
-                                        {(basisscholen as any).filter(basisschool => basisschool.distance < 15).map((basisschool, index) => 
-                                            <Marker key={index} anchor={[parseFloat(basisschool.latitude), parseFloat(basisschool.longitude)]} payload={1} onClick={({ event, anchor, payload }) => {
-                                                console.log(basisschool.naam);
-                                            }} />
-                                        )}
-                                    </Map>*/}
                         </Step>
                         <Step
                             title="Verwijzing"

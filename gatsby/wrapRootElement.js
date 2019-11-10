@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { configureStore } from '../src/store';
+import { store, persistor } from '../src/store';
+import { ConfigProvider } from 'antd';
+import MetaData from '../src/components/MetaData';
 
 const wrapRootElement = ({ element }) => {
-    const { store, persistor } = configureStore();
     return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                {element}
-            </PersistGate>
-        </Provider>
+        <Fragment>
+            <MetaData />
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <ConfigProvider>{element}</ConfigProvider>
+                </PersistGate>
+            </Provider>
+        </Fragment>
     );
 };
 

@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { LOGIN, LOGOUT, LOGIN_SUCCESSFUL, AuthActions, AuthState } from './types';
+import { LOGIN, LOGOUT, AuthActions, AuthState } from './types';
 
 const INITIAL_STATE: AuthState = {
     isLoggedIn: false
@@ -11,11 +11,6 @@ export const reducer: Reducer<AuthState, AuthActions> = (
 ): AuthState => {
     switch (action.type) {
         case LOGIN:
-            return {
-                ...state,
-                isLoggedIn: true
-            };
-        case LOGIN_SUCCESSFUL:
             return {
                 ...state,
                 isLoggedIn: true,

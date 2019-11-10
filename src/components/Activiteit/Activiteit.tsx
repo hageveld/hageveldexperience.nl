@@ -1,58 +1,60 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { Row, Col, Button, Avatar, Statistic, Divider, Popconfirm, message } from 'antd';
-import { navigate } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from '../../hooks';
-import { inschrijf, uitschrijf } from '../../store/inschrijving';
-import ActiviteitType from '../../classes/activiteit';
-import axios from 'axios';
+import {
+    schrijfIn,
+    schrijfUit,
+    ingeschreven as ingeschrevenDispatch,
+    uitgeschreven
+} from '../../store/activiteiten';
+import ActiviteitModel from '../../models/activiteit';
+import { addInschrijving, removeInschrijving } from '../../utils/api';
 
 interface Props {
-    data: ActiviteitType;
-    api: any;
+    data: ActiviteitModel;
+    fetching: boolean;
 }
 
-const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnemers }, api }) => {
+const Activiteit: FunctionComponent<Props> = ({
+    data: { id, vak, dag, maxDeelnemers },
+    fetching
+}) => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-    const auth = useSelector(state => state.auth.auth);
-    const ingeschreven = useSelector(state => state.inschrijf[id]);
-    const dagLocked = useSelector(state => state.inschrijf[`DAG-${dag.id}`]);
-    const dagenIngeschreven = useSelector(state => state.inschrijf.DAGEN);
+    const activiteit = useSelector(state => state.activiteiten.items[id]);
+    const dagen = useSelector(state => state.activiteiten.dagen);
+    const ingeschreven = activiteit ? activiteit.ingeschreven : false;
+    const deelnemers = activiteit ? activiteit.deelnemers : 0;
+    const loading = fetching || (activiteit ? activiteit.loading : true);
     const dispatch = useDispatch();
+
+    console.log('ACTIVITEIT RENDER');
+
+    const geactiveerd =
+        !loading &&
+        isLoggedIn &&
+        (ingeschreven ||
+            (!dagen[activiteit.dag] &&
+                deelnemers < maxDeelnemers &&
+                Object.keys(dagen).length < 2));
 
     const toggleSchrijfIn = () => {
         if (isLoggedIn) {
             if (ingeschreven) {
-                dispatch(uitschrijf(id, dag.id));
-                message.error('Succesvol uitgeschreven');
-                axios
-                    .post('https://api.hageveldexperience.nl/activity', {
-                        email: auth.email,
-                        wachtwoord: auth.wachtwoord,
-                        type: 'uitschrijving',
-                        id: id.toString()
-                    })
-                    .catch(error => {
-                        navigate('/error');
-                    });
+                dispatch(schrijfUit(id));
+                removeInschrijving(id).then(() => {
+                    dispatch(uitgeschreven(id));
+                    message.error('Succesvol uitgeschreven');
+                });
             } else {
-                dispatch(inschrijf(id, dag.id));
-                message.success('Succesvol ingeschreven!');
-                axios
-                    .post('https://api.hageveldexperience.nl/activity', {
-                        email: auth.email,
-                        wachtwoord: auth.wachtwoord,
-                        type: 'inschrijving',
-                        id: id.toString()
-                    })
-                    .catch(error => {
-                        navigate('/error');
-                    });
+                dispatch(schrijfIn(id));
+                addInschrijving(id).then(() => {
+                    dispatch(ingeschrevenDispatch(id));
+                    message.success('Succesvol ingeschreven!');
+                });
             }
         }
     };
-
-    console.log(api);
 
     return (
         <Fragment>
@@ -64,14 +66,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                 </Col>
                 <Col span={7}>{vak.naam}</Col>
                 <Col span={2} style={{ float: 'right' }}>
-                    {!api ||
-                    !(
-                        !isLoggedIn ||
-                        (!ingeschreven &&
-                            (!!dagLocked ||
-                                parseInt(api.deelnemers, 10) >= maxDeelnemers ||
-                                dagenIngeschreven >= 2))
-                    ) ? (
+                    {geactiveerd ? (
                         <Popconfirm
                             title={
                                 ingeschreven ? (
@@ -97,17 +92,16 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                             <Button
                                 type="primary"
                                 shape="circle"
-                                icon={isLoggedIn && ingeschreven ? 'check' : 'plus'}
-                                disabled={
-                                    !api ||
-                                    !isLoggedIn ||
-                                    (!ingeschreven &&
-                                        (!!dagLocked ||
-                                            parseInt(api.deelnemers, 10) >= maxDeelnemers ||
-                                            dagenIngeschreven >= 2))
+                                icon={
+                                    loading
+                                        ? 'loading'
+                                        : isLoggedIn && ingeschreven
+                                        ? 'check'
+                                        : 'plus'
                                 }
+                                disabled={!geactiveerd}
                                 style={
-                                    isLoggedIn && ingeschreven
+                                    isLoggedIn && ingeschreven && !loading
                                         ? { backgroundColor: '#52c41a', borderColor: '#52c41a' }
                                         : {}
                                 }
@@ -117,17 +111,12 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                         <Button
                             type="primary"
                             shape="circle"
-                            icon={isLoggedIn && ingeschreven ? 'check' : 'plus'}
-                            disabled={
-                                !api ||
-                                !isLoggedIn ||
-                                (!ingeschreven &&
-                                    (!!dagLocked ||
-                                        parseInt(api.deelnemers, 10) >= maxDeelnemers ||
-                                        dagenIngeschreven >= 2))
+                            icon={
+                                loading ? 'loading' : isLoggedIn && ingeschreven ? 'check' : 'plus'
                             }
+                            disabled={!geactiveerd}
                             style={
-                                isLoggedIn && ingeschreven
+                                isLoggedIn && ingeschreven && !loading
                                     ? { backgroundColor: '#52c41a', borderColor: '#52c41a' }
                                     : {}
                             }
@@ -137,13 +126,7 @@ const Activiteit: FunctionComponent<Props> = ({ data: { id, vak, dag, maxDeelnem
                 <Col span={6} style={{ float: 'right' }}>
                     <Statistic
                         title="Inschrijvingen"
-                        value={
-                            api
-                                ? isLoggedIn && ingeschreven
-                                    ? parseInt(api.deelnemers, 10) + 1
-                                    : api.deelnemers
-                                : '0'
-                        }
+                        value={activiteit ? activiteit.deelnemers : '0'}
                         suffix={`/ ${maxDeelnemers}`}
                     />
                 </Col>
