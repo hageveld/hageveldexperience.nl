@@ -34,7 +34,7 @@ const Activiteit: FunctionComponent<Props> = ({
         (ingeschreven ||
             (!dagen[activiteit.dag] &&
                 deelnemers < maxDeelnemers &&
-                Object.keys(dagen).length < 2));
+                Object.values(dagen).filter((dagAantal: number) => dagAantal > 0).length < 2));
 
     const toggleSchrijfIn = () => {
         if (isLoggedIn) {
