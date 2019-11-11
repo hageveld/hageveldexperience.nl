@@ -22,7 +22,6 @@ class LoginForm extends Component<any, any> {
         const { dispatch } = this.props;
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 this.setState({
                     loading: true
                 });
