@@ -1,13 +1,27 @@
-# Hageveld Experience
+<p align="center">
+	<img src="https://raw.githubusercontent.com/hageveld/hageveldexperience.nl/master/src/images/hageveld_experience.png" alt="Hageveld Experience">
+	<br>
+	<a href="https://travis-ci.com/hageveld/experience.hageveld.nl">
+		<img src="https://img.shields.io/travis/com/hageveld/experience.hageveld.nl?style=flat-square" alt="Travis CI">
+	</a>
+	<a href="https://github.com/hageveld/hageveldexperience.nl/blob/master/package.json#L4">
+		<img src="https://img.shields.io/github/package-json/v/hageveld/hageveldexperience.nl.svg?style=flat-square" alt="Version">
+	</a>
+	<a href="https://david-dm.org/hageveld/hageveldexperience.nl">
+		<img src="https://img.shields.io/david/hageveld/hageveldexperience.nl?style=flat-square" alt="Dependencies">
+	</a>
+	<a href="https://github.com/hageveld/hageveldexperience.nl/blob/master/LICENSE">
+		<img src="https://img.shields.io/github/license/hageveld/hageveldexperience.nl?style=flat-square" alt="License">
+	</a>
+</p>
 
-[![](https://img.shields.io/travis/com/hageveld/hageveldexperience.nl?style=flat-square)](https://travis-ci.com/hageveld/hageveldexperience.nl)
-[![](https://img.shields.io/npm/v/@hageveld/experience-web.svg?style=flat-square)](https://www.npmjs.com/package/@hageveld/experience-web)
-[![](https://img.shields.io/david/hageveld/hageveldexperience.nl?style=flat-square)](https://david-dm.org/hageveld/hageveldexperience.nl)
-[![](https://img.shields.io/github/license/hageveld/hageveldexperience.nl?style=flat-square)](https://github.com/hageveld/hageveldexperience.nl/blob/master/LICENSE)
+------
 
-Website voor de Hageveld Experience op het Atheneum College Hageveld.
-    
-**Link**: https://hageveldexperience.nl
+<p align="center">
+Website voor de <a href="https://hageveldexperience.nl">Hageveld Experience</a> op het <a href="http://www.hageveld.nl">Atheneum College Hageveld</a>.
+</p>
+
+------
 
 ## Usage
 

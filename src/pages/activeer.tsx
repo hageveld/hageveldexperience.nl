@@ -333,7 +333,13 @@ const Activeer: FunctionComponent = () => {
             })
             .then(response => {
                 setLoading(false);
-                dispatch(login({ ...formData, email: response.data.result.email, admin: false }));
+                dispatch(
+                    login({
+                        ...formData,
+                        email: response.data.result.email.toLowerCase(),
+                        admin: false
+                    })
+                );
             })
             .catch(error => {
                 navigate('/error');
