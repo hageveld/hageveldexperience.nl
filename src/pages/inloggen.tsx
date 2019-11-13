@@ -22,13 +22,12 @@ class LoginForm extends Component<any, any> {
         const { dispatch } = this.props;
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 this.setState({
                     loading: true
                 });
                 axios
                     .post(`https://api.hageveldexperience.nl/login`, {
-                        email: values.email,
+                        email: values.email.toLowerCase(),
                         wachtwoord: createHash('sha256')
                             .update(values.wachtwoord)
                             .digest('hex')
@@ -38,7 +37,7 @@ class LoginForm extends Component<any, any> {
                             const { result } = response.data;
                             dispatch(
                                 login({
-                                    email: result.email.S,
+                                    email: result.email.S.toLowerCase(),
                                     roepnaam: result.roepnaam.S,
                                     tussenvoegsel:
                                         'NULL' in result.tussenvoegsel

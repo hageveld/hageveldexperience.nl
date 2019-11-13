@@ -43,7 +43,7 @@ export const getActivities = async () => {
     if (state.auth.isLoggedIn) {
         const response: any = await api
             .post('/activities', {
-                email: state.auth.auth.email,
+                email: state.auth.auth.email.toLowerCase(),
                 wachtwoord: state.auth.auth.wachtwoord
             })
             .catch(error => {
@@ -62,7 +62,7 @@ export const addInschrijving = async (id: number) => {
     const state = store.getState();
     await api
         .post('/activity', {
-            email: state.auth.auth.email,
+            email: state.auth.auth.email.toLowerCase(),
             wachtwoord: state.auth.auth.wachtwoord,
             type: 'inschrijving',
             id: id.toString()
@@ -76,7 +76,7 @@ export const removeInschrijving = async (id: number) => {
     const state = store.getState();
     await api
         .post('/activity', {
-            email: state.auth.auth.email,
+            email: state.auth.auth.email.toLowerCase(),
             wachtwoord: state.auth.auth.wachtwoord,
             type: 'uitschrijving',
             id: id.toString()
@@ -84,4 +84,17 @@ export const removeInschrijving = async (id: number) => {
         .catch(error => {
             reportError(error);
         });
+};
+
+export const getAdminData = async () => {
+    const state = store.getState();
+    const response: any = await api
+        .post('/admin', {
+            email: state.auth.auth.email.toLowerCase(),
+            wachtwoord: state.auth.auth.wachtwoord
+        })
+        .catch(error => {
+            reportError(error);
+        });
+    return response.data.result;
 };

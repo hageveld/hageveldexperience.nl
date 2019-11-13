@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Link } from 'gatsby';
-import { Menu, Icon } from 'antd';
+import { Menu, Icon, Badge } from 'antd';
 import { useSelector } from '../../hooks';
 
 const { SubMenu } = Menu;
@@ -72,6 +72,36 @@ const Header: FunctionComponent = () => {
                     <Menu.Item key="setting:2">
                         <Link to="/registreren">
                             <Icon type="user-add" /> Registreren
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+            )}
+            {isLoggedIn && (
+                <SubMenu
+                    title={
+                        <Badge count={5} dot={true}>
+                            <Icon type="bell" style={{ marginRight: '0px' }} />
+                        </Badge>
+                    }
+                    style={{
+                        float: 'right'
+                    }}
+                >
+                    {auth.admin && (
+                        <Menu.Item key="setting:0">
+                            <Link to="/admin">
+                                <Icon type="crown" /> Admin
+                            </Link>
+                        </Menu.Item>
+                    )}
+                    <Menu.Item key="setting:1">
+                        <Link to="/inschrijven">
+                            <Icon type="edit" /> Inschrijven
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="setting:2">
+                        <Link to="/uitloggen">
+                            <Icon type="user-delete" /> Uitloggen
                         </Link>
                     </Menu.Item>
                 </SubMenu>

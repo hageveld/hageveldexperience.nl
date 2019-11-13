@@ -1,34 +1,26 @@
 import React, { FunctionComponent, Fragment, useState } from 'react';
 import Layout from '../components/Layout';
-import {
-    Row,
-    Col,
-    Button,
-    Result,
-    Icon,
-    Statistic,
-    Layout as AntLayout,
-    Menu,
-    Switch,
-    Table,
-    Collapse,
-    Progress
-} from 'antd';
+import { Button, Result, Icon, Layout as AntLayout, Menu } from 'antd';
 import MetaData from '../components/MetaData';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import PieChart from 'react-minimal-pie-chart';
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import Title from '../components/Title';
 import { useSelector } from '../hooks';
-import axios from 'axios';
-import colors from 'nice-color-palettes';
+import { getAdminData } from '../utils/api';
 import { activiteiten, dagen } from '../data';
+import Dagen from '../components/AdminPanel/components/Dagen';
+import Gebruikers from '../components/AdminPanel/components/Gebruikers';
+import Inschrijvingen from '../components/AdminPanel/components/Inschrijvingen';
+import Statistieken from '../components/AdminPanel/components/Statistieken';
+import Vakken from '../components/AdminPanel/components/Vakken';
+import Instellingen from '../components/AdminPanel/components/Instellingen';
+import Inbox from '../components/AdminPanel/components/Inbox';
+import Activiteiten from '../components/AdminPanel/components/Activiteiten';
 
 import '../sass/index.scss';
 
 const { Sider } = AntLayout;
-const { Panel } = Collapse;
 
 const Admin: FunctionComponent = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
@@ -52,44 +44,36 @@ const Admin: FunctionComponent = () => {
         const [selectedItem, setSelectedItem] = useState(1);
         if (!done && !loading) {
             setLoading(true);
-            axios
-                .post('https://api.hageveldexperience.nl/admin', {
-                    email: auth.email,
-                    wachtwoord: auth.wachtwoord
-                })
-                .then(response => {
-                    const dagenData: any = { ...dagen };
-                    Object.values(dagenData).map((dagData: any) => {
-                        const dagActiviteiten = activiteiten.filter(
-                            activiteit => activiteit.dag.id === dagData.id
-                        );
-                        const maxDeelnemers = dagActiviteiten
-                            .map(activiteit => activiteit.maxDeelnemers)
-                            .reduce((a, b) => a + b);
-                        dagData.maxDeelnemers = maxDeelnemers;
-                        dagData.inschrijvingen = 0;
+            getAdminData().then(response => {
+                const dagenData: any = { ...dagen };
+                Object.values(dagenData).map((dagData: any) => {
+                    const dagActiviteiten = activiteiten.filter(
+                        activiteit => activiteit.dag.id === dagData.id
+                    );
+                    const maxDeelnemers = dagActiviteiten
+                        .map(activiteit => activiteit.maxDeelnemers)
+                        .reduce((a, b) => a + b);
+                    dagData.maxDeelnemers = maxDeelnemers;
+                    dagData.inschrijvingen = 0;
 
-                        return dagData;
-                    });
-
-                    response.data.result.inschrijvingenItems.forEach(item => {
-                        const dagActiviteit: any = activiteiten.find(
-                            activiteit => activiteit.id === item.activiteit
-                        );
-                        const dag = dagActiviteit.dag.id;
-                        const dagItem: any = Object.values(dagenData).find(
-                            (dagData: any) => dagData.id === dag
-                        );
-                        dagItem.inschrijvingen++;
-                    });
-
-                    setResult({ ...response.data.result, dagenExtended: dagenData });
-                    setDone(true);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    navigate('/error');
+                    return dagData;
                 });
+
+                response.inschrijvingenItems.forEach(item => {
+                    const dagActiviteit: any = activiteiten.find(
+                        activiteit => activiteit.id === item.activiteit
+                    );
+                    const dag = dagActiviteit.dag.id;
+                    const dagItem: any = Object.values(dagenData).find(
+                        (dagData: any) => dagData.id === dag
+                    );
+                    dagItem.inschrijvingen++;
+                });
+
+                setResult({ ...response, dagenExtended: dagenData });
+                setDone(true);
+                setLoading(false);
+            });
         }
         return (
             <Fragment>
@@ -153,336 +137,19 @@ const Admin: FunctionComponent = () => {
                             </Sider>
                             <AntLayout.Content style={{ padding: '0 24px', minHeight: 280 }}>
                                 <br />
-                                {selectedItem === 1 && (
-                                    <Fragment>
-                                        <Row gutter={16} style={{ textAlign: 'center' }}>
-                                            <Col span={12}>
-                                                <Statistic
-                                                    title="Gebruikers"
-                                                    value={result.gebruikers}
-                                                    groupSeparator="."
-                                                    decimalSeparator=","
-                                                />
-                                            </Col>
-                                            <Col span={12}>
-                                                <Statistic
-                                                    title="Inschrijvingen"
-                                                    value={result.inschrijvingen}
-                                                    groupSeparator="."
-                                                    decimalSeparator=","
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <Row
-                                            gutter={24}
-                                            style={{
-                                                textAlign: 'center',
-                                                marginLeft: '60px',
-                                                marginRight: '60px'
-                                            }}
-                                        >
-                                            <Col span={12}>
-                                                <h2>Verwijzing</h2>
-                                                <PieChart
-                                                    radius={35}
-                                                    lineWidth={13}
-                                                    label={(labelProps: any) =>
-                                                        labelProps.data[labelProps.dataIndex].title
-                                                    }
-                                                    labelStyle={{
-                                                        fontSize: '3px'
-                                                    }}
-                                                    labelPosition={120}
-                                                    data={
-                                                        Object.keys(result.verwijzingen).map(
-                                                            (verwijzing, index) => {
-                                                                const aantal =
-                                                                    result.verwijzingen[verwijzing];
-                                                                const color = colors[6][index];
-                                                                return {
-                                                                    title: verwijzing,
-                                                                    value: aantal,
-                                                                    color
-                                                                };
-                                                            }
-                                                        ) as any
-                                                    }
-                                                    style={{
-                                                        height: '400px'
-                                                    }}
-                                                />
-                                            </Col>
-                                            <Col span={12}>
-                                                <h2>Inschrijvingen per gebruiker</h2>
-                                                <PieChart
-                                                    radius={35}
-                                                    lineWidth={13}
-                                                    label={(labelProps: any) =>
-                                                        labelProps.data[labelProps.dataIndex].title
-                                                    }
-                                                    labelStyle={{
-                                                        fontSize: '3px'
-                                                    }}
-                                                    labelPosition={120}
-                                                    data={
-                                                        Object.keys(
-                                                            result.inschrijvingenGemiddelde
-                                                        ).map((inschrijvingen, index) => {
-                                                            const aantal =
-                                                                result.inschrijvingenGemiddelde[
-                                                                    inschrijvingen
-                                                                ];
-                                                            const color = colors[21][index];
-                                                            return {
-                                                                title: inschrijvingen,
-                                                                value: aantal,
-                                                                color
-                                                            };
-                                                        }) as any
-                                                    }
-                                                    style={{
-                                                        height: '400px'
-                                                    }}
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <br />
-                                        <br />
-                                        <Row
-                                            gutter={24}
-                                            style={{
-                                                textAlign: 'center',
-                                                marginLeft: '60px',
-                                                marginRight: '60px'
-                                            }}
-                                        >
-                                            <Col span={12}>
-                                                <h2>Inschrijvingen per dag</h2>
-                                                <PieChart
-                                                    radius={35}
-                                                    lineWidth={13}
-                                                    label={(labelProps: any) =>
-                                                        labelProps.data[labelProps.dataIndex].title
-                                                    }
-                                                    labelStyle={{
-                                                        fontSize: '3px'
-                                                    }}
-                                                    labelPosition={120}
-                                                    data={
-                                                        Object.keys(result.dagen).map(
-                                                            (dag, index) => {
-                                                                const aantal = result.dagen[dag];
-                                                                const color = colors[28][index];
-                                                                return {
-                                                                    title: dag,
-                                                                    value: aantal,
-                                                                    color
-                                                                };
-                                                            }
-                                                        ) as any
-                                                    }
-                                                    style={{
-                                                        height: '400px'
-                                                    }}
-                                                />
-                                            </Col>
-                                            <Col span={12}>
-                                                <h2>Inschrijvingen per vak</h2>
-                                                <PieChart
-                                                    radius={35}
-                                                    lineWidth={13}
-                                                    label={(labelProps: any) =>
-                                                        labelProps.data[labelProps.dataIndex].title
-                                                    }
-                                                    labelStyle={{
-                                                        fontSize: '3px'
-                                                    }}
-                                                    labelPosition={120}
-                                                    data={
-                                                        Object.keys(result.vakken).map(
-                                                            (vak, index) => {
-                                                                const aantal = result.vakken[vak];
-                                                                const color = [
-                                                                    ...colors[29],
-                                                                    ...colors[30],
-                                                                    ...colors[39]
-                                                                ][index];
-                                                                return {
-                                                                    title: vak,
-                                                                    value: aantal,
-                                                                    color
-                                                                };
-                                                            }
-                                                        ) as any
-                                                    }
-                                                    style={{
-                                                        height: '400px'
-                                                    }}
-                                                />
-                                            </Col>
-                                        </Row>
-                                    </Fragment>
-                                )}
+                                {selectedItem === 1 && <Statistieken data={result} />}
                                 {selectedItem === 2 && (
-                                    <Collapse bordered={false}>
-                                        {activiteiten.map((activiteit, activiteitIndex) => (
-                                            <Panel
-                                                header={
-                                                    activiteit.vak.naam +
-                                                    ' (' +
-                                                    activiteit.dag.datum +
-                                                    ')'
-                                                }
-                                                key={activiteitIndex}
-                                            >
-                                                <Table
-                                                    locale={{ emptyText: 'Geen inschrijvingen' }}
-                                                    columns={[
-                                                        {
-                                                            title: 'Naam',
-                                                            dataIndex: 'naam',
-                                                            key: 'naam'
-                                                        },
-                                                        {
-                                                            title: 'Geslacht',
-                                                            dataIndex: 'geslacht',
-                                                            key: 'geslacht'
-                                                        }
-                                                    ]}
-                                                    dataSource={result.inschrijvingenItems
-                                                        .filter(
-                                                            (inschrijving: any) =>
-                                                                inschrijving.activiteit ===
-                                                                activiteit.id
-                                                        )
-                                                        .map(
-                                                            (
-                                                                inschrijving: any,
-                                                                inschrijvingIndex
-                                                            ) => {
-                                                                const gebruiker: any = result.gebruikersItems.find(
-                                                                    (gebruikerItem: any) =>
-                                                                        gebruikerItem.email ===
-                                                                        inschrijving.email
-                                                                );
-                                                                return {
-                                                                    key: inschrijvingIndex,
-                                                                    email: inschrijving.email.toLowerCase(),
-                                                                    naam:
-                                                                        gebruiker.roepnaam +
-                                                                        ' ' +
-                                                                        (gebruiker.tussenvoegsel
-                                                                            ? gebruiker.tussenvoegsel +
-                                                                              ' '
-                                                                            : '') +
-                                                                        gebruiker.achternaam,
-                                                                    geslacht: gebruiker.geslacht
-                                                                };
-                                                            }
-                                                        )
-                                                        .sort((a, b) =>
-                                                            a.naam.localeCompare(b.naam)
-                                                        )}
-                                                />
-                                                <Button
-                                                    type="primary"
-                                                    icon="printer"
-                                                    style={{ position: 'relative', bottom: '48px' }}
-                                                >
-                                                    Print
-                                                </Button>
-                                            </Panel>
-                                        ))}
-                                    </Collapse>
-                                )}
-                                {selectedItem === 3 && (
-                                    <Table
-                                        columns={[
-                                            {
-                                                title: 'E-mailadres',
-                                                dataIndex: 'email',
-                                                key: 'email'
-                                            },
-                                            {
-                                                title: 'Naam',
-                                                dataIndex: 'naam',
-                                                key: 'naam'
-                                            },
-                                            {
-                                                title: 'Geslacht',
-                                                dataIndex: 'geslacht',
-                                                key: 'geslacht'
-                                            }
-                                        ]}
-                                        dataSource={result.gebruikersItems
-                                            .map((gebruiker: any, index) => ({
-                                                key: index,
-                                                email: gebruiker.email.toLowerCase(),
-                                                naam:
-                                                    gebruiker.roepnaam +
-                                                    ' ' +
-                                                    (gebruiker.tussenvoegsel
-                                                        ? gebruiker.tussenvoegsel + ' '
-                                                        : '') +
-                                                    gebruiker.achternaam,
-                                                geslacht: gebruiker.geslacht
-                                            }))
-                                            .sort((a, b) => a.email.localeCompare(b.email))}
+                                    <Inschrijvingen
+                                        inschrijvingen={result.inschrijvingenItems}
+                                        gebruikers={result.gebruikersItems}
                                     />
                                 )}
-                                {selectedItem === 4 && <p>Test</p>}
-                                {selectedItem === 5 && (
-                                    <Fragment>
-                                        <h2>Dagen</h2>
-                                        <Table
-                                            columns={[
-                                                {
-                                                    title: '#',
-                                                    dataIndex: 'id',
-                                                    key: 'id'
-                                                },
-                                                {
-                                                    title: 'Datum',
-                                                    dataIndex: 'datum',
-                                                    key: 'datum'
-                                                },
-                                                {
-                                                    title: 'Inschrijvingen',
-                                                    dataIndex: 'inschrijvingen',
-                                                    key: 'inschrijvingen'
-                                                }
-                                            ]}
-                                            dataSource={Object.values(result.dagenExtended).map(
-                                                (dag: any) => {
-                                                    return {
-                                                        id: dag.id,
-                                                        datum: dag.datum,
-                                                        inschrijvingen: (
-                                                            <Progress
-                                                                percent={Math.floor(
-                                                                    (dag.inschrijvingen /
-                                                                        dag.maxDeelnemers) *
-                                                                        100
-                                                                )}
-                                                            />
-                                                        )
-                                                    };
-                                                }
-                                            )}
-                                        />
-                                    </Fragment>
-                                )}
-                                {selectedItem === 6 && <p>Test</p>}
-                                {selectedItem === 7 && <p>Test</p>}
-                                {selectedItem === 8 && (
-                                    <>
-                                        <h2>Instellingen</h2>
-                                        <b>Inschrijvingen</b>: <Switch />
-                                    </>
-                                )}
+                                {selectedItem === 3 && <Gebruikers data={result.gebruikersItems} />}
+                                {selectedItem === 4 && <Vakken />}
+                                {selectedItem === 5 && <Dagen data={result.dagenExtended} />}
+                                {selectedItem === 6 && <Activiteiten />}
+                                {selectedItem === 7 && <Inbox />}
+                                {selectedItem === 8 && <Instellingen />}
                             </AntLayout.Content>
                         </AntLayout>
                     </AntLayout.Content>
