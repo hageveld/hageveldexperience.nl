@@ -76,7 +76,7 @@ const Header: FunctionComponent = () => {
                     </Menu.Item>
                 </SubMenu>
             )}
-            {isLoggedIn && (
+            {isLoggedIn && false && (
                 <SubMenu
                     title={
                         <Badge count={5} dot={true}>
