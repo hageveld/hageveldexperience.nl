@@ -1,7 +1,7 @@
 {
   "name": "@hageveld/experience-web",
   "description": "Website voor de Hageveld Experience op het Atheneum College Hageveld",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "Luit Hollander <luit@hollander.email> (https://luit.me)",
   "homepage": "https://hageveldexperience.nl",
   "repository": "https://github.com/hageveld/hageveldexperience.git",
@@ -60,6 +60,7 @@
     "react-helmet": "5.2.1",
     "react-minimal-pie-chart": "5.0.2",
     "react-redux": "7.1.1",
+    "react-to-print": "2.5.0",
     "redux": "4.0.4",
     "redux-logger": "3.0.6",
     "redux-persist": "6.0.0",

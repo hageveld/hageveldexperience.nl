@@ -6,14 +6,15 @@ import { Layout as AntLayout } from 'antd';
 
 interface Props {
     title?: string;
+    noMargin?: boolean;
     children: ReactNode;
 }
 
-const Layout: FunctionComponent<Props> = ({ children, title }: Props) => (
+const Layout: FunctionComponent<Props> = ({ title, noMargin, children }: Props) => (
     <Fragment>
         <MetaData title={title} />
         <AntLayout>
-            <AntLayout.Header style={{ padding: '0', marginBottom: '25px' }}>
+            <AntLayout.Header style={{ padding: '0', marginBottom: noMargin ? '0' : '25px' }}>
                 <Header />
             </AntLayout.Header>
             <AntLayout.Content>{children}</AntLayout.Content>

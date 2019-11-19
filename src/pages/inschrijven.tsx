@@ -14,8 +14,6 @@ import { getActivities } from '../utils/api';
 
 import '../sass/index.scss';
 
-moment.locale('nl');
-
 const Inschrijven: FunctionComponent = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
 
@@ -50,8 +48,8 @@ const Inschrijven: FunctionComponent = () => {
                             message={<Fragment>Je bent niet ingelogd.</Fragment>}
                             description={
                                 <p>
-                                    Dit betekent dat je momenteel niet jezelf kan inschrijven voor
-                                    de proeflessen. Klik{' '}
+                                    Dit betekent dat je momenteel niet kan inschrijven voor de
+                                    proeflessen. Klik{' '}
                                     <Link to="/inloggen">
                                         <b>hier</b>
                                     </Link>{' '}
@@ -119,9 +117,9 @@ const Inschrijven: FunctionComponent = () => {
                                                     </span>
                                                 </Col>
                                                 <Col span={16} style={{ textAlign: 'right' }}>
-                                                    {moment(dag.datum, 'DD-MM-YYYY').format(
-                                                        'D MMMM YYYY'
-                                                    )}
+                                                    {moment(dag.datum, 'DD-MM-YYYY')
+                                                        .locale('nl')
+                                                        .format('D MMMM YYYY')}
                                                     <br />
                                                     <span style={{ fontSize: '10px' }}>
                                                         {dag.startTijd} - {dag.eindTijd}

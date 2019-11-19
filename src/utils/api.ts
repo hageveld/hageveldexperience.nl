@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { navigate } from 'gatsby';
+import { createHash } from 'crypto';
 import { store } from '../store';
 
 const API_ENDPOINT = 'https://api.hageveldexperience.nl';
@@ -31,11 +32,38 @@ const reportError = (error: Error) => {
 export const register = async (email: string) => {
     await api
         .post('/register', {
-            email
+            email: email.toLowerCase()
         })
         .catch(error => {
             reportError(error);
         });
+};
+
+export const login = async (email: string, wachtwoord: string) => {
+    const hash = createHash('sha256')
+        .update(wachtwoord)
+        .digest('hex');
+    const response: any = await api
+        .post('/login', {
+            email: email.toLowerCase(),
+            wachtwoord: hash
+        })
+        .catch(error => {
+            reportError(error);
+        });
+    return response.data;
+};
+
+export const activate = async (token: string, formData: any) => {
+    const response: any = await api
+        .post('/activate', {
+            token,
+            ...formData
+        })
+        .catch(error => {
+            reportError(error);
+        });
+    return response.data.result;
 };
 
 export const getActivities = async () => {
@@ -90,6 +118,19 @@ export const getAdminData = async () => {
     const state = store.getState();
     const response: any = await api
         .post('/admin', {
+            email: state.auth.auth.email.toLowerCase(),
+            wachtwoord: state.auth.auth.wachtwoord
+        })
+        .catch(error => {
+            reportError(error);
+        });
+    return response.data.result;
+};
+
+export const getAdminCloudWatchData = async () => {
+    const state = store.getState();
+    const response: any = await api
+        .post('/admin/cloudwatch', {
             email: state.auth.auth.email.toLowerCase(),
             wachtwoord: state.auth.auth.wachtwoord
         })

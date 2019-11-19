@@ -1,7 +1,6 @@
 /* tslint:disable:max-classes-per-file */
 import React, { FunctionComponent, Component, useState } from 'react';
 import { Link, navigate } from 'gatsby';
-import axios from 'axios';
 import Layout from '../components/Layout';
 import Stepper from '../components/Stepper';
 import {
@@ -24,6 +23,7 @@ import basisscholen from '../data/duo-bo-data.json';
 import { createHash } from 'crypto';
 import { useDispatch } from '../hooks';
 import { login } from '../store/auth';
+import { activate } from '../utils/api';
 
 const { Option } = Select;
 const { Step } = Stepper;
@@ -326,24 +326,16 @@ const Activeer: FunctionComponent = () => {
 
     const sendData = () => {
         setLoading(true);
-        axios
-            .post(`https://api.hageveldexperience.nl/activate`, {
-                token: hash,
-                ...formData
-            })
-            .then(response => {
-                setLoading(false);
-                dispatch(
-                    login({
-                        ...formData,
-                        email: response.data.result.email.toLowerCase(),
-                        admin: false
-                    })
-                );
-            })
-            .catch(error => {
-                navigate('/error');
-            });
+        activate(hash, formData).then(response => {
+            setLoading(false);
+            dispatch(
+                login({
+                    ...formData,
+                    email: response.email.toLowerCase(),
+                    admin: false
+                })
+            );
+        });
     };
 
     return (

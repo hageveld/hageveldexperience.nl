@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Link, navigate } from 'gatsby';
-import { Form, Icon, Input, Button, Checkbox, Col, Row, Result, Alert } from 'antd';
-import { createHash } from 'crypto';
+import { Form, Icon, Input, Button, Col, Row, Result, Alert } from 'antd';
 import { connect } from 'react-redux';
 import { login } from '../store/auth';
-import axios from 'axios';
+import { login as checkLogin } from '../utils/api';
 
 class LoginForm extends Component<any, any> {
     constructor(props) {
@@ -25,48 +24,38 @@ class LoginForm extends Component<any, any> {
                 this.setState({
                     loading: true
                 });
-                axios
-                    .post(`https://api.hageveldexperience.nl/login`, {
-                        email: values.email.toLowerCase(),
-                        wachtwoord: createHash('sha256')
-                            .update(values.wachtwoord)
-                            .digest('hex')
-                    })
-                    .then((response: any) => {
-                        if (response.data.success) {
-                            const { result } = response.data;
-                            dispatch(
-                                login({
-                                    email: result.email.S.toLowerCase(),
-                                    roepnaam: result.roepnaam.S,
-                                    tussenvoegsel:
-                                        'NULL' in result.tussenvoegsel
-                                            ? undefined
-                                            : result.tussenvoegsel.S,
-                                    achternaam: result.achternaam.S,
-                                    geslacht: result.geslacht.S,
-                                    prefix: 'NULL' in result.prefix ? undefined : result.prefix.S,
-                                    telefoonnummer:
-                                        'NULL' in result.telefoonnummer
-                                            ? undefined
-                                            : result.telefoonnummer.S,
-                                    wachtwoord: result.wachtwoord.S,
-                                    school: result.school.S,
-                                    verwijzing: result.verwijzing.S,
-                                    admin: 'admin' in result ? result.admin.BOOL : false
-                                })
-                            );
-                            navigate('/inschrijven');
-                        } else {
-                            this.setState({
-                                loading: false,
-                                wrongPassword: true
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        navigate('/error');
-                    });
+                checkLogin(values.email, values.wachtwoord).then((response: any) => {
+                    if (response.success) {
+                        const { result } = response;
+                        dispatch(
+                            login({
+                                email: result.email.S.toLowerCase(),
+                                roepnaam: result.roepnaam.S,
+                                tussenvoegsel:
+                                    'NULL' in result.tussenvoegsel
+                                        ? undefined
+                                        : result.tussenvoegsel.S,
+                                achternaam: result.achternaam.S,
+                                geslacht: result.geslacht.S,
+                                prefix: 'NULL' in result.prefix ? undefined : result.prefix.S,
+                                telefoonnummer:
+                                    'NULL' in result.telefoonnummer
+                                        ? undefined
+                                        : result.telefoonnummer.S,
+                                wachtwoord: result.wachtwoord.S,
+                                school: result.school.S,
+                                verwijzing: result.verwijzing.S,
+                                admin: 'admin' in result ? result.admin.BOOL : false
+                            })
+                        );
+                        navigate('/inschrijven');
+                    } else {
+                        this.setState({
+                            loading: false,
+                            wrongPassword: true
+                        });
+                    }
+                });
             }
         });
     };

@@ -18,6 +18,7 @@ const MetaData: FunctionComponent<Props> = ({  }: Props) => {
     return (
         <Helmet htmlAttributes={{ lang: 'nl' }}>
             <title>{title}</title>
+            <link rel="shortcut icon" href="/favicon.ico" />
             <meta name="apple-mobile-web-app-title" content={title} />
             <meta name="description" content={description} />
             <meta name="author" content={author} />

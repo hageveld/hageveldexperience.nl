@@ -1,24 +1,24 @@
 import React, { FunctionComponent, useState } from 'react';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 import { Button, Result, Icon, Layout as AntLayout, Menu } from 'antd';
 import { Link } from 'gatsby';
-import Title from '../components/Title';
-import { useSelector } from '../hooks';
-import { getAdminData } from '../utils/api';
-import { activiteiten, dagen } from '../data';
-import Dagen from '../components/AdminPanel/components/Dagen';
-import Gebruikers from '../components/AdminPanel/components/Gebruikers';
-import Inschrijvingen from '../components/AdminPanel/components/Inschrijvingen';
-import Statistieken from '../components/AdminPanel/components/Statistieken';
-import Vakken from '../components/AdminPanel/components/Vakken';
-import Instellingen from '../components/AdminPanel/components/Instellingen';
-import Inbox from '../components/AdminPanel/components/Inbox';
-import Activiteiten from '../components/AdminPanel/components/Activiteiten';
-import SEO from '../components/AdminPanel/components/SEO';
-import CloudWatch from '../components/AdminPanel/components/CloudWatch';
-import Overzicht from '../components/AdminPanel/components/Overzicht';
+import Title from '../../components/Title';
+import { useSelector } from '../../hooks';
+import { getAdminData } from '../../utils/api';
+import { activiteiten, dagen } from '../../data';
+import Dagen from '../../components/AdminPanel/components/Dagen';
+import Gebruikers from '../../components/AdminPanel/components/Gebruikers';
+import Inschrijvingen from '../../components/AdminPanel/components/Inschrijvingen';
+import Statistieken from '../../components/AdminPanel/components/Statistieken';
+import Vakken from '../../components/AdminPanel/components/Vakken';
+import Instellingen from '../../components/AdminPanel/components/Instellingen';
+import Inbox from '../../components/AdminPanel/components/Inbox';
+import Activiteiten from '../../components/AdminPanel/components/Activiteiten';
+import SEO from '../../components/AdminPanel/components/SEO';
+import CloudWatch from '../../components/AdminPanel/components/CloudWatch';
+import Overzicht from '../../components/AdminPanel/components/Overzicht';
 
-import '../sass/index.scss';
+import '../../sass/index.scss';
 
 const { Sider } = AntLayout;
 
@@ -158,13 +158,7 @@ const Admin: FunctionComponent = () => {
                         {selectedItem === 5 && <CloudWatch />}
                         {selectedItem === 6 && <p>Binnenkort beschikbaar</p>}
                         {selectedItem === 7 && <Vakken />}
-                        {selectedItem === 8 && (
-                            <Dagen
-                                dagen={result.dagenExtended}
-                                inschrijvingen={result.inschrijvingenItems}
-                                gebruikers={result.gebruikersItems}
-                            />
-                        )}
+                        {selectedItem === 8 && <Dagen data={result.dagenExtended} />}
                         {selectedItem === 9 && <Activiteiten />}
                         {selectedItem === 10 && <p>Binnenkort beschikbaar</p>}
                         {selectedItem === 11 && <SEO />}
