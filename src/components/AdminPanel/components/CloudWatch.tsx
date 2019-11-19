@@ -4,7 +4,7 @@ import { getAdminCloudWatchData } from '../../../utils/api';
 
 const CloudWatch: FunctionComponent = () => {
     const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState({});
+    const [result, setResult] = useState({} as any);
 
     useEffect(() => {
         if (!loading) {
