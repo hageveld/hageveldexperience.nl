@@ -57,6 +57,11 @@ const vakken: Vak[] = [
         naam: 'Tekenen'
     },
     {
+        id: 'TEST',
+        icon: 'book',
+        naam: 'Test'
+    },
+    {
         id: 'WW',
         icon: 'compass',
         naam: 'Wereldwijs'
