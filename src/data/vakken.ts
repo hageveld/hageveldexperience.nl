@@ -12,9 +12,9 @@ const vakken: Vak[] = [
         naam: 'Biologie'
     },
     {
-        id: 'DU',
+        id: 'FR',
         icon: 'book',
-        naam: 'Duits'
+        naam: 'Frans'
     },
     {
         id: 'EN',
