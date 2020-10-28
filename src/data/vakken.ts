@@ -66,6 +66,11 @@ const vakken: Vak[] = [
         icon: 'calculator',
         naam: 'Wiskunde'
     }
+    {
+        id: 'VIA',
+        icon: 'graduation-cap',
+        naam: 'VIA Experience'
+    }
 ];
 
 export default vakken;
