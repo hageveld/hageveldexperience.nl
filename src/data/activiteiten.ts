@@ -2,14 +2,14 @@ const activiteiten = [
     {
         id: 1,
         vak: 'AK',
-        dag: 1,
+        dag: 3,
         maxDeelnemers: 30
     },
     {
         id: 2,
-        vak: 'AK',
-        dag: 3,
-        maxDeelnemers: 30
+        vak: 'FR',
+        dag: 2,
+        maxDeelnemers: 25
     },
     {
         id: 3,
@@ -20,20 +20,20 @@ const activiteiten = [
     {
         id: 4,
         vak: 'BI',
-        dag: 2,
+        dag: 1,
         maxDeelnemers: 20
     },
     {
         id: 5,
         vak: 'BI',
-        dag: 3,
+        dag: 2,
         maxDeelnemers: 20
     },
     {
         id: 6,
-        vak: 'DU',
-        dag: 2,
-        maxDeelnemers: 30
+        vak: 'BI',
+        dag: 3,
+        maxDeelnemers: 20
     },
     {
         id: 7,
@@ -44,50 +44,50 @@ const activiteiten = [
     {
         id: 8,
         vak: 'EN',
-        dag: 2,
-        maxDeelnemers: 24
+        dag: 1,
+        maxDeelnemers: 30
     },
     {
         id: 9,
         vak: 'EN',
-        dag: 3,
-        maxDeelnemers: 24
+        dag: 2,
+        maxDeelnemers: 30
     },
     {
         id: 10,
-        vak: 'GS',
-        dag: 1,
+        vak: 'EN',
+        dag: 3,
         maxDeelnemers: 30
     },
     {
         id: 11,
         vak: 'GS',
-        dag: 2,
+        dag: 1,
         maxDeelnemers: 30
     },
     {
         id: 12,
         vak: 'GS',
-        dag: 3,
+        dag: 2,
         maxDeelnemers: 30
     },
     {
         id: 13,
-        vak: 'LA',
-        dag: 1,
-        maxDeelnemers: 24
+        vak: 'GS',
+        dag: 3,
+        maxDeelnemers: 30
     },
     {
         id: 14,
         vak: 'LA',
-        dag: 2,
-        maxDeelnemers: 24
+        dag: 1,
+        maxDeelnemers: 25
     },
     {
         id: 15,
-        vak: 'MU',
-        dag: 3,
-        maxDeelnemers: 30
+        vak: 'LA',
+        dag: 2,
+        maxDeelnemers: 25
     },
     {
         id: 16,
@@ -111,13 +111,13 @@ const activiteiten = [
         id: 19,
         vak: 'SK',
         dag: 1,
-        maxDeelnemers: 24
+        maxDeelnemers: 16
     },
     {
         id: 20,
         vak: 'SK',
         dag: 2,
-        maxDeelnemers: 24
+        maxDeelnemers: 16
     },
     {
         id: 21,
@@ -141,13 +141,13 @@ const activiteiten = [
         id: 24,
         vak: 'TE',
         dag: 2,
-        maxDeelnemers: 24
+        maxDeelnemers: 25
     },
     {
         id: 25,
         vak: 'TE',
         dag: 3,
-        maxDeelnemers: 24
+        maxDeelnemers: 25
     },
     {
         id: 26,
@@ -159,7 +159,7 @@ const activiteiten = [
         id: 27,
         vak: 'WW',
         dag: 3,
-        maxDeelnemers: 24
+        maxDeelnemers: 30
     },
     {
         id: 28,
@@ -178,6 +178,30 @@ const activiteiten = [
         vak: 'WI',
         dag: 3,
         maxDeelnemers: 30
+    }
+    {
+        id: 31,
+        vak: 'MU',
+        dag: 1,
+        maxDeelnemers: 25
+    }
+     {
+        id: 32,
+        vak: 'MU',
+        dag: 3,
+        maxDeelnemers: 25
+    }
+    {
+        id: 33,
+        vak: 'VIA',
+        dag: 4,
+        maxDeelnemers: 60
+    }
+    {
+        id: 34,
+        vak: 'VIA',
+        dag: 5,
+        maxDeelnemers: 60
     }
 ];
 
