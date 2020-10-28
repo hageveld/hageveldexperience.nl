@@ -65,7 +65,7 @@ const vakken: Vak[] = [
         id: 'WI',
         icon: 'calculator',
         naam: 'Wiskunde'
-    }
+    },
     {
         id: 'VIA',
         icon: 'graduation-cap',
