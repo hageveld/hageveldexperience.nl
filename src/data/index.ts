@@ -25,3 +25,5 @@ export const activiteiten = rawActiviteiten.map(rawActiviteit => {
 export const vakken = rawVakken;
 
 export const dagen = rawDagen;
+
+export const locked = true;

@@ -1,9 +1,10 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import Layout from '../components/Layout';
 import { Row, Col, Button, Carousel, Icon } from 'antd';
-import { Link } from 'gatsby';
+import { Link, navigateTo } from 'gatsby';
 import Title from '../components/Title';
 import { useSelector } from '../hooks';
+import { locked } from '../data';
 
 import Hageveld from '../images/hageveld_front.jpg';
 import Kluisjes from '../images/1_kluisjes.jpg';
@@ -15,6 +16,10 @@ import '../sass/index.scss';
 
 const Index: FunctionComponent<any> = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+    if (locked) {
+        navigateTo('/onderhoud');
+    }
 
     return (
         <Layout>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
-import { Link, navigate } from 'gatsby';
+import { Link, navigate, navigateTo } from 'gatsby';
 import { Form, Icon, Input, Button, Col, Row, Result, Alert } from 'antd';
 import { connect } from 'react-redux';
 import { login } from '../store/auth';
 import { login as checkLogin } from '../utils/api';
+import { locked } from '../data';
 
 class LoginForm extends Component<any, any> {
     constructor(props) {
@@ -62,6 +63,9 @@ class LoginForm extends Component<any, any> {
 
     render() {
         const { isLoggedIn } = this.props;
+        if (locked) {
+            navigateTo('/onderhoud');
+        }
         if (isLoggedIn) {
             navigate('/inschrijven');
         }

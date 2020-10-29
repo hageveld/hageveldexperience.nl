@@ -2,8 +2,8 @@ import React, { FunctionComponent, Fragment, useState, useEffect } from 'react';
 import Layout from '../components/Layout';
 import Title from '../components/Title';
 import { Alert, Row, Col, Card, List, Divider } from 'antd';
-import { dagen, activiteiten } from '../data';
-import { Link } from 'gatsby';
+import { dagen, activiteiten, locked } from '../data';
+import { Link, navigateTo } from 'gatsby';
 import moment from 'moment';
 import 'moment/locale/nl';
 import ActiviteitModel from '../models/activiteit';
@@ -37,6 +37,10 @@ const Inschrijven: FunctionComponent = () => {
             });
         }
     });
+
+    if (locked) {
+        navigateTo('/onderhoud');
+    }
 
     return (
         <Layout>

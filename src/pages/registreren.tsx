@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 import Layout from '../components/Layout';
-import { Link, navigate } from 'gatsby';
+import { Link, navigate, navigateTo } from 'gatsby';
 import { Row, Col, Input, Result, Icon } from 'antd';
 import { useSelector } from '../hooks';
 import { register } from '../utils/api';
 import Title from '../components/Title';
+import { locked } from '../data';
 
 const { Search } = Input;
 
@@ -12,6 +13,10 @@ const Registreren: FunctionComponent = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
     const [loading, setLoading] = useState(false);
     const [done, setDone] = useState(false);
+
+    if (locked) {
+        navigateTo('/onderhoud');
+    }
 
     if (isLoggedIn) {
         navigate('/inschrijven');
