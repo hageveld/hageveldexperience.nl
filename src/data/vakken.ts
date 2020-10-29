@@ -22,7 +22,7 @@ const vakken: Vak[] = [
         naam: 'Engels'
     },
     {
-        id: 'FA',
+        id: 'FR',
         icon: 'book',
         naam: 'Frans'
     },
