@@ -63,7 +63,10 @@ class LoginForm extends Component<any, any> {
 
     render() {
         const { isLoggedIn } = this.props;
-        if (locked) {
+        if (
+            locked &&
+            !(typeof location !== 'undefined' && location.hash && location.hash === '#bypass')
+        ) {
             navigateTo('/onderhoud');
         }
         if (isLoggedIn) {

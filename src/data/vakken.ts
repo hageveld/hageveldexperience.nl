@@ -22,6 +22,11 @@ const vakken: Vak[] = [
         naam: 'Engels'
     },
     {
+        id: 'FA',
+        icon: 'book',
+        naam: 'Frans'
+    },
+    {
         id: 'GS',
         icon: 'landmark',
         naam: 'Geschiedenis'
@@ -55,6 +60,11 @@ const vakken: Vak[] = [
         id: 'TE',
         icon: 'pencil-alt',
         naam: 'Tekenen'
+    },
+    {
+        id: 'VIA',
+        icon: 'graduation-cap',
+        naam: 'VIA Experience'
     },
     {
         id: 'WW',

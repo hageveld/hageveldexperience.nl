@@ -42,7 +42,7 @@ module.exports = {
                 background_color: '#5B34AD',
                 theme_color: '#E67200',
                 display: 'minimal-ui',
-                icon: 'src/images/favicon.png'
+                icon: 'src/images/favicon_v2.png'
             }
         },
         {

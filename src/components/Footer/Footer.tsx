@@ -3,7 +3,7 @@
 import React, { FunctionComponent, Fragment } from 'react';
 import ExternalLink from '../ExternalLink';
 import { Row, Col, Divider } from 'antd';
-import Favicon from '../../images/favicon.png';
+import Favicon from '../../images/favicon_v2.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Map from 'pigeon-maps';
 import Marker from 'pigeon-marker';

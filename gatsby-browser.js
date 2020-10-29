@@ -14,7 +14,8 @@ import {
     faMusic,
     faPencilAlt,
     faPhone,
-    faRocket
+    faRocket,
+    faGraduationCap
 } from '@fortawesome/free-solid-svg-icons';
 import {
     faFacebookSquare,
@@ -40,7 +41,8 @@ library.add(
     faFacebookSquare,
     faInstagram,
     faLinkedin,
-    faYoutube
+    faYoutube,
+    faGraduationCap
 );
 
 export { default as wrapRootElement } from './gatsby/wrapRootElement';
