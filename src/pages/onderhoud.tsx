@@ -25,7 +25,7 @@ const Onderhoud: FunctionComponent<any> = () => {
                     <Result
                         icon={<Icon type="clock-circle" theme="twoTone" />}
                         title="Experience nog niet beschikbaar"
-                        subTitle="Je kan je helaas nog niet inschrijven. Dit kan waarschijnlijk na de herfstvakantie. Houd de website goed in de gaten."
+                        subTitle="Je kan je helaas nog niet inschrijven. Dit kan vanaf maandag 2 november 2020."
                         extra={
                             <ExternalLink to="https://www.hageveld.nl/Groep-8/Experience">
                                 <Button style={{ marginTop: '2.5%' }} type="primary">
