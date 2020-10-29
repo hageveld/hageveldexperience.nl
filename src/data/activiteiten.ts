@@ -178,25 +178,25 @@ const activiteiten = [
         vak: 'WI',
         dag: 3,
         maxDeelnemers: 30
-    }
+    },
     {
         id: 31,
         vak: 'MU',
         dag: 1,
         maxDeelnemers: 25
-    }
-     {
+    },
+    {
         id: 32,
         vak: 'MU',
         dag: 3,
         maxDeelnemers: 25
-    }
+    },
     {
         id: 33,
         vak: 'VIA',
         dag: 4,
         maxDeelnemers: 60
-    }
+    },
     {
         id: 34,
         vak: 'VIA',
