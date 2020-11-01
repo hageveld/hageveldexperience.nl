@@ -26,4 +26,4 @@ export const vakken = rawVakken;
 
 export const dagen = rawDagen;
 
-export const locked = true;
+export const locked = false;
