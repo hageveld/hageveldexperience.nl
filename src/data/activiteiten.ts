@@ -178,6 +178,210 @@ const activiteiten = [
         vak: 'WI',
         dag: 3,
         maxDeelnemers: 30
+    },
+    {
+        id: 31,
+        vak: 'AK',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 32,
+        vak: 'FR',
+        dag: 5,
+        maxDeelnemers: 25
+    },
+    {
+        id: 33,
+        vak: 'BI',
+        dag: 4,
+        maxDeelnemers: 20
+    },
+    {
+        id: 34,
+        vak: 'BI',
+        dag: 4,
+        maxDeelnemers: 20
+    },
+    {
+        id: 35,
+        vak: 'BI',
+        dag: 5,
+        maxDeelnemers: 20
+    },
+    {
+        id: 36,
+        vak: 'BI',
+        dag: 6,
+        maxDeelnemers: 20
+    },
+    {
+        id: 37,
+        vak: 'EN',
+        dag: 4,
+        maxDeelnemers: 24
+    },
+    {
+        id: 38,
+        vak: 'EN',
+        dag: 4,
+        maxDeelnemers: 30
+    },
+    {
+        id: 39,
+        vak: 'EN',
+        dag: 5,
+        maxDeelnemers: 30
+    },
+    {
+        id: 40,
+        vak: 'EN',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 41,
+        vak: 'GS',
+        dag: 4,
+        maxDeelnemers: 30
+    },
+    {
+        id: 42,
+        vak: 'GS',
+        dag: 5,
+        maxDeelnemers: 30
+    },
+    {
+        id: 43,
+        vak: 'GS',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 44,
+        vak: 'LA',
+        dag: 4,
+        maxDeelnemers: 25
+    },
+    {
+        id: 45,
+        vak: 'LA',
+        dag: 5,
+        maxDeelnemers: 25
+    },
+    {
+        id: 46,
+        vak: 'NT',
+        dag: 4,
+        maxDeelnemers: 20
+    },
+    {
+        id: 47,
+        vak: 'NT',
+        dag: 5,
+        maxDeelnemers: 20
+    },
+    {
+        id: 48,
+        vak: 'NT',
+        dag: 6,
+        maxDeelnemers: 20
+    },
+    {
+        id: 49,
+        vak: 'SK',
+        dag: 4,
+        maxDeelnemers: 16
+    },
+    {
+        id: 50,
+        vak: 'SK',
+        dag: 5,
+        maxDeelnemers: 16
+    },
+    {
+        id: 51,
+        vak: 'SP',
+        dag: 4,
+        maxDeelnemers: 30
+    },
+    {
+        id: 52,
+        vak: 'SP',
+        dag: 5,
+        maxDeelnemers: 30
+    },
+    {
+        id: 53,
+        vak: 'SP',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 54,
+        vak: 'TE',
+        dag: 5,
+        maxDeelnemers: 25
+    },
+    {
+        id: 55,
+        vak: 'TE',
+        dag: 6,
+        maxDeelnemers: 25
+    },
+    {
+        id: 56,
+        vak: 'WW',
+        dag: 4,
+        maxDeelnemers: 30
+    },
+    {
+        id: 57,
+        vak: 'WW',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 58,
+        vak: 'WI',
+        dag: 4,
+        maxDeelnemers: 30
+    },
+    {
+        id: 59,
+        vak: 'WI',
+        dag: 5,
+        maxDeelnemers: 30
+    },
+    {
+        id: 60,
+        vak: 'WI',
+        dag: 6,
+        maxDeelnemers: 30
+    },
+    {
+        id: 61,
+        vak: 'MU',
+        dag: 4,
+        maxDeelnemers: 25
+    },
+    {
+        id: 62,
+        vak: 'MU',
+        dag: 6,
+        maxDeelnemers: 25
+    },
+    {
+        id: 63,
+        vak: 'VIA',
+        dag: 7,
+        maxDeelnemers: 60
+    },
+    {
+        id: 64,
+        vak: 'VIA',
+        dag: 8,
+        maxDeelnemers: 60
     }
 ];
 
