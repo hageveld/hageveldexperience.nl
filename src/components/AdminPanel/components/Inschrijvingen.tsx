@@ -5,7 +5,7 @@ import ExternalLink from '../../ExternalLink';
 import ReactToPrint from 'react-to-print';
 import { useSelector } from '../../../hooks';
 import { activiteiten } from '../../../data';
-import ExcelJS from 'exceljs';
+import { Workbook } from 'exceljs/dist/exceljs.min';
 import fileDownload from 'js-file-download';
 
 const { Panel } = Collapse;
@@ -31,8 +31,7 @@ const Inschrijvingen: FunctionComponent<Props> = ({ inschrijvingen, gebruikers }
     const auth = useSelector(state => state.auth.auth);
 
     const downloadExcel = async (name, data) => {
-        console.log(data);
-        const workbook = new ExcelJS.Workbook();
+        const workbook = new Workbook();
         const worksheet = workbook.addWorksheet('Inschrijvingen');
         worksheet.columns = [
             {
