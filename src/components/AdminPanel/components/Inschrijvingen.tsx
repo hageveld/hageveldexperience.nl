@@ -5,6 +5,8 @@ import ExternalLink from '../../ExternalLink';
 import ReactToPrint from 'react-to-print';
 import { useSelector } from '../../../hooks';
 import { activiteiten } from '../../../data';
+import ExcelJS from 'exceljs';
+import fileDownload from 'js-file-download';
 
 const { Panel } = Collapse;
 
@@ -27,6 +29,43 @@ const geslachtToIcon = (geslacht: string) => {
 const Inschrijvingen: FunctionComponent<Props> = ({ inschrijvingen, gebruikers }: Props) => {
     const componentRef: any = useRef();
     const auth = useSelector(state => state.auth.auth);
+
+    const downloadExcel = async (name, data) => {
+        console.log(data);
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Inschrijvingen');
+        worksheet.columns = [
+            {
+                header: 'Roepnaam',
+                key: 'roepnaam'
+            },
+            {
+                header: 'Tussenvoegsel',
+                key: 'tussenvoegsel'
+            },
+            {
+                header: 'Achternaam',
+                key: 'achternaam'
+            },
+            {
+                header: 'Geslacht',
+                key: 'geslacht'
+            },
+            {
+                header: 'Telefoonnummer',
+                key: 'telefoonnummer'
+            },
+            {
+                header: 'E-mailadres',
+                key: 'email'
+            }
+        ] as any;
+        data.forEach(gebruiker => {
+            worksheet.addRow(gebruiker);
+        });
+        const buf = await workbook.xlsx.writeBuffer();
+        fileDownload(buf, name);
+    };
 
     return (
         <Fragment>
@@ -130,6 +169,32 @@ const Inschrijvingen: FunctionComponent<Props> = ({ inschrijvingen, gebruikers }
                                     ref={componentRef}
                                 />
                             </div>
+                            <Button
+                                type="primary"
+                                icon="download"
+                                style={{ position: 'relative', bottom: '48px', marginLeft: '5px' }}
+                                onClick={() =>
+                                    downloadExcel(
+                                        `experience_${activiteit.vak.naam.toLowerCase()}_${
+                                            activiteit.dag.datum
+                                        }.xlsx`,
+                                        inschrijvingen
+                                            .filter(
+                                                (inschrijving: any) =>
+                                                    inschrijving.activiteit === activiteit.id
+                                            )
+                                            .map((inschrijving: any, inschrijvingIndex) => {
+                                                const gebruiker: any = gebruikers.find(
+                                                    (gebruikerItem: any) =>
+                                                        gebruikerItem.email === inschrijving.email
+                                                );
+                                                return gebruiker;
+                                            })
+                                    )
+                                }
+                            >
+                                Download
+                            </Button>
                         </div>
                     </Panel>
                 ))}
