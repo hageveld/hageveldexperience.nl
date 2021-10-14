@@ -91,6 +91,10 @@ const Index: FunctionComponent<any> = () => {
                         <br />
                         Op deze manier kun je ervaren hoe een les op Hageveld eruit ziet.
                         <br />
+                        Let op: De Hageveld Experience is alléén bedoeld voor leerlingen die in 2022 de overstap naar de middelbare school maken.
+                        <br />
+                        Wil je toch graag ervaren hoe het op Hageveld is? Volg dan een les op onze open dag op zaterdag 5 februari 2022.
+                        <br />
                     </div>
                     <br />
                     {isLoggedIn ? (
