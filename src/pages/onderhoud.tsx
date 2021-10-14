@@ -21,11 +21,11 @@ const Onderhoud: FunctionComponent<any> = () => {
             <Row style={{ marginLeft: '5%', marginRight: '5%', marginTop: '5%' }}>
                 <Col span={24}>
                     <Title centered={true}>Hageveld Experience</Title>
-                    <SubTitle centered={true}>Schooljaar 2020-2021</SubTitle>
+                    <SubTitle centered={true}>Schooljaar 2021-2022</SubTitle>
                     <Result
                         icon={<Icon type="clock-circle" theme="twoTone" />}
                         title="Experience nog niet beschikbaar"
-                        subTitle="Je kan je helaas nog niet inschrijven. Dit kan vanaf maandag 2 november 2020."
+                        subTitle="Je kan je helaas nog niet inschrijven. Dit kan vanaf woensdag 3 november 2021."
                         extra={
                             <ExternalLink to="https://www.hageveld.nl/Groep-8/Experience">
                                 <Button style={{ marginTop: '2.5%' }} type="primary">

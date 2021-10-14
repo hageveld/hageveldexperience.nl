@@ -34,7 +34,8 @@ const dagen: Dag[] = [
         datum: '18-11-2020',
         startTijd: '14:00',
         eindTijd: '15:30',
-        beschrijving: '(+ rondleiding)'
+        beschrijving: '(+ rondleiding)',
+        hidden: true
     },
     {
         id: 5,
@@ -42,7 +43,8 @@ const dagen: Dag[] = [
         datum: '25-11-2020',
         startTijd: '14:00',
         eindTijd: '15:30',
-        beschrijving: '(+ puzzeltocht)'
+        beschrijving: '(+ puzzeltocht)',
+        hidden: true
     },
     {
         id: 6,
@@ -50,7 +52,8 @@ const dagen: Dag[] = [
         datum: '13-01-2021',
         startTijd: '14:00',
         eindTijd: '15:30',
-        beschrijving: '(+ speeddate)'
+        beschrijving: '(+ speeddate)',
+        hidden: true
     },
     {
         id: 7,
@@ -58,12 +61,54 @@ const dagen: Dag[] = [
         datum: '02-12-2020',
         startTijd: '14:00',
         eindTijd: '16:00',
-        beschrijving: 'VIA Experience'
+        beschrijving: 'VIA Experience',
+        hidden: true
     },
     {
         id: 8,
         titel: 'Dag 2',
         datum: '13-01-2021',
+        startTijd: '14:00',
+        eindTijd: '16:00',
+        beschrijving: 'VIA Experience',
+        hidden: true
+    },
+    {
+        id: 9,
+        titel: 'Dag 1',
+        datum: '24-11-2021',
+        startTijd: '14:00',
+        eindTijd: '15:30',
+        beschrijving: '(+ rondleiding)'
+    },
+    {
+        id: 10,
+        titel: 'Dag 2',
+        datum: '01-12-2021',
+        startTijd: '14:00',
+        eindTijd: '15:30',
+        beschrijving: '(+ puzzeltocht)'
+    },
+    {
+        id: 11,
+        titel: 'Dag 3',
+        datum: '19-01-2022',
+        startTijd: '14:00',
+        eindTijd: '15:30',
+        beschrijving: '(+ speeddate)'
+    },
+    {
+        id: 12,
+        titel: 'Dag 1',
+        datum: '08-12-2021',
+        startTijd: '14:00',
+        eindTijd: '16:00',
+        beschrijving: 'VIA Experience'
+    },
+    {
+        id: 13,
+        titel: 'Dag 2',
+        datum: '09-02-2022',
         startTijd: '14:00',
         eindTijd: '16:00',
         beschrijving: 'VIA Experience'

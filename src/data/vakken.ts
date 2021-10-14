@@ -67,6 +67,26 @@ const vakken: Vak[] = [
         naam: 'VIA Experience'
     },
     {
+        id: 'VIA1',
+        icon: 'graduation-cap',
+        naam: 'Alfa'
+    },
+    {
+        id: 'VIA2',
+        icon: 'graduation-cap',
+        naam: 'Design Thinking'
+    },
+    {
+        id: 'VIA3',
+        icon: 'graduation-cap',
+        naam: 'Gamma'
+    },
+    {
+        id: 'VIA4',
+        icon: 'graduation-cap',
+        naam: 'Ruimtevaart'
+    },
+    {
         id: 'WW',
         icon: 'compass',
         naam: 'Wereldwijs'
