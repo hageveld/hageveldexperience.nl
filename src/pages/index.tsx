@@ -45,18 +45,18 @@ const Index: FunctionComponent<any> = () => {
                         </div>
                     </Carousel>
                     <div>
-                        De data van de Hageveld Experience Regulier voor het schooljaar 2020-2021
+                        De data van de Hageveld Experience Regulier voor het schooljaar 2021-2022
                         zijn:
                         <br />
                         <br />
-                        woensdag 18 november 2020, 25 november 2020 en 13 januari 2021 van 14.00
+                        woensdag 24 november 2021, 1 december 2021 en 19 januari 2022 van 14.00
                         -15.30 uur.
                         <br />
                         <br />
-                        De data van de Hageveld Experience VIA voor het schooljaar 2020-2021 zijn:
+                        De data van de Hageveld Experience VIA voor het schooljaar 2021-2022 zijn:
                         <br />
                         <br />
-                        woensdag 2 december 2020 en 13 januari 2021 van 14.00 -16.00 uur.
+                        woensdag 8 december 2021 en 9 februari 2022 van 14.00 -16.00 uur.
                     </div>
                 </Col>
                 <Col span={12}>
