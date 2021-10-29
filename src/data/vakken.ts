@@ -69,22 +69,22 @@ const vakken: Vak[] = [
     {
         id: 'VIA1',
         icon: 'graduation-cap',
-        naam: 'Alfa'
+        naam: 'Alfa: Spel om woordjes te leren'
     },
     {
         id: 'VIA2',
         icon: 'graduation-cap',
-        naam: 'Design Thinking'
+        naam: 'Bèta: proefjes ruimtevaart'
     },
     {
         id: 'VIA3',
         icon: 'graduation-cap',
-        naam: 'Gamma'
+        naam: 'Gamma: De Doos van Pandora'
     },
     {
         id: 'VIA4',
         icon: 'graduation-cap',
-        naam: 'Ruimtevaart'
+        naam: 'Ontwerpen: duurzame toekomst'
     },
     {
         id: 'WW',
