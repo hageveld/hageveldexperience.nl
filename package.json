@@ -52,7 +52,7 @@
     "gatsby-transformer-yaml": "2.1.12",
     "js-file-download": "0.4.12",
     "less": "3.10.3",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "nice-color-palettes": "3.0.0",
     "node-sass": "4.11.0",
     "pigeon-maps": "0.14.0",
